@@ -1,0 +1,22 @@
+Item
+
+ - nice to have optional parameters
+
+Promotion_Rule
+
+
+Checkout
+
+
+
+Initialize Items
+- create each item
+Initialize Promotions maybee or bake it in
+- load rules
+Initialize Checkout
+- scan each item
+- determine which promotion applies
+- apply promotion
+- calculate total price
+Run some tests
+Run a scan scenario
