@@ -15,11 +15,17 @@ class Checkout
     @basket
   end
 
+  def total
+    prices = []
+    @basket.each {|e| prices.push(e.price)}
+    prices.reduce(:+)
+  end
+
   # setter methods
   def scan(item)
     @basket.push(item)
   end
-  
+
   # instance method
 
   def self.count()
@@ -27,7 +33,7 @@ class Checkout
   end
 
   def self.printCount()
-    puts "Product count is : #@@count"
+    puts "Basket count is : #@@count"
   end
 
 end

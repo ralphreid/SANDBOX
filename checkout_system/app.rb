@@ -2,8 +2,8 @@ require 'pry'
 
 Dir[__dir__ + '/lib/*.rb'].each {|file| require file }
 
+# Build Product List
 products = Hash.new
-
 seed_products = []
 seed_products.push([1,'Travel Card Holder', 9.25, :GBP])
 seed_products.push([2,'Personalised cufflinks', 45.0, :GBP])
@@ -13,6 +13,10 @@ seed_products.each do |seed_product|
   products.store(seed_product[0], p)
 end
 
-
+# Build test checkout
+co = Checkout.new
+co.scan(products[1])
+co.scan(products[2])
+co.total
 
 binding.pry
