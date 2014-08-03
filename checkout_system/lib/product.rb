@@ -2,8 +2,10 @@ class Product
   # Initialize class variables
   @@count = 0
 
+  attr_accessor :id, :name, :price, :currency
+
   # constructor method
-  def initialize (id, name, price, currency)
+  def initialize(id, name, price, currency)
     # assign instance variables
     @id, @name, @price, @currency = id, name, price, currency
 
