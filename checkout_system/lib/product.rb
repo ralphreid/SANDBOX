@@ -1,11 +1,11 @@
-class Item
+class Product
   # Initialize class variables
   @@count = 0
 
   # constructor method
-  def initialize (product_code, name, price)
+  def initialize (id, name, price, currency)
     # assign instance variables
-    @product_code, @name, @price = product_code, name, price
+    @id, @name, @price, @currency = id, name, price, currency
 
     @@count += 1
   end
@@ -16,8 +16,12 @@ class Item
 
   # instance method
 
+  def self.count()
+    @@count
+  end
+
   def self.printCount()
-    puts "Item count is : #@@count"
- end
+    puts "Product count is : #@@count"
+  end
 
 end

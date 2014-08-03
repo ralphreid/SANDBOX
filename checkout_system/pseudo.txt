@@ -7,7 +7,7 @@ Promotion_Rule
 
 Checkout
 
-
+Product Code Algorithm
 
 Initialize Items
 - create each item
