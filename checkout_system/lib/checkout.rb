@@ -11,13 +11,15 @@ class Checkout
   end
 
   # accessor methods
-  def scan(item)
-    puts item
-    basket = @basket.push(item)
-    puts basket
+  def getBasket
+    @basket
   end
-  # setter methods
 
+  # setter methods
+  def scan(item)
+    @basket.push(item)
+  end
+  
   # instance method
 
   def self.count()
