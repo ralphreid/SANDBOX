@@ -1,4 +1,5 @@
 require 'pry'
+require 'rspec'
 
 Dir[__dir__ + '/lib/*.rb'].each {|file| require file }
 
@@ -14,9 +15,16 @@ seed_products.each do |seed_product|
 end
 
 # Build test checkout
-co = Checkout.new
+rules = []
+rules.push Rule.new(nil, nil, 60, 10, nil)
+rules.push Rule.new(1, 2, nil, nil, 8.50)
+
+
+co = Checkout.new(rules)
 co.scan(products[1])
 co.scan(products[2])
 co.total
+
+
 
 binding.pry

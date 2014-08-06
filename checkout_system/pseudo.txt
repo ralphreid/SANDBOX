@@ -6,6 +6,8 @@ Promotion_Rule
 
 
 Checkout
+__ how do i call this from a lib....in app
+
 
 Product Code Algorithm
 
@@ -20,3 +22,10 @@ Initialize Checkout
 - calculate total price
 Run some tests
 Run a scan scenario
+
+tasks:
+-build rules class
+- build console ui
+- allow rules to be added
+- allow rules to be edited
+- add more products
