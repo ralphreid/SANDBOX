@@ -9,14 +9,14 @@ require 'odesk/api/routers/auth'
 require 'odesk/api/routers/mc'
 require 'odesk/api/routers/reports/time'
 require 'odesk/api/routers/freelancers/search'
-#require 'pry'
+require 'pry'
 
 # initiate config
 config = Odesk::Api::Config.new({
-  'consumer_key'    => 'xxxxxxxx',
-  'consumer_secret' => 'xxxxxxxx',
-  'access_token'    => 'xxxxxxxx',# assign if known
-  'access_secret'   => 'xxxxxxxx',# assign if known
+  'consumer_key'    => ENV['ODESK_KEY'],
+  'consumer_secret' => ENV['ODESK_SECRET']
+  # 'access_token'    => 'xxxxxxxx',# assign if known
+  # 'access_secret'   => 'xxxxxxxx',# assign if known
   #'debug'           => false
 })
 
@@ -42,7 +42,7 @@ info = auth.get_user_info
 # work with mc
 mc = Odesk::Api::Routers::Mc.new(client)
 mc_response = mc.get_trays
- 
+
 # mark the thread
 #response = mc.mark_thread 'username', '88888', {'read' => 'false'}
 
@@ -56,4 +56,4 @@ freelancers = Odesk::Api::Routers::Freelancers::Search.new(client)
 p freelancers.find(params)
 
 # Start REPL session
-#binding.pry
+binding.pry
