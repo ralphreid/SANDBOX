@@ -10,15 +10,15 @@ body {
   margin-left: 0px;
 }
 
-.strip-padding {
+.strip-margins {
   margin-left: 0px;
   margin-right: 0px;
-  margin-top: 19px;
 }
 .header-section {
   max-width: 936px;
   padding-left: 0px;
   padding-right: 0px;
+  margin-bottom: 19px;
 }
 
 .header-section h1 {
@@ -28,11 +28,18 @@ body {
 .page-content {
   padding-left: 32px;
   padding-right: 0px;
+
 }
 
 .page-content h2 {
   font-size: 24px;
   margin-top: 0px;
+  margin-bottom: 32px;
+}
+
+.page-content p {
+  margin-top: 45px;
+  margin-bottom: 0px;
 }
 
 .left-section {
@@ -60,6 +67,9 @@ body {
   font-size: 24px;
 }
 
+.main-features ul {
+  margin-top: 30px;
+}
 .main-features li {
   font-size: 16px;
 }
