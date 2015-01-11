@@ -1,5 +1,5 @@
 
-.container {
+.presentation {
   max-width: 1024px;
   padding-left: 42px;
   padding-right: 46px;
@@ -9,11 +9,27 @@
   max-width: 936px;
 }
 
+.page-content {
+  padding-left: 32px;
+  padding-right: 0px;
+}
+
+.left-section {
+  padding-right: 0px;
+  padding-left: 0px;
+  max-width: 375px;
+}
+
 .image-mug {
   max-width: 375px;
   max-height: 375px;
 }
 
-.page-content {
+.main-features {
   padding-left: 32px;
+  height: 223px;
+}
+
+.main-features h2 {
+  margin-top: 35px;
 }
