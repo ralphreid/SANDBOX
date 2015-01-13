@@ -25,19 +25,20 @@ body {
   font-size: 48px;
 }
 
-.page-content {
-  padding-left: 31px;
+/*.page-content {
+  padding-left: 0px;
   padding-right: 0px;
+  margin-left: 31px;
+  max-width: 530px;
+}*/
 
-}
-
-/*.page-content h2 {
+.page-content h2 {
   font-size: 24px;
   margin-top: 0px;
   padding-bottom: 32px;
   margin-bottom: 0px;
   color: #F07C17;
-}*/
+}
 
 /*.page-content p {
   font-size: 16px;
@@ -74,19 +75,20 @@ body {
   border-left-width: 1px;
 }
 
-/*.main-features h2 {
+.main-features h2 {
   margin-top: 32px;
   font-size: 24px;
   color: #F07C17;
-}*/
+}
 
-/*.main-features ul {
+.main-features ul {
   margin-top: 33px;
 }
+
 .main-features li {
   font-size: 16px;
   line-height: 30px;
-}*/
+}
 
 .mockup-overlay {
   top: 0;
