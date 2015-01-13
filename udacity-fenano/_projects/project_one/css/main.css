@@ -25,12 +25,12 @@ body {
   font-size: 48px;
 }
 
-/*.page-content {
+.page-content {
   padding-left: 0px;
   padding-right: 0px;
   margin-left: 31px;
-  max-width: 530px;
-}*/
+  max-width: 483px;
+}
 
 .page-content h2 {
   font-size: 24px;
@@ -41,16 +41,16 @@ body {
 }
 
 /*.page-content p {
-  font-size: 16px;
+  font-size: 18px;
   width: 546px;
   margin-bottom: 0px;
-  line-height: 32px;
+
 }*/
 
-.space-top {
-  margin-top: 10px;
+/*.space-top {
+  margin-top: 25px;
   margin-bottom: 0;
-}
+}*/
 
 .left-section {
   padding-right: 0;
