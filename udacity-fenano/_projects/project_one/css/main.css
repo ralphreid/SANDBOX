@@ -1,6 +1,5 @@
 body {
   padding-top: 27px;
-  line-height: 2;
   font-family: Kalimati, Verdana, sans-serif;
 }
 .presentation {
@@ -23,10 +22,11 @@ body {
 
 .header-section h1 {
   font-size: 48px;
+  color: #666666;
 }
 
 .page-content {
-  padding-left: 32px;
+  padding-left: 31px;
   padding-right: 0px;
 
 }
@@ -34,44 +34,58 @@ body {
 .page-content h2 {
   font-size: 24px;
   margin-top: 0px;
-  margin-bottom: 32px;
+  padding-bottom: 32px;
+  margin-bottom: 0px;
+  color: #F07C17;
 }
 
 .page-content p {
-  margin-top: 45px;
+  font-size: 16px;
+  width: 546px;
   margin-bottom: 0px;
+  line-height: 32px;
+}
+
+.space-top {
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .left-section {
-  padding-right: 0px;
-  padding-left: 0px;
-  max-width: 375px;
+  padding-right: 0;
+  padding-left: 0;
+  width: 375px;
 }
 
 .image-mug {
-  max-width: 375px;
-  max-height: 375px;
+  width: 375px;
+  height: 375px;
 }
 
 .main-features {
   margin-top: 28px;
-  padding-left: 32px;
+  padding-left: 31px;
   height: 223px;
   border-color: #CCCCCC;
   border-style: solid;
-  border-width: 1px;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
 }
 
 .main-features h2 {
   margin-top: 32px;
   font-size: 24px;
+  color: #F07C17;
 }
 
 .main-features ul {
-  margin-top: 30px;
+  margin-top: 33px;
 }
 .main-features li {
   font-size: 16px;
+  line-height: 30px;
 }
 
 .mockup-overlay {
