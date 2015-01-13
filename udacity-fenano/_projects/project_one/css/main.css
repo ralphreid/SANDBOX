@@ -55,7 +55,7 @@ body {
 .left-section {
   padding-right: 0;
   padding-left: 0;
-  width: 375px;
+  max-width: 375px;
 }
 
 .image-mug {
