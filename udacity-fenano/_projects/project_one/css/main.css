@@ -1,6 +1,7 @@
 body {
   padding-top: 27px;
-  font-family: Kalimati, Verdana, sans-serif;
+  font-family: "Kalimati", Verdana, sans-serif;
+  color: #666666;
 }
 .presentation {
   max-width: 1024px;
@@ -22,7 +23,6 @@ body {
 
 .header-section h1 {
   font-size: 48px;
-  color: #666666;
 }
 
 .page-content {
@@ -41,7 +41,7 @@ body {
 
 .page-content p {
   font-size: 16px;
-  width: 546px;
+  /*width: 546px;*/
   margin-bottom: 0px;
   line-height: 32px;
 }
