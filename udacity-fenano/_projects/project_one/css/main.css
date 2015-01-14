@@ -15,6 +15,11 @@ body {
   margin-right: 0px;
 }
 
+.strip-margins-top-bottom {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .strip-padding-sides {
   padding-left: 0px;
   padding-right: 0px;
