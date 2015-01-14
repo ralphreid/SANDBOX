@@ -10,10 +10,16 @@ body {
   margin-left: 0px;
 }
 
-.strip-margins {
+.strip-margins-sides {
   margin-left: 0px;
   margin-right: 0px;
 }
+
+.strip-padding-sides {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .header-section {
   max-width: 936px;
   padding-left: 0px;
