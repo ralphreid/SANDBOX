@@ -34,6 +34,7 @@ body {
 
 .header-section h1 {
   font-size: 48px;
+  padding-right: 40px;
 }
 
 .page-content {
