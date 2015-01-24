@@ -3,10 +3,11 @@ var html =
 
 var charEscape = function(_html) {
 	var newHTML = _html;
-	// How will you make sure that newHTML doesn't contain any < or > ?
-	// Your code goes here!
+	// Make sure that newHTML doesn't contain any < or > by replacing with character entity references
 
-	// Don't delete this line!
+	newHTML = _html.replace(/</g, "&lt;");
+	newHTML = newHTML.replace(/>/g, "&lt;");
+
 	return newHTML;
 };
 
