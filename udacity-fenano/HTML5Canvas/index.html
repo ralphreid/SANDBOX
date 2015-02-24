@@ -14,6 +14,10 @@
       image.onload = function() {
         console.log("Loaded image");
         ctx.drawImage(image, 0, 0, c.width, c.height);
+
+        // Allows image to saved but requires a webserver to be running
+        // var savedImage = c.toDataURL();
+        // window.open(savedImage);
       }
 
       image.src = "sample.jpg";
