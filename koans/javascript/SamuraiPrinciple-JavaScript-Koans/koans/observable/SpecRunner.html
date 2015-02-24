@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Observable</title>
+		<link rel="shortcut icon" type="image/png" href="../../lib/jasmine-2.0.0/jasmine_favicon.png">
+		<link rel="stylesheet" type="text/css" href="../../lib/jasmine-2.0.0/jasmine.css">
+		<style>
+			td {
+				background-color: #E0C020;
+				width: 16px;
+				height: 16px;
+			}
+			td.alive {
+				background-color: #4040C0;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="../../lib/jquery-1.10.2.js"></script>
+		<script src="../../lib/jquery-ui-1.10.3.custom.js"></script>
+		<script type="text/javascript" src="../../lib/jasmine-2.0.0/jasmine.js"></script>
+		<script type="text/javascript" src="../../lib/jasmine-2.0.0/jasmine-html.js"></script>
+		<script type="text/javascript" src="../../lib/jasmine-2.0.0/boot.js"></script>
+		<script src="../../lib/sinon-1.7.3.js"></script>
+
+		<script src="src/eventDispatcher.js"></script>
+		<script src="src/game-of-life.js"></script>
+		<!--script src="../dont-peek/observable/eventDispatcher.js"></script>
+		<script src="../dont-peek/observable/game-of-life.js"></script-->
+
+		<script src="spec/eventDispatcherTest01.js"></script>
+		<script src="spec/eventDispatcherTest02.js"></script>
+		<script src="spec/eventDispatcherTest03.js"></script>
+		<script src="spec/eventDispatcherTest04.js"></script>
+		<script src="spec/eventDispatcherTest05.js"></script>
+		<script src="spec/eventDispatcherTest06.js"></script>
+		<script src="spec/eventDispatcherTest07.js"></script>
+		<script src="spec/eventDispatcherTest08.js"></script>
+		<script src="spec/eventDispatcherTest10.js"></script>
+		<script src="spec/game-of-life.js"></script>
+		<div id='gameOfLifeWidget'>
+			<table class='grid'>
+				<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+			</table>
+			<input type='button' class='tick' value='tick'></input>
+		</div>
+		<script>
+			jQuery(function () {
+				var gameOfLife = new SAMURAIPRINCIPLE.GameOfLife();
+				jQuery('#gameOfLifeWidget').gameOfLifeWidget(gameOfLife, 10, 10, 250);
+			});
+		</script>
+	</body>
+</html>
