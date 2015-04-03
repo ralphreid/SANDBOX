@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+  </head>
+  <body>
+    <canvas id="c" width="200" height="200"></canvas>
+    <script charset="utf-8">
+      var c = document.querySelector("#c");
+      var ctx = c.getContext("2d");
+
+
+      // Allows image to saved but requires a webserver to be running
+      // var savedImage = c.toDataURL();
+      // window.open(savedImage);
+
+      ctx.fillRect(100, 100, 100, 100);
+
+      ctx.strokeRect(50, 50, 50, 50);
+
+      ctx.beginPath();
+      ctx.moveTo(10, 10);
+      ctx.lineTo(50, 50);
+      ctx.lineTo(50, 10);
+      ctx.lineTo(10, 10);
+
+      // now we need to actually put something down on the canvas
+      // two options
+      // ctx.fill();
+      ctx.stroke();
+
+
+    </script>
+  </body>
+</html>
