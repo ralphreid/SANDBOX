@@ -13,6 +13,17 @@ avatar = media.Movie(
     "http://en.wikipedia.org/wiki/File:Avatar-Teaser-Poster.jpg",
     "https://www.youtube.com/watch?v=d1_JBMrrYw8"
 )
+
+top_gun = media.Movie(
+    "Top Gun",
+    "F14 piolots jam it up",
+    "http://en.wikipedia.org/wiki/File:Top_Gun_Movie.jpg",
+    "https://www.youtube.com/watch?v=vwBbrngafl0"
+)
+
+
+
 print(toy_story.storyline)
 print(avatar.storyline)
-avatar.show_trailer()
+# avatar.show_trailer()
+top_gun.show_trailer()
