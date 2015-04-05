@@ -10,8 +10,9 @@ toy_story = media.Movie("Toy Story",
 avatar = media.Movie(
     "Avatar",
     "A marine on an alien planet",
-    "http://en.wikipedia.org/wiki/Avatar_(2009_film)",
-    "http://en.wikipedia.org/wiki/File:Avatar-Teaser-Poster.jpg"
+    "http://en.wikipedia.org/wiki/File:Avatar-Teaser-Poster.jpg",
+    "https://www.youtube.com/watch?v=d1_JBMrrYw8"
 )
 print(toy_story.storyline)
 print(avatar.storyline)
+avatar.show_trailer()
