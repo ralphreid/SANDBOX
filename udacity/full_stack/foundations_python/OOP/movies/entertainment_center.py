@@ -1,3 +1,5 @@
+import fresh_tomatoes
+
 __author__ = 'ralph'
 
 import media
@@ -21,9 +23,34 @@ top_gun = media.Movie(
     "https://www.youtube.com/watch?v=vwBbrngafl0"
 )
 
+ratatouille = media.Movie(
+    "Avatar",
+    "A marine on an alien planet",
+    "http://en.wikipedia.org/wiki/File:Avatar-Teaser-Poster.jpg",
+    "https://www.youtube.com/watch?v=d1_JBMrrYw8"
+)
+
+midnight_in_paris = media.Movie(
+    "Top Gun",
+    "F14 piolots jam it up",
+    "http://en.wikipedia.org/wiki/File:Top_Gun_Movie.jpg",
+    "https://www.youtube.com/watch?v=vwBbrngafl0"
+)
+
+hunger_games = media.Movie(
+    "Top Gun",
+    "F14 piolots jam it up",
+    "http://en.wikipedia.org/wiki/File:Top_Gun_Movie.jpg",
+    "https://www.youtube.com/watch?v=vwBbrngafl0"
+)
 
 
-print(toy_story.storyline)
-print(avatar.storyline)
-# avatar.show_trailer()
-top_gun.show_trailer()
+
+
+# print(toy_story.storyline)
+# print(avatar.storyline)
+# # avatar.show_trailer()
+# top_gun.show_trailer()
+
+movies = [toy_story, top_gun, avatar, ratatouille, midnight_in_paris, hunger_games]
+fresh_tomatoes.open_movies_page(movies)
