@@ -4,7 +4,7 @@ __author__ = 'ralph'
 
 
 class Movie():
-    valid_ratings = ["G", "PG", "PG-13", "R"]
+    VALID_RATINGS = ["G", "PG", "PG-13", "R"]
 
     def __init__(self, movie_title, movie_story_line, movie_poster_image_url, movie_trailer_youtube_url):
         self.title = movie_title
