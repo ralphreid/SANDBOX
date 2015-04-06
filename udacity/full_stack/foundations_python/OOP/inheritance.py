@@ -9,7 +9,7 @@ class Parent():
 
     def show_info(self):
         print("Last Name - "+self.last_name)
-        print("Eye Color -"+self.eye_color)
+        print("Eye Color - "+self.eye_color)
 
 
 class Child(Parent):
@@ -19,7 +19,8 @@ class Child(Parent):
         self.number_of_toys = number_of_toys
 
 
-billy_cyrus = Parent("Cyrus", "blue")
-billy_cyrus.show_info()
+# billy_cyrus = Parent("Cyrus", "blue")
+# billy_cyrus.show_info()
 
-# miley_cyrus = Child("Cyrus", "Blue", 5)
+miley_cyrus = Child("Cyrus", "Blue", 5)
+miley_cyrus.show_info()
