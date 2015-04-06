@@ -47,10 +47,5 @@ hunger_games = media.Movie(
 
 
 
-# print(toy_story.storyline)
-# print(avatar.storyline)
-# # avatar.show_trailer()
-# top_gun.show_trailer()
-
 movies = [toy_story, top_gun, avatar, ratatouille, midnight_in_paris, hunger_games]
 fresh_tomatoes.open_movies_page(movies)
