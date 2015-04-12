@@ -1,6 +1,13 @@
 __author__ = 'ralph'
 
 
+# To see how the various functions in the DB-API work, take a look at this code,
+# then the results that it prints when you press "Test Run".
+#
+# Then modify this code so that the student records are fetched in sorted order
+# by student's name.
+#
+
 import sqlite3
 
 # Fetch some student records from the database.
