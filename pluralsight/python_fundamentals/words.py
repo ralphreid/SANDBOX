@@ -16,11 +16,10 @@ def print_items(items):
 		print(item)
 
 
-def main():
-	url = sys.argv[1]
+def main(url):
 	words = fetch_words(url)
 	print_items(words)
 
 
 if __name__ == '__main__':
-	main()
+	main(sys.argv[1])
