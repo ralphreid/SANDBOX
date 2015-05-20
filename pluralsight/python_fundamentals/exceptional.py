@@ -7,4 +7,5 @@ def convert(s):
 	try:
 		x = int(s)
 	except (ValueError, TypeError):
+		pass
 	return x
