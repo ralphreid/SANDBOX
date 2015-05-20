@@ -3,9 +3,7 @@
 
 def convert(s):
 	'''Convert to an integer.'''
-	x = -1
 	try:
-		x = int(s)
+	 	return int(s)
 	except (ValueError, TypeError):
-		pass
-	return x
+		return -1
