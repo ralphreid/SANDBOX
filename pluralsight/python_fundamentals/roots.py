@@ -8,6 +8,10 @@ def sqrt(x):
 		The square root of x.
 	'''
 
+	if x < 0:
+		raise ValueError("Cannot compute square root "
+						 "of negative number {}".format(x))
+
 	guess = x
 	i = 0
 	while guess * guess != x and i < 20:
