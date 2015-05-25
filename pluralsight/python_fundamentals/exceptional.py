@@ -12,4 +12,4 @@ def convert(s):
 		print("Conversion error: {}"\
 				.format(str(e)),
 				file=sys.stderr)
-		return -1
+		raise
