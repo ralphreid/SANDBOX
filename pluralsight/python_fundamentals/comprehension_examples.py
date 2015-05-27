@@ -1,6 +1,5 @@
 __author__ = 'ralph'
 
-
 from math import factorial
 
 # List comprehension example
@@ -10,6 +9,12 @@ print(type(f))
 
 # Set comprehension example
 f = {len(str(factorial(x))) for x in range(20)}
+print(f)
+print(type(f))
+
+# Notice that later keys overwrite earlier keys
+words = ["hi", "hello", "yahmon", "hank"]
+f = {x[0]: x for x in words}
 print(f)
 print(type(f))
 
