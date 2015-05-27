@@ -1,6 +1,7 @@
 __author__ = 'ralph'
 
 import os
+import sys
 
 
 def make_at(path, dir_name):
@@ -8,5 +9,8 @@ def make_at(path, dir_name):
     try:
         os.chdir(path)
         os.mkdir(dir_name)
+    except OSError as e:
+        print(e, file=sys.stderr)
+        raise
     finally:
         os.chdir(original_path)
