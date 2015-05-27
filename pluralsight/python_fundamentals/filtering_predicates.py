@@ -9,3 +9,7 @@ def is_prime(x):
         if x % i == 0:
             return False
     return True
+
+
+# filter applied to range
+print([x for x in range(101) if is_prime(x)])
