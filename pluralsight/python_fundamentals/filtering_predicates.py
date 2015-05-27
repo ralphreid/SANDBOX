@@ -13,3 +13,11 @@ def is_prime(x):
 
 # filter applied to range
 print([x for x in range(101) if is_prime(x)])
+
+from pprint import pprint as pp
+
+# Combining a filtering predicate with a transformation
+# Dictionary transformation which maps numbers with three divisors
+prime_square_divisors = {x*x:(1, x, x*x) for x in range(101)
+                         if is_prime(x)}
+pp(prime_square_divisors)
