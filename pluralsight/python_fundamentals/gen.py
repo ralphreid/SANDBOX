@@ -47,5 +47,11 @@ def run_distinct():
     for item in distinct(items):
         print(item)
 
+
+def run_pipeline():
+    items = [3, 6, 6, 2, 1]
+    for item in take(3, distinct(items)):
+        print(item)
+
 if __name__ == '__main__':
-    run_take()
+    run_pipeline()
