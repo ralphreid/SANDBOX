@@ -52,6 +52,35 @@ class Flight:
         # reaching through Flight and interrogate the aircraft directly
         return self._aircraft.model()
 
+    def allocate_seat(seat, passenger):
+        """Allocate a seat to a passenger.
+
+        Args:
+            seat: A seat designator such as '12C' or '21F'
+            passenger: The passenger name.
+
+        Raises:
+            ValueError: if the seat is unavailable.
+        """
+        rows, seat_letters = self._aircraft.seating_plan()
+
+        letter = seat[-1]  # Get seat letter through negative indexing into the seat string
+        if letter not in seat_letters:
+            raise ValueError("Invalid seat letter {}".format(letter))
+
+        row_text = seat[:-1]  # Extract the row number by extracting all but the
+        # last character using string slicing
+        try:
+            row = int(row_text)  # Try to convert the row substring to an integer
+        except ValueError("Invalid seat row {}".format(row_text))
+
+        if row not in rows:  # Validate the row using an in operator against the rows range and this is possible because range supports the container protocol
+            raise ValueError("Invalid row number {}".format(row))
+
+        if self._seating[row][letter] is not None:  #Check to see if seat is unoccupied using an identity test
+            raise ValueError("Seat {} already occupied".format(seat))
+
+        self._seating[row][letter] = passenger
 
 
 class Aircraft:
