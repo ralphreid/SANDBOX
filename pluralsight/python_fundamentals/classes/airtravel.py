@@ -55,3 +55,8 @@ class Aircraft:
         # Added method which returns the allowed rows and seats as a tupl of range and seat letters
         return (range(1, self._num_rows + 1), # Range function produces an iterable series of row numbers up to the number in the plane
                 "ABCDEFGHJK"[:self._num_seats_per_row]) # String and slice method return a string with one character per seat
+
+
+    # Examples of how to run access these classes and instantiate
+    # f = Flight("BA456", Aircraft("G-RUT", "Airbus A320", num_rows=20, num_seats_per_row=5))
+    # f.aircraft_model()
