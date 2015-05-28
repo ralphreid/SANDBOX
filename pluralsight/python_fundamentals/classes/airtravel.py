@@ -40,3 +40,8 @@ class Aircraft:
 
     def model(self):
         return self._model
+
+    def seating_plan(self):
+        # Added method which returns the allowed rows and seats as a tupl of range and seat letters
+        return (range(1, self._num_rows + 1), # Range function produces an iterable series of row numbers up to the number in the plane
+                "ABCDEFGHJK"[:self._num_seats_per_row]) # String and slice method return a string with one character per seat
