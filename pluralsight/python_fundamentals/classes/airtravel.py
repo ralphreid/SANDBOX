@@ -22,6 +22,24 @@ class Flight:
         self._number = number
         self._aircraft = aircraft  # Accepts an aircraft object with class is constructed
 
+        # Receive the seating plan for the aircraft
+        # Use tupl unpacking to put the row and seats into local variables
+        rows, seats = self._aircraft.seating_plan()
+
+        # Create a list for the seat allocations
+        # [None] is a single entry list
+        # used to waste one entry at the beginning of the list because row entries are
+        # 1 based whereas python lists are 0 based
+        # Use first entry to account for offset
+        # Then concatenate one entry for each real row entry in the aircraft
+        # _ used to discard the row numbers as we are not interested as it will match the final index
+        # The item part of the list comprehension is {letter: None for letter in seats} which is a
+        # dictionary comprehension which creates a mapping over each letter row to none indicating an empty seat
+        # list comprehension [{letter: None for letter in seats} for _ in rows] used rather than list replication
+        # with a multiplication operator because we want a distinct dictionary object created for each row
+
+        self._seating = [None] + [{letter: None for letter in seats} for _ in rows]
+
     def number(self):
         return self._number
 
