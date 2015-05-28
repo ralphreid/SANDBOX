@@ -27,6 +27,8 @@ class Flight:
 
 
 class Aircraft:
+    # In production, we should validate as wells to that we can ensure
+    # for example that the number of seats is NOT negative
     def __init__(self, registration, model, num_rows, num_seats_per_row):
         self._registration = registration
         self._model = model
