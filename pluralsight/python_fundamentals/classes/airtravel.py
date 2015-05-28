@@ -8,4 +8,4 @@ class Flight:
         self._number = number
 
     def number(self):
-        return "SN060"
+        return self._number
