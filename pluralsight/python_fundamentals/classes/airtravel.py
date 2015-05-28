@@ -52,7 +52,7 @@ class Flight:
         # reaching through Flight and interrogate the aircraft directly
         return self._aircraft.model()
 
-    def allocate_seat(seat, passenger):
+    def allocate_seat(self, seat, passenger):
         """Allocate a seat to a passenger.
 
         Args:
@@ -72,7 +72,8 @@ class Flight:
         # last character using string slicing
         try:
             row = int(row_text)  # Try to convert the row substring to an integer
-        except ValueError("Invalid seat row {}".format(row_text))
+        except ValueError:
+            raise ValueError("Invalid seat row {}".format(row_text))
 
         if row not in rows:  # Validate the row using an in operator against the rows range and this is possible because range supports the container protocol
             raise ValueError("Invalid row number {}".format(row))
