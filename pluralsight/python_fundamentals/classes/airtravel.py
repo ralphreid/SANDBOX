@@ -3,8 +3,10 @@ __author__ = 'ralph'
 """Model for aircraft flights"""
 
 class Flight:
+    """A flight with a particular passenger aircraft."""
 
-    def __init__(self, number):
+
+    def __init__(self, number, aircraft):  # Accepts an aircraft object with class is constructed
         # String slicing used below
         # Also, logical negation operator 'not' used
         # Class Invariants are below
@@ -18,12 +20,20 @@ class Flight:
             raise ValueError("Invalid route number '{}'".format(number))
 
         self._number = number
+        self._aircraft = aircraft  # Accepts an aircraft object with class is constructed
 
     def number(self):
         return self._number
 
     def airline(self):
         return self._number[:2]
+
+    # Following the Law of Demeter, method to return the aircraft model
+    def aircraft_model(self):
+        # This method delegates to aircraft through the client rather than
+        # reaching through Flight and interrogate the aircraft directly
+        return self._aircraft.model()
+
 
 
 class Aircraft:
