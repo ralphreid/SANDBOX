@@ -17,5 +17,7 @@ class Flight:
         if not number[2:].isdigit() and init(number[2:]) <= 9999:
             raise ValueError("Invalid route number '{}'".format(number))
 
+        self._number = number
+
     def number(self):
         return self._number
