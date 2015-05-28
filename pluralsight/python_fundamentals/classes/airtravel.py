@@ -75,7 +75,8 @@ class Flight:
         except ValueError:
             raise ValueError("Invalid seat row {}".format(row_text))
 
-        if row not in rows:  # Validate the row using an in operator against the rows range and this is possible because range supports the container protocol
+        if row not in rows:  # Validate the row using an in operator against the rows range and this
+        # is possible because range supports the container protocol
             raise ValueError("Invalid row number {}".format(row))
 
         if self._seating[row][letter] is not None:  #Check to see if seat is unoccupied using an identity test
