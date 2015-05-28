@@ -33,7 +33,7 @@ class Aircraft:
         self._registration = registration
         self._model = model
         self._num_rows = num_rows
-        self._num_seats_per_row
+        self._num_seats_per_row = num_seats_per_row
 
     def registration(self):
         return self._registration
