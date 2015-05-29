@@ -88,7 +88,9 @@ class Flight:
         Raises:
             ValueError: if the seat is unavailable.
         """
-        rows, seat_letters = self._parse_seat(self,seat)
+        # Notice method calls in the same object also require explicit qualification
+        # the self prefix
+        rows, seat_letters = self._parse_seat(seat)
 
         letter = seat[-1]  # Get seat letter through negative indexing into the seat string
         if letter not in seat_letters:
