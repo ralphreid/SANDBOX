@@ -115,6 +115,26 @@ class Flight:
 
         self._seating[row][letter] = passenger
 
+    def relocate_passenger(self, from_seat, to_seat):
+        """Relocate a passenger to a different seat.
+
+        Args:
+            from_seat: The existing seat designator for the
+                        passenger to be moved.
+
+            to_seat: The new seat designator.
+        """
+        from_row, from_letter = self._parse_seat(from_seat)
+        if self._seating[from_row][from_letter] is None:
+            raise ValueError("No passenger to relocate in seat {}".format(from_seat))
+
+        to_row, to_letter = self._parse_seat(to_seat)
+        if self._seating[to_row][to_letter] is not None:
+            raise ValueError("Seat {} is already occupied".format(to_seat))
+
+        self._seating[to_row][to_letter] = self._seating[from_row][from_letter]
+        self._seating[from_row][from_letter] = None
+
 
 class Aircraft:
     # In production, we should validate as wells to that we can ensure
