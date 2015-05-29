@@ -52,6 +52,32 @@ class Flight:
         # reaching through Flight and interrogate the aircraft directly
         return self._aircraft.model()
 
+    def _parse_seat(self, seat):  # '_' used because this method is an implementation detail
+        """Parse a seat designator into a valid row and letter.
+
+        Args:
+            seat: A seat designator such as 12F
+
+        Returns:
+            A tuple containing an integer and a string for row and seat.
+        """
+        row_numbers, seat_letters = self._aircraft.seating_plan()
+
+        letter = seat[-1]
+        if letter not in seat_letters:
+            raise ValueError("Invalid seat letter {}".format(letter))
+
+        row_text = seat[:-1]
+        try:
+            row = int(row_text)
+        except ValueError:
+            raise ValueError("Invalid seat row {}".format(row_text))
+
+        if row not in row_numbers:
+            raise ValueError("Invalid row number {}".format(row))
+
+        return row, letter
+
     def allocate_seat(self, seat, passenger):
         """Allocate a seat to a passenger.
 
@@ -62,7 +88,7 @@ class Flight:
         Raises:
             ValueError: if the seat is unavailable.
         """
-        rows, seat_letters = self._aircraft.seating_plan()
+        rows, seat_letters = self._parse_seat(self,seat)
 
         letter = seat[-1]  # Get seat letter through negative indexing into the seat string
         if letter not in seat_letters:
