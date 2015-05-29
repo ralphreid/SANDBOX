@@ -121,6 +121,18 @@ class Flight:
         self._seating[to_row][to_letter] = self._seating[from_row][from_letter]
         self._seating[from_row][from_letter] = None
 
+    def num_available_seats(self):
+        # Achieved using TWO nested generator expressions
+        # Outer expressions searches for all rows that are not none
+        # which excludes our dummy first row
+        # So the summ of this outer expression is the sum of values in each row
+        # Inner expressions iterates over the dictionary and is the sum of None values in each row
+        # Also, split the outer expression over three lines to improve readability
+        # The inner expressions then adds ONE for each None seat found
+        return sum(sum(1 for s in row.values() if s is None)
+                   for row in self._seating
+                   if row is not None)
+
 
 class Aircraft:
     # In production, we should validate as wells to that we can ensure
