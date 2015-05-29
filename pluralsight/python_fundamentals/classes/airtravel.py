@@ -63,17 +63,21 @@ class Flight:
         """
         row_numbers, seat_letters = self._aircraft.seating_plan()
 
-        letter = seat[-1]
+        letter = seat[-1]  # Get seat letter through negative indexing into the seat string
         if letter not in seat_letters:
             raise ValueError("Invalid seat letter {}".format(letter))
 
-        row_text = seat[:-1]
+        row_text = seat[:-1]  # Extract the row number by extracting all but the
+        # # last character using string slicing
         try:
-            row = int(row_text)
+            row = int(row_text)  # Try to convert the row number substring to an int constructor
         except ValueError:
+            # If that fails we catch the value error
+            # Then the handler raises a new value valuable payload
             raise ValueError("Invalid seat row {}".format(row_text))
 
-        if row not in row_numbers:
+        if row not in row_numbers:  # Validate the row using an in operator against the rows range and this
+            # is possible because range supports the container protocol
             raise ValueError("Invalid row number {}".format(row))
 
         return row, letter
@@ -90,26 +94,8 @@ class Flight:
         """
         # Notice method calls in the same object also require explicit qualification
         # the self prefix
-        rows, seat_letters = self._parse_seat(seat)
+        row, letter = self._parse_seat(seat)
 
-        letter = seat[-1]  # Get seat letter through negative indexing into the seat string
-        if letter not in seat_letters:
-            raise ValueError("Invalid seat letter {}".format(letter))
-
-        row_text = seat[:-1]  # Extract the row number by extracting all but the
-        # last character using string slicing
-        try:
-            row = int(row_text)  # Try to convert the row number substring to an int constructor
-        except ValueError:
-            # If that fails we catch the value error
-            # Then the handler raises a new value valuable payload
-            raise ValueError("Invalid seat row {}".format(row_text))
-
-        if row not in rows:  # Validate the row using an in operator against the rows range and this
-            # is possible because range supports the container protocol
-            raise ValueError("Invalid row number {}".format(row))
-
-        # Check to see if seat is unoccupied using an identity test
         if self._seating[row][letter] is not None:
             raise ValueError("Seat {} already occupied".format(seat))
 
