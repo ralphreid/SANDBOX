@@ -156,6 +156,15 @@ class Aircraft:
         return (range(1, self._num_rows + 1), # Range function produces an iterable series of row numbers up to the number in the plane
                 "ABCDEFGHJK"[:self._num_seats_per_row]) # String and slice method return a string with one character per seat
 
+    # Convience method so that I do not have to add flight and passangers everytime
+    def make_flight():
+        f = Flight("AA678", Aircraft("G-BRI", "Airbus A319", num_rows=24, num_seats_per_row=6))
+        f.allocate_seat('12A', 'Bob Marlet')
+        f.allocate_seat('15F', 'jah aha')
+        f.allocate_seat('15E', 'Jane Smith')
+        f.allocate_seat('1C', 'Caool Luke')
+        f.allocate_seat('1D', 'Sam Smith')
+        return f
 
     # Examples of how to run access these classes and instantiate
     # f = Flight("BA456", Aircraft("G-RUT", "Airbus A320", num_rows=20, num_seats_per_row=5))
