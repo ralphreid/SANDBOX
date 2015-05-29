@@ -112,3 +112,6 @@ class Aircraft:
     # Examples of how to run access these classes and instantiate
     # f = Flight("BA456", Aircraft("G-RUT", "Airbus A320", num_rows=20, num_seats_per_row=5))
     # f.aircraft_model()
+
+    # Interesting things:
+    # TypeError two positional argumetns could be caused by forgetting self in the  method
