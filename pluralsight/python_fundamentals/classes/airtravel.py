@@ -71,15 +71,18 @@ class Flight:
         row_text = seat[:-1]  # Extract the row number by extracting all but the
         # last character using string slicing
         try:
-            row = int(row_text)  # Try to convert the row substring to an integer
+            row = int(row_text)  # Try to convert the row number substring to an int constructor
         except ValueError:
+            # If that fails we catch the value error
+            # Then the handler raises a new value valuable payload
             raise ValueError("Invalid seat row {}".format(row_text))
 
         if row not in rows:  # Validate the row using an in operator against the rows range and this
-        # is possible because range supports the container protocol
+            # is possible because range supports the container protocol
             raise ValueError("Invalid row number {}".format(row))
 
-        if self._seating[row][letter] is not None:  #Check to see if seat is unoccupied using an identity test
+        # Check to see if seat is unoccupied using an identity test
+        if self._seating[row][letter] is not None:
             raise ValueError("Seat {} already occupied".format(seat))
 
         self._seating[row][letter] = passenger
