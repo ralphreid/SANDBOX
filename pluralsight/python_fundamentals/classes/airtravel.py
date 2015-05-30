@@ -133,6 +133,12 @@ class Flight:
                    for row in self._seating
                    if row is not None)
 
+    # This tells the card printer to print each passenger
+    def make_boarding_cards(self, card_printer):
+        # sorting a list of a passenger seats tuple from _passenger_seats
+        for passenger, seat in sorted(self._passenger_seats()):
+            card_printer(passenger, seat, self.number(), self.aircraft_model())
+
 
 class Aircraft:
     # In production, we should validate as wells to that we can ensure
