@@ -154,7 +154,8 @@ class Aircraft:
         return (range(1, self._num_rows + 1), # Range function produces an iterable series of row numbers up to the number in the plane
                 "ABCDEFGHJK"[:self._num_seats_per_row]) # String and slice method return a string with one character per seat
 
-    # Convience method so that I do not have to add flight and passengers every time
+
+# Convinience method so that I do not have to add flight and passengers every time
 def make_flight():
     f = Flight("AA678", Aircraft("G-BRI", "Airbus A319", num_rows=24, num_seats_per_row=6))
     f.allocate_seat('12A', 'Bob Marlet')
@@ -164,9 +165,32 @@ def make_flight():
     f.allocate_seat('1D', 'Sam Smith')
     return f
 
-    # Examples of how to run access these classes and instantiate
-    # f = Flight("BA456", Aircraft("G-RUT", "Airbus A320", num_rows=20, num_seats_per_row=5))
-    # f.aircraft_model()
 
-    # Interesting things:
-    # TypeError two positional argumetns could be caused by forgetting self in the  method
+# Follow the object oriented design principle;
+# Rather than have a color printer query all of the passenger details,
+# Follow this principal, 'Tell! Dont't Ask.' also related to law of demeter
+# http://en.wikipedia.org/wiki/Law_of_Demeter
+# Have the Flight TELL a simple Card Printing Function what to do
+# This card printer is a module level function
+# Notice the card printer does not know anything about flights or aircraft
+# Its very loosely coupled,
+def console_card_printer(passenger, seat, flight_number, aircraft):
+    # Used 'line configuration' in the form of the '\' characters'
+    # allows splitting of long characters over several lines
+    output = "| Name:       {0}"      \
+             "  Flight:     {1}"      \
+             "  Seat:       {2}"      \
+             "  Aircraft:   {3}"      \
+             " |".format(passenger, flight_number, seat, aircraft)  # Implicit string concatenation
+             # of adjacent strings to produce one long string with no line breaks
+    # Measure length of the output line and build some banners and borders.
+    banner = '+' + '-' * (len(output) - 2) + '+'
+    border = '|' + ' ' * (len(output) - 2) + '|'
+    lines = [banner, border, output, border, banner]  # construct a list of the elements
+    card = 'n'.join(lines)  # Concatinate into a card
+    print(card)  # print the whole card
+    print()  # follow by a black line
+
+
+# Interesting things:
+# TypeError two positional argumetns could be caused by forgetting self in the  method
