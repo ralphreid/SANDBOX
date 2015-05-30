@@ -155,17 +155,18 @@ class Flight:
 # Base class
 class Aircraft:
 
+    def __init__(self, registration):
+        self._registration = registration
+
+    def registration(self):
+        return self._registration
+
     def num_seats(self):
         rows, row_seats = self.seating_plan()
         return len(rows) * len(row_seats)
 
 
 class AirbusA319(Aircraft):
-    def __init__(self, registration):
-        self._registration = registration
-
-    def registration(self):
-        return self._registration
 
     def model(self):
         return "Airbus A319"
@@ -175,11 +176,6 @@ class AirbusA319(Aircraft):
 
 
 class Boeing777(Aircraft):
-    def __init__(self, registration):
-        self._registration = registration
-
-    def registration(self):
-        return self._registration
 
     def model(self):
         return "Boeing 777"
