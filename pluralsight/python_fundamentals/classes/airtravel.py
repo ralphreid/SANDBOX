@@ -139,6 +139,18 @@ class Flight:
         for passenger, seat in sorted(self._passenger_seats()):
             card_printer(passenger, seat, self.number(), self.aircraft_model())
 
+    # Implementation method so the use of '_'
+    # This method is actually a generator function ... see the yield
+    def _passenger_seats(self):
+        """An iterable series of passenger seating allocations."""
+        row_numbers, seat_letters = self._aircraft.seating_plan()
+        for row in row_numbers:
+            for letter in seat_letters:
+                passenger = self._seating[row][letter]
+                if passenger is not None:
+                    # generator function
+                    # yields the passenter and seat as found
+                    yield (passenger, "{}{}".format(row, letter))
 
 class Aircraft:
     # In production, we should validate as wells to that we can ensure
