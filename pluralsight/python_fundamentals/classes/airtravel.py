@@ -180,14 +180,19 @@ class Boeing777:
         return range(1, 56), "ABCDEGHJK"
 
 # Convinience method so that I do not have to add flight and passengers every time
-def make_flight():
-    f = Flight("AA678", Aircraft("G-BRI", "Airbus A319", num_rows=24, num_seats_per_row=6))
+def make_flights():
+    f = Flight("AA678", AirbusA319("G-EUPT"))
     f.allocate_seat('12A', 'Bob Marlet')
     f.allocate_seat('15F', 'jah aha')
     f.allocate_seat('15E', 'Jane Smith')
     f.allocate_seat('1C', 'Caool Luke')
     f.allocate_seat('1D', 'Sam Smith')
-    return f
+
+    g = Flight("AA678", Boeing777("F-4566"))
+    g.allocate_seat('12A', 'Jass fsss')
+    g.allocate_seat('15F', 'Foo Smith')
+
+    return f, g
 
 
 # Follow the object oriented design principle;
