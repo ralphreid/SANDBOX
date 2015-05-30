@@ -160,7 +160,7 @@ class Aircraft:
         return len(rows) * len(row_seats)
 
 
-class AirbusA319:
+class AirbusA319(Aircraft):
     def __init__(self, registration):
         self._registration = registration
 
@@ -173,11 +173,8 @@ class AirbusA319:
     def seating_plan(self):
         return range(1, 23), "ABCDEF"
 
-    def num_seats(self):
-        rows, row_seats = self.seating_plan()
-        return len(rows) * len(row_seats)
 
-class Boeing777:
+class Boeing777(Aircraft):
     def __init__(self, registration):
         self._registration = registration
 
@@ -190,9 +187,6 @@ class Boeing777:
     def seating_plan(self):
         return range(1, 56), "ABCDEGHJK"
 
-    def num_seats(self):
-        rows, row_seats = self.seating_plan()
-        return len(rows) * len(row_seats)
 
 # Convinience method so that I do not have to add flight and passengers every time
 def make_flights():
