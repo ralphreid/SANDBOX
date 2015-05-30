@@ -165,6 +165,20 @@ class AirbusA319:
     def seating_plan(self):
         return range(1, 23), "ABCDEF"
 
+
+class Boeing777:
+    def __init__(self, registration):
+        self._registration = registration
+
+    def registration(self):
+        return self._registration
+
+    def model(self):
+        return "Boeing 777"
+
+    def seating_plan(self):
+        return range(1, 56), "ABCDEGHJK"
+
 # Convinience method so that I do not have to add flight and passengers every time
 def make_flight():
     f = Flight("AA678", Aircraft("G-BRI", "Airbus A319", num_rows=24, num_seats_per_row=6))
