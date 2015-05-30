@@ -195,17 +195,17 @@ def make_flight():
 def console_card_printer(passenger, seat, flight_number, aircraft):
     # Used 'line configuration' in the form of the '\' characters'
     # allows splitting of long characters over several lines
-    output = "| Name:       {0}"      \
-             "  Flight:     {1}"      \
-             "  Seat:       {2}"      \
-             "  Aircraft:   {3}"      \
+    output = "| Name:  {0}"     \
+             "  Flight:  {1}"   \
+             "  Seat:  {2}"     \
+             "  Aircraft:  {3}" \
              " |".format(passenger, flight_number, seat, aircraft)  # Implicit string concatenation
              # of adjacent strings to produce one long string with no line breaks
     # Measure length of the output line and build some banners and borders.
     banner = '+' + '-' * (len(output) - 2) + '+'
     border = '|' + ' ' * (len(output) - 2) + '|'
     lines = [banner, border, output, border, banner]  # construct a list of the elements
-    card = 'n'.join(lines)  # Concatinate into a card
+    card = '\n'.join(lines)  # Concatinate into a card
     print(card)  # print the whole card
     print()  # follow by a black line
 
