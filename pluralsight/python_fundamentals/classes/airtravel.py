@@ -165,6 +165,9 @@ class AirbusA319:
     def seating_plan(self):
         return range(1, 23), "ABCDEF"
 
+    def num_seats(self):
+        rows, row_seats = self.seating_plan()
+        return len(rows) * len(row_seats)
 
 class Boeing777:
     def __init__(self, registration):
@@ -179,6 +182,10 @@ class Boeing777:
     def seating_plan(self):
         return range(1, 56), "ABCDEGHJK"
 
+    def num_seats(self):
+        rows, row_seats = self.seating_plan()
+        return len(rows) * len(row_seats)
+
 # Convinience method so that I do not have to add flight and passengers every time
 def make_flights():
     f = Flight("AA678", AirbusA319("G-EUPT"))
@@ -190,7 +197,7 @@ def make_flights():
 
     g = Flight("AA678", Boeing777("F-4566"))
     g.allocate_seat('12A', 'Jass fsss')
-    g.allocate_seat('15F', 'Foo Smith')
+    g.allocate_seat('15G', 'Foo Smith')
 
     return f, g
 
