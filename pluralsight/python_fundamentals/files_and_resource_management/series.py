@@ -11,8 +11,8 @@ def read_series(filename):
     for line in f:
         a = int(line.strip())  # Strips the new line character & converts to interger
         series.append(a)
-        f.close()
-        return series
+    f.close()
+    return series
 
 def main(filename):
     series = read_series(filename)
