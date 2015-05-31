@@ -5,13 +5,15 @@ __author__ = 'ralph'
 import sys
 
 def read_series(filename):
-    f = open(filename, mode='rt', encoding='utf-8')
-    series = []
-    # uses a for-loop to iterate over the file reading one line at a time
-    for line in f:
-        a = int(line.strip())  # Strips the new line character & converts to interger
-        series.append(a)
-    f.close()
+    try:
+        f = open(filename, mode='rt', encoding='utf-8')
+        series = []
+        # uses a for-loop to iterate over the file reading one line at a time
+        for line in f:
+            a = int(line.strip())  # Strips the new line character & converts to interger
+            series.append(a)
+    finally:
+        f.close()
     return series
 
 def main(filename):
