@@ -78,4 +78,12 @@ def write_grayscale(filename, pixels):
         bmp.write(_int32_to_bytes(pixel_data_bookmark))
 
 
+def _int32_to_bytes(i):
+    """Convert an integer to four bytes in little-endian format."""
+    return bytes((i & 0xff,     # bitwise and uses & rather than logical AND
+                  i >> 8 & 0xff,
+                  i >> 16 & 0xff,
+                  i >> 24 & 0xff,))
+
+
 
