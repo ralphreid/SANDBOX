@@ -1,5 +1,6 @@
 __author__ = 'ralph'
 
+import os
 import unittest
 
 
@@ -17,6 +18,13 @@ class TextAnalysisTests(unittest.TestCase):
                     'testing wheahter that nation,\n'
                     'or any nation so concieved and so dedicated,\n'
                     'can long endure.')
+
+    def tearDown(self):
+        """Fixture that deletes the files used by the test methods."""
+        try:
+            os.remove(self.filename)
+        except:
+            pass
 
     def test_function_runs(self):  # simple start with test_ as these are auto discovered
         """Basic smoke test: does the function run."""
