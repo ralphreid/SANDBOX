@@ -23,7 +23,7 @@ class TextAnalysisTests(unittest.TestCase):
         """Fixture that deletes the files used by the test methods."""
         try:
             os.remove(self.filename)
-        except:
+        except:  # Assumes that any failure is acceptable becuase just trying to remove file
             pass
 
     def test_function_runs(self):  # simple start with test_ as these are auto discovered
