@@ -5,7 +5,18 @@ import unittest
 
 
 def analyze_text(filename):
-    pass
+    """Calculate the number of lines and characters in a file.
+
+    Args:
+        filename: The name of the file to analyze.
+
+    Raises:
+        IOError: If ``filename`` does not exist or cant't be read.
+
+    Returns: The number of lines in the file.
+    """
+    with open(filename, 'r') as f:
+        return sum(1 for _ in f)
 
 class TextAnalysisTests(unittest.TestCase):
     """Tests for the ``analyze_text()`` function."""
