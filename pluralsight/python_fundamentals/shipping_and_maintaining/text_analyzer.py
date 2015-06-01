@@ -31,5 +31,9 @@ class TextAnalysisTests(unittest.TestCase):
         # Will fail if it throws any exceptions
         analyze_text(self.filename)
 
+    def test_line_count(self):
+        """Check that the line count is correct."""
+        self.assertEqual(analyze_text(self.filename), 4)
+
 if __name__ == '__main__':
     unittest.main()
