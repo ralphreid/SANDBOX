@@ -5,12 +5,12 @@ __author__ = 'ralph'
 import sys
 
 def read_series(filename):
-    try:
-        f = open(filename, mode='rt', encoding='utf-8')
+    # No longer need to call close explicitly because the with
+    # construct will call it for us when and by what ever means,
+    # with execution exits the block
+    with open(filename, mode='rt', encoding='utf-8')
         # return a list comprehension
         return [ int(line.strip()) for line in f ]
-    finally:
-        f.close()
 
 def main(filename):
     series = read_series(filename)
