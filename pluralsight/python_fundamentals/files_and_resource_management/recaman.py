@@ -19,14 +19,13 @@ def sequence():
 # Writes the start of the sequence to a file
 def write_sequence(filename, num):
     """Write Recaman's sequence to a pext file."""
-    f = open(filename, mode='wt', encoding='utf-8')
-    # Generator function to covert the start of the sequence to a file
-    # Generator expression used to convert each number to a string and add
-    # a new line
-    f.writelines("{0}\n".format(r)
+    # with block means close is no longer needed explicitly
+    with open(filename, mode='wt', encoding='utf-8') as f:
+        # Generator function to covert the start of the sequence to a file
+        # Generator expression used to convert each number to a string and add
+        # a new line
+        f.writelines("{0}\n".format(r)
                  for r in islice(sequence(), num + 1))  # islice used to truncate
-                # the infinate sequence
-    f.close()
 
 if __name__ == '__main__':
     write_sequence(filename=sys.argv[1],
