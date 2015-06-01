@@ -4,7 +4,7 @@ import os
 import unittest
 
 
-def analyze_text():
+def analyze_text(filename):
     pass
 
 class TextAnalysisTests(unittest.TestCase):
