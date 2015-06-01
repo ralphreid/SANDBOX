@@ -56,5 +56,10 @@ class TextAnalysisTests(unittest.TestCase):
         """Check that the character count is correct."""
         self.assertEqual(analyze_text(self.filename)[1], 126)
 
+    def test_no_such_file(self):
+        """Check the proper exception is thrown for a missing file."""
+        with self.assertRaises(IOError):
+            analyze_text('foobar')
+
 if __name__ == '__main__':
     unittest.main()
