@@ -77,6 +77,10 @@ def write_grayscale(filename, pixels):
         bmp.seek(pixel_offset_bookmark)
         bmp.write(_int32_to_bytes(pixel_data_bookmark))
 
+    def _bytes_to_int32(b):
+        """Convert a bytes object containing four bytes into an integer."""
+        return b[0] | (b[1] << 8) | (b[2] << 16) | (b[3] << 24)
+
     def dimensions(filename):
         """Determine the dimensions in pixels of a BMP image.
 
