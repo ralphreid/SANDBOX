@@ -61,5 +61,10 @@ class TextAnalysisTests(unittest.TestCase):
         with self.assertRaises(IOError):
             analyze_text('foobar')
 
+    def test_no_deletion(self):
+        """Check that the function doesn't delete the input file."""
+        analyze_text(self.filename)
+        self.assertTrue(os.path.exists(self.filename))
+
 if __name__ == '__main__':
     unittest.main()
