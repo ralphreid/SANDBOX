@@ -2,6 +2,10 @@ __author__ = 'ralph'
 
 import unittest
 
+
+def analyze_text():
+    pass
+
 class TextAnalysisTests(unittest.TestCase):
     """Tests for the ``analyze_text()`` function."""
 
