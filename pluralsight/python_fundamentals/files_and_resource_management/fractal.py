@@ -42,3 +42,10 @@ def mandelbrot(size_x, size_y):
                     (2.0 * y / size_y) - 1.0)
              for x in range(size_x)]
             for y in range(size_y)]
+
+
+# Sample usage
+# import fractal
+# pixels = fractal.mandelbrot(448, 256)
+# import bmp
+# bmp.write_grayscale('mandel.bmp', pixels)
