@@ -18,7 +18,6 @@ class RefridgeratorRaider:
         print("Close fridge door.")
 
 def raid(food):
-    with closing(RefridgeratorRaider()) as r:
+    with closing(RefridgeratorRaider()) as r: # Alaways called the close
         r.open()
         r.take(food)
-        r.close()
