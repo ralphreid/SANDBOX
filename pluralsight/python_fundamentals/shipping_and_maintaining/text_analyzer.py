@@ -26,8 +26,8 @@ class TextAnalysisTests(unittest.TestCase):
         self.filename = 'text_analysis_test_file.txt'
         with open(self.filename, 'w') as f:
             f.write('Now we are engaged in a great ware.\n'
-                    'testing wheahter that nation,\n'
-                    'or any nation so concieved and so dedicated,\n'
+                    'testing whether that nation,\n'
+                    'or any nation so conceived and so dedicated,\n'
                     'can long endure.')
 
     def tearDown(self):
@@ -45,6 +45,10 @@ class TextAnalysisTests(unittest.TestCase):
     def test_line_count(self):
         """Check that the line count is correct."""
         self.assertEqual(analyze_text(self.filename), 4)
+
+    def test_character_count(self):
+        """Check that the character count is correct."""
+        self.assertEqual(analyze_text(self.filename)[1], 131)
 
 if __name__ == '__main__':
     unittest.main()
