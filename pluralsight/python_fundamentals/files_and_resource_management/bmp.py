@@ -2,8 +2,12 @@ __author__ = 'ralph'
 
 """A module for dealing with BMP bitmap image files."""
 
-
+# Dealing with 8-bit grayscale images because the have the nice principle of
+# accepting one byte per pixel
 def write_grayscale(filename, pixels):
+    # Each inner-list is row of pixels from left to right
+    # Outer list is a list of pixel rows from top to bottom
+
     """Creates and writes a grayscale BMP files.
 
     Args:
@@ -15,15 +19,18 @@ def write_grayscale(filename, pixels):
     Raises:
         OSError: If the file couldn't be written.
     """
-    height = len(pixels)
-    width = len(pixels[0])
+    # Get the size of the image. Assumed that all rows have the same length.
+    # In production code, this should be checked.
+    height = len(pixels)    # number of rows
+    width = len(pixels[0])  # items in the zero row to get the width
 
-    with open(filename, 'wb') as bmp:
+    with open(filename, 'wb') as bmp:   # File opened in binary mode. Encoding makes no sense for raw binary files
         #BMP Header
-        bmp.write(b'BM')
+        bmp.write(b'BM')    # BM identifies it as a BMP file. Magic header.
 
         size_bookmark = bmp.tell()      # The next four bytes hold the filesize as a 32-bit
         bmp.write(b'\x00\x00\x00\x00')  # little-endian integer. Zero placeholder for now.
+        # 'little-endian' means least significant byte is written first
 
         bmp.write(b'\x00\x00')      # Unused 16-bit integer - should be zero
         bmp.write(b'\x00\x00')      # Unused 16-bit integer - should be zero
@@ -32,7 +39,8 @@ def write_grayscale(filename, pixels):
         bmp.write(b'\x00\x00\x00\x00')      # to the pixel data. Zero placeholder for now.
 
         # Image Header
-        bmp.write(b'\x28\x00\x00\x00')  # Image header size in bytes - 40 decimal
+        # First thing is to write the length as a 32-bit integer
+        bmp.write(b'\x28\x00\x00\x00')  # Image header size in bytes - 40 decimal; hardwire - 0x28 == 40
         bmp.write(_int32_to_bytes(width))   # Image width in pixels
         bmp.write(_int32_to_bytes(height))  # Image height in pixels
         bmp.write(b'\x01\x00')          # Number of image planes
@@ -51,11 +59,23 @@ def write_grayscale(filename, pixels):
         # Pixel data
         pixel_data_bookmark = bmp.tell()
         for row in reversed(pixels):    # BMP files are bottom to top
-            row_data = bytes(row)
+            row_data = bytes(row)      # bytes constructor will raise a ValueError if argument is outside of the 0 - 255 range
             bmp.write(row_data)
+            # Each row of pixel data must be a multiple of 4 bytes long irrespective of the image width
+            #
             padding = b'\x00' * (4 - (len(row) % 4))    # Pad row to multiple of four bytes
             bmp.write(padding)
 
         #End of file
+        eof_bookmark = bmp.tell()
+
+        # Fill in file size placeholder
+        bmp.seek(size_bookmark)
+        bmp.write(_int32_to_bytes(eof_bookmark))
+
+        # Fill in pixel offset placeholder
+        bmp.seek(pixel_offset_bookmark)
+        bmp.write(_int32_to_bytes(pixel_data_bookmark))
+
 
 
