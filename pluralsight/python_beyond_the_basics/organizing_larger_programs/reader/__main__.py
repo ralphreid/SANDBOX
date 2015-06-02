@@ -1,0 +1,1 @@
+print('executing _main__.py with name {}'.format(__name__))
