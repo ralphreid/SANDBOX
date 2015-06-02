@@ -19,3 +19,10 @@ class Reader:
 # r = reader.reader.Reader('reader/reader.py')
 # r.read()
 # r.close()
+
+# Examples at the REPL - After Hoisting:
+# import reader
+# reader.__file__
+# r = reader.Reader('reader/reader.py')
+# r.read()
+# r.close()
