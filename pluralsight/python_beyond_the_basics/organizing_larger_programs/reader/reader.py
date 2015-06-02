@@ -10,3 +10,12 @@ class Reader:
 
     def read(self):
         return self.f.read()
+
+
+
+# Examples at the REPL:
+# import reader.reader
+# reader.reader.__file__
+# r = reader.reader.Reader('reader/reader.py')
+# r.read()
+# r.close()
