@@ -1,0 +1,5 @@
+#!/Users/ralph/Documents/_development/me/SANDBOX/pluralsight/python_fundamentals/shipping_and_maintaining/list/bin/python3.3
+if __name__ == '__main__':
+    import sys, pydoc
+    sys.exit(pydoc.cli())
+
