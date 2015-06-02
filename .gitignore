@@ -2,4 +2,6 @@
 .idea
 .vagrant
 __pycache__/
-*.pyc
+.pyc
+pluralsight/python_beyond_the_basics/organizing_larger_programs/reader/__pycache__
+
