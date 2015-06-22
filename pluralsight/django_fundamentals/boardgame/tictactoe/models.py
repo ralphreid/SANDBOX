@@ -14,3 +14,4 @@ class Move(models.Model):
     x = models.IntegerField()
     y = models.IntegerField()
     comment = models.CharField(max_length=300)
+    game = models.ForeignKey(Game)  # Added relationship of Move to Games - Many MOVES have a relationship to same Game
