@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User  # Taking advantage of a Built-In user class
 
 
 class Game(models.Model):
