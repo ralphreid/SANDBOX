@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('start_time', models.DateTimeField(auto_now_add=True)),
                 ('last_active', models.DateTimeField(auto_now=True)),
+                ('status', models.CharField(choices=[('A', 'Active'), ('F', 'First Player Wins'), ('S', 'Second Player Wins'), ('D', 'Draw')], default='A', max_length=1)),
                 ('first_player', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='games_first_player')),
                 ('next_to_move', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='games_to_move')),
                 ('second_player', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='games_second_player')),
