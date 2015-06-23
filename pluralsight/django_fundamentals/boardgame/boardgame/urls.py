@@ -22,7 +22,7 @@ admin.autodiscover()  # Tells admin site to discover all models to generate a UI
 # since no '$' it can be several urls under admin which are include by the site.url module
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'main.views.home')
+    url(r'^$', 'main.views.home', name='boardgames_home')  # when a user logs out they are returned to the page called 'boardgames_home
 )
 
 
