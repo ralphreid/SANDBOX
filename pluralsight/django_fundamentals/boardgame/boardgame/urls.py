@@ -13,10 +13,11 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
+admin.autodiscover()  # Tells admin site to discover all models to generate a UI for
 
-urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+urlpatterns = ('',
+    url(r'^admin/', include(admin.site.urls)), # since no '$' it can be several urls under admin which are include by the site.url module
     url(r'^$', 'main.views.home')
-]
+)
