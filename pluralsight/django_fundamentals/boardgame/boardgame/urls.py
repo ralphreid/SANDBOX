@@ -27,11 +27,11 @@ urlpatterns = patterns('',
 
 
 urlpatterns += patterns(
-    'django.contrib.auth.views',
+    'django.contrib.auth.views',  # this prefix means that this is the common prefix for the pattern invocation
 
-    url(r'^login/$', 'login',
+    url(r'^login/$', 'login',  # so based on the prefix above, its actually looking for 'django.contrib.auth.views.login'
         {'template_name': 'login.html'},
-        name='boardgames_login'),
+        name='boardgames_login'),  # naming of url mappings
 
     url(r'^logout/$', 'logout',
         {'next_page': 'boardgames_home'},
