@@ -17,7 +17,10 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()  # Tells admin site to discover all models to generate a UI for
 
-urlpatterns = ('',
-    url(r'^admin/', include(admin.site.urls)), # since no '$' it can be several urls under admin which are include by the site.url module
+
+# Deprecated since version 1.8: urlpatterns should be a plain list of django.conf.urls.url() instances instead.
+# since no '$' it can be several urls under admin which are include by the site.url module
+urlpatterns = patterns('',
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'main.views.home')
 )
