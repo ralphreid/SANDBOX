@@ -9,8 +9,11 @@ class Game(models.Model):
     next_to_move = models.ForeignKey(User, related_name="games_to_move")
     start_time = models.DateTimeField(auto_now_add=True)
     last_active = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=1, default='A', # Parameter showing the game status, default is 'A' for active
+                              choices=GAME_STATUS_CHOICES) # Makes the possible options explist using the choices value referencing list of choices
 
-    def __str__(self):
+
+    def __str__(self): # method to allow a Game object to display itself
         return "{0} vs {1}".format(self.first_player, self.second_player)
 
 
