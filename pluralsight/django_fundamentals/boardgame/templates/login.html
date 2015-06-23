@@ -9,7 +9,8 @@
 
         <form role="form" class="form-horizontal" method="post" action="{% url 'boardgames_login' %}">
             {% csrf_token %}
-            {{ form }}  # the View passes a form variable which is rendered by the template
+            <!--the View passes a form variable which is rendered by the template-->
+            {{ form }}
             <input class="btn btn-primary" type="submit" value="Login" />
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
