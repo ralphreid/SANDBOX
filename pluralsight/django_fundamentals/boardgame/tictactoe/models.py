@@ -18,7 +18,9 @@ class Game(models.Model):
     start_time = models.DateTimeField(auto_now_add=True)
     last_active = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, default='A',  # Parameter showing the game status, default is 'A' for active
-                              choices=GAME_STATUS_CHOICES)  # Makes the possible options explist using the choices value referencing list of choices
+                              choices=GAME_STATUS_CHOICES)  # Makes the possible options explicit
+                              #  using the choices value referencing list of choices
+                              #  django will use this to generate a drop down list
 
 
     def __str__(self): # method to allow a Game object to display itself
