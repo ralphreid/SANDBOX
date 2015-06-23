@@ -4,4 +4,4 @@
 __pycache__/
 .pyc
 pluralsight/python_beyond_the_basics/organizing_larger_programs/reader/__pycache__
-
+pluralsight/django_fundamentals/boardgame/db.sqlite3
