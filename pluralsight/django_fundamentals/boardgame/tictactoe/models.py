@@ -3,6 +3,7 @@ from django.contrib.auth.models import User  # Taking advantage of a Built-In us
 
 
 class Game(models.Model):
+    # Remember all django models must inherit from the Django base model class 'models'
     first_player = models.ForeignKey(User, related_name="games_first_player")
     second_player = models.ForeignKey(User,related_name="games_second_player")
     next_to_move = models.ForeignKey(User, related_name="games_to_move")
