@@ -26,4 +26,8 @@ class SeatFinderTest(unittest.TestCase):
         seats = finder.find_seats(5)
         assert seats == {}
         
+    def test_find_seats_for_wheelchair_users_on_front_row(self):
+        finder = SeatFinder(available_seats={"A1W", "A6", "A7", "C7"})
+        seats = finder.find_seats(1, wheelchair_count=1)
+        assert seats == {"A1W"}
     

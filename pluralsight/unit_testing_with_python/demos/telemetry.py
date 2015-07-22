@@ -1,42 +1,32 @@
-class TelemetryDiagnosticControls:
-    DiagnosticChannelConnectionString = "*111#"
+DiagnosticChannelConnectionString = "*111#"
 
-    def __init__(self):
-        self.telemetry_client = TelemetryClient()
+class TelemetryDiagnosticControls:
+
+    def __init__(self, telemetry_client=None):
+        self.telemetry_client = telemetry_client or TelemetryClient()
         self.diagnostic_info = ""
 
     def check_transmission(self):
+        telemetry_client = self.reconnect(DiagnosticChannelConnectionString)
         self.diagnostic_info = ""
+        self.diagnostic_info = self.fetch_diagnostic_info(telemetry_client)
 
+    def reconnect(self, address):
         self.telemetry_client.disconnect()
-
         retryLeft = 3
-        while (self.telemetry_client.get_online_status() == False and retryLeft > 0):
-            self.telemetry_client.connect(TelemetryDiagnosticControls.DiagnosticChannelConnectionString)
+        while ((not self.telemetry_client.online_status) and retryLeft > 0):
+            self.telemetry_client.connect(address)
             retryLeft -= 1
 
-        if telemetry_client.get_online_status() == False:
+        if not self.telemetry_client.online_status:
             raise Exception("Unable to connect.")
+        return self.telemetry_client
 
-        self.telemetry_client.send(TelemetryClient.DIAGNOSTIC_MESSAGE)
-        self.diagnostic_info = self.telemetry_client.receive()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def fetch_diagnostic_info(self, connected_client):
+        connected_client.send(TelemetryClient.DIAGNOSTIC_MESSAGE)
+        if not self.telemetry_client.online_status:
+            raise Exception("Unable to connect.")
+        return connected_client.receive()
 
 
 
