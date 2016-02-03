@@ -7,5 +7,7 @@ RUN apt-get update && apt-get install -y iputils-ping apache2
 # arguments to the entry point so docker run hw2 Hellowwwww there!
 # ENTRYPOINT ["echo"]
 
-ENTRYPOINT ["apache2ctl"]
+ENV var1=Ralph var2=duke
 
+#ENTRYPOINT ["apache2ctl"]
+#docker run -d -p 80:80 web2 -D FOREGROUND would pass the arguments. CMD could be used to indicate defaults
