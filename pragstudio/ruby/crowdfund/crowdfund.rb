@@ -29,39 +29,51 @@ class Project
   
 end
 
+class FundRequest
+  
+  attr_reader :title
+  
+  def initialize(title)
+    @title = title
+    @projects = []
+  end
+  
+  def add_project(a_project)
+    @projects.push(a_project)
+  end
+  
+  def request_funding
+    puts "There are #{@projects.size} projects that you could fund:"
+    @projects.each do |project|
+      puts project
+    end
+    @projects.each do |project|
+      project.add_funds
+      project.remove_funds
+      project.add_funds
+      puts project
+    end
+  end
+end
+
+
 project1 = Project.new("Project ABC", 5000, 1000)
 project2 = Project.new("Project LMN", 3000, 500)
 project3 = Project.new("Project XYZ", 75, 25)
 
-projects = [project1, project2, project3]
+projects = FundRequest.new("VC-Friendly Start-up Projects")
+puts projects.title
+projects.add_project(project1)
+projects.add_project(project2)
+projects.add_project(project3)
+projects.request_funding
 
-puts "There are #{projects.size} projects that you could fund:"
-projects.each do |project|
-  puts project
-end
-
-puts "***"
-
-puts "Here are the target funding amounts of each project:"
-projects.each do |project|
-  puts project.target
-end
-
-puts "***"
-
-puts "Let's go through a round of funding requests and see what happens:"
-projects.each do |project|
-  project.add_funds
-  project.remove_funds
-  project.add_funds
-  puts project
-end
-
-puts "***"
-
-puts "Project ABC is removed and Project TBD is added. Now we have:"
-projects.delete(project1)
 project4 = Project.new("Project TBD", 10000)
-projects.push(project4)
-puts projects
 
+projectrequest = FundRequest.new("Ask My Family For Money")
+puts projectrequest.title
+projectrequest.add_project(project1)
+projectrequest.add_project(project2)
+projectrequest.add_project(project3)
+projectrequest.add_project(project4)
+projectrequest.request_funding
