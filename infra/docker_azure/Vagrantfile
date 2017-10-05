@@ -1,17 +1,26 @@
 Vagrant.configure('2') do |config|
-  config.vm.box = 'azure'
+  config.vm.boot_timeout = 350
 
-  # use local ssh key to connect to remote vagrant box
-  config.ssh.private_key_path = '~/.ssh/id_rsa'
-  config.vm.provider :azure do |azure, override|
+  common_azure_config = Proc.new do |azure, override|
+    override.config.vm.box = 'azure'
+    # use local ssh key to connect to remote vagrant box
+    override.config.ssh.private_key_path = '~/.ssh/id_rsa'
 
-    # each of the below values will default to use the env vars named as below if not specified explicitly
+    # Mandatory Parameters
     azure.tenant_id = ENV['AZURE_TENANT_ID']
     azure.client_id = ENV['AZURE_CLIENT_ID']
     azure.client_secret = ENV['AZURE_CLIENT_SECRET']
     azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
-    azure.location = "westus2"
+
+    # Optional VM Parameters
+    azure.resource_group_name = 'infra-dev'
+    azure.location = 'westus2'
     azure.vm_size = 'Basic_A0'
   end
 
+  config.vm.define 'first' do |node_cfg|
+    node_cfg.vm.provider :azure do |azure, override|
+      common_azure_config.call azure, override
+    end
+  end
 end
