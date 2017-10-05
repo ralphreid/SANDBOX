@@ -3,7 +3,7 @@
     - [x] Vagrant - single node
     - [ ] Azure - command to delete all resources
     - [ ] Vagrant - multi node
-        - [ ] Same resource groups
+        - [x] Same resource groups
         - [ ] Sub-task 1
         - [ ] Sub-task 1
         - [ ] Sub-task 1
@@ -12,6 +12,7 @@
     - [ ] Vagrant - open appropriate ports
     - [ ] ServerSpec - Build initial tests
     - [ ] Docker - Attempt manual install
+    - [ ] Install network traffic tools
     - [ ] CD Pipeline
         - [ ] https://docs.microsoft.com/en-us/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd
     - [ ] Chef - Install Docker

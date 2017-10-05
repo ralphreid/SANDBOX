@@ -1,7 +1,11 @@
 Vagrant.configure('2') do |config|
+  nodes = [1]
+  workers = [1]
+
   config.vm.boot_timeout = 350
   config.vm.box = 'azure'
   config.ssh.private_key_path = '~/.ssh/id_rsa'
+  config.vm.synced_folder '.', '/vagrant', disabled: true
 
   common_azure_config = Proc.new do |azure, override|
     # Mandatory Parameters
@@ -11,14 +15,29 @@ Vagrant.configure('2') do |config|
     azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
 
     # Optional VM Parameters
-    azure.resource_group_name = 'infra-dev'
+    azure.resource_group_name = 'dev'
     azure.location = 'westus2'
     azure.vm_size = 'Basic_A0'
+    azure.wait_for_destroy = 'true'
+    azure.instance_ready_timeout = 180
+    azure.instance_check_interval = 3
   end
 
-  config.vm.define :first do |first|
-    first.vm.provider :azure do |azure, override|
-      common_azure_config.call azure, override
+  nodes.each do |i|
+    config.vm.define "node-#{i}" do |cfg|
+      cfg.vm.provider :azure do |azure, override|
+        common_azure_config.call azure, override
+        azure.vm_name = "node-#{i}"
+      end
+    end
+  end
+
+  workers.each do |i|
+    config.vm.define "worker-#{i}" do |cfg|
+      cfg.vm.provider :azure do |azure, override|
+        common_azure_config.call azure, override
+        azure.vm_name = "worker-#{i}"
+      end
     end
   end
 
