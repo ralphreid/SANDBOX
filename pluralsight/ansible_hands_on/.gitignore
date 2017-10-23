@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Ansible template
+*.retry
+### Vagrant template
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.logs
+
