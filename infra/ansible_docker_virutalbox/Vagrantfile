@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  config.vm.define 'acs' do |node|
+    node.vm.box = 'ubuntu/trusty64'
+    node.vm.hostname = 'acs'
+    node.vm.network 'private_network', ip: '192.168.33.10'
+  end
+
+  config.vm.define 'bamboo' do |node|
+    node.vm.box = 'bento/centos-7.4'
+    node.vm.hostname = 'bamboo'
+    node.vm.network 'private_network', ip: '192.168.33.20'
+    node.vm.network 'forwarded_port', guest: 80, host: 8080
+  end
+
+  config.vm.define 'reef' do |node|
+    node.vm.box = 'ubuntu/trusty64'
+    node.vm.hostname = 'reef'
+    node.vm.network 'private_network', ip: '192.168.33.30'
+  end
+end
