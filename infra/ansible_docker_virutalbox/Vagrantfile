@@ -6,12 +6,15 @@ Vagrant.require_version ">= 2.0.0"
 Vagrant.configure(2) do |config|
 
   docker_workers = 2
+  docker_managers = 3
   mesosphere_workers = 2
+  mesosphere_managers = 3
   common_virtualbox_config = Proc.new do |vb|
     vb.customize ['modifyvm', :id, '--memory', '256']
   end
 
   config.vm.box = 'ubuntu/trusty64'
+  config.vm.synced_folder '.', '/vagrant', disabled: true
 
   docker_workers.times do |i|
     config.vm.define "docker-worker-#{i}" do |cfg|
@@ -19,8 +22,17 @@ Vagrant.configure(2) do |config|
         common_virtualbox_config.call vb
       end
       cfg.vm.hostname = "docker-worker-#{i}"
-      config.vm.synced_folder '.', '/vagrant', disabled: true
-      cfg.vm.network 'private_network', ip: "192.168.33.#{30+i}"
+      cfg.vm.network 'private_network', ip: "192.168.33.#{20+i}"
+    end
+  end
+
+  docker_managers.times do |i|
+    config.vm.define "docker-manager-#{i}" do |cfg|
+      cfg.vm.provider :virtualbox do |vb, override|
+        common_virtualbox_config.call vb
+      end
+      cfg.vm.hostname = "docker-manager-#{i}"
+      cfg.vm.network 'private_network', ip: "192.168.33.#{40+i}"
     end
   end
 
@@ -30,24 +42,20 @@ Vagrant.configure(2) do |config|
         common_virtualbox_config.call vb
       end
       cfg.vm.hostname = "mesosphere-worker-#{i}"
-      config.vm.synced_folder '.', '/vagrant', disabled: true
-      cfg.vm.network 'private_network', ip: "192.168.33.#{40+i}"
+      cfg.vm.network 'private_network', ip: "192.168.33.#{60+i}"
     end
   end
 
-  # config.vm.define 'acs' do |node|
-  #   node.vm.hostname = 'acs'
-  #   node.vm.network 'private_network', ip: '192.168.33.10'
-  # end
+  mesosphere_managers.times do |i|
+    config.vm.define "mesosphere-manager-#{i}" do |cfg|
+      cfg.vm.provider :virtualbox do |vb, override|
+        common_virtualbox_config.call vb
+      end
+      cfg.vm.hostname = "mesosphere-manager-#{i}"
+      cfg.vm.network 'private_network', ip: "192.168.33.#{80+i}"
+    end
+  end
 
-  # config.vm.define 'bamboo' do |node|
-  #   node.vm.hostname = 'bamboo'
-  #   node.vm.network 'private_network', ip: '192.168.33.20'
-  #   node.vm.network 'forwarded_port', guest: 80, host: 8080
-  # end
-  #
-  # config.vm.define 'reef' do |node|
-  #   node.vm.hostname = 'reef'
-  #   node.vm.network 'private_network', ip: '192.168.33.30'
-  # end
+  # Executes on the remote machine and returns the hostname
+  config.vm.provision :shell, inline: 'hostname'
 end
