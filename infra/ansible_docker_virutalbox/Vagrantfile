@@ -5,7 +5,8 @@ Vagrant.require_version ">= 2.0.0"
 
 Vagrant.configure(2) do |config|
 
-  docker_workers = 2.to_i
+  docker_workers = 2
+  mesosphere_workers = 2
   common_virtualbox_config = Proc.new do |vb|
     vb.customize ['modifyvm', :id, '--memory', '256']
   end
@@ -18,7 +19,19 @@ Vagrant.configure(2) do |config|
         common_virtualbox_config.call vb
       end
       cfg.vm.hostname = "docker-worker-#{i}"
+      config.vm.synced_folder '.', '/vagrant', disabled: true
       cfg.vm.network 'private_network', ip: "192.168.33.#{30+i}"
+    end
+  end
+
+  mesosphere_workers.times do |i|
+    config.vm.define "mesosphere-worker-#{i}" do |cfg|
+      cfg.vm.provider :virtualbox do |vb, override|
+        common_virtualbox_config.call vb
+      end
+      cfg.vm.hostname = "mesosphere-worker-#{i}"
+      config.vm.synced_folder '.', '/vagrant', disabled: true
+      cfg.vm.network 'private_network', ip: "192.168.33.#{40+i}"
     end
   end
 
