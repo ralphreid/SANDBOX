@@ -14,6 +14,9 @@ http://everythingshouldbevirtual.com/ansible-provision-docker-swarm-mode-1-12-cl
 - GOOD destory and simple install Docker [https://rsmitty.github.io/Multi-Cloud-Swarm/]
 - https://github.com/geerlingguy/ansible-role-docker
 
+## Other playaround ideas
+- https://github.com/binocarlos/arpanet
+
 
 
 
