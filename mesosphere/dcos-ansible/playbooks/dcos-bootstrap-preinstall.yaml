@@ -1,0 +1,26 @@
+- hosts: bootstrap
+  remote_user: centos
+  become: false
+  vars_files:
+    - "../vars/{{ dcos_version }}.yaml"
+
+  tasks:
+  - name: Generate and write out DC/OS config.yaml
+    template:
+      src: ../files/config.yaml.j2
+      dest: "{{ install_dir }}/genconf/config.yaml"
+      force: yes
+
+  - name: Generate DC/OS install bits
+    shell: bash dcos_generate_config.ee.sh
+    args:
+      chdir: "{{ install_dir }}"
+
+  - name: Start nginx Docker container
+    docker_container:
+      name: nginx
+      image: nginx:latest
+      ports:
+      - "80:80"
+      volumes:
+      - "{{ install_dir }}/genconf/serve:/usr/share/nginx/html:ro"

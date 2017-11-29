@@ -1,0 +1,12 @@
+- hosts: dcos-cluster
+  remote_user: centos
+  become: false
+  vars_files:
+    - "../vars/{{ dcos_version }}.yaml"
+
+  tasks:
+  - name: Create {{ tmp_dir }}
+    file:
+      dest: "{{ tmp_dir }}"
+      state: directory
+      mode: 0755

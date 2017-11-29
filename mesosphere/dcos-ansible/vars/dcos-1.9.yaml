@@ -1,0 +1,3 @@
+---
+tmp_dir: "/tmp/dcos_1.9"
+install_dir: "/home/centos/dcos_1.9"

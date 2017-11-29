@@ -1,0 +1,12 @@
+bootstrap_url: http://{{ hostvars[groups['bootstrap'][0]].ansible_eth0['ipv4']['address'] }}
+cluster_name: Mesosphere-DEMO
+customer_key: # <Insert key here>
+exhibitor_storage_backend: static
+master_discovery: static
+master_list:
+{% for host in groups['masters'] %}
+- {{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}
+{% endfor %}
+resolvers:
+- 8.8.8.8
+security: disabled

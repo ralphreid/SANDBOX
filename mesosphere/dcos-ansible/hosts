@@ -1,0 +1,17 @@
+[bootstrap]
+# Insert IP/Hostname of bootstrap node here
+10.0.0.232
+[masters]
+# Insert IP/Hostname of master nodes here
+10.0.0.216
+[public-agents]
+# Insert IP/Hostname of public agent nodes here
+10.0.0.172
+[private-agents]
+# Insert IP/Hostname of private agent nodes here
+10.0.0.226
+10.0.0.63
+[dcos-cluster:children]
+masters
+public-agents
+private-agents
