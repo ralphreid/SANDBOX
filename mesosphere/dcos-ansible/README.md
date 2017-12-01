@@ -27,6 +27,9 @@ Refer to the install guide found at http://docs.ansible.com/ansible/latest/intro
 
 ## Usage
 
+On to the bootstrap node, download into appropriate directory
+http://downloads.mesosphere.io/dcos-enterprise/stable/dcos_generate_config.ee.sh
+
 Clone this repository:
 
 also for comunity check
