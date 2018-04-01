@@ -26,6 +26,7 @@ $ sudo yum -y install ansible
 Refer to the install guide found at http://docs.ansible.com/ansible/latest/intro_installation.html
 
 ## Usage
+Rember to add appropriate ip-detect https://docs.mesosphere.com/1.10/installing/custom/advanced/
 
 On to the bootstrap node, download into appropriate directory
 http://downloads.mesosphere.io/dcos-enterprise/stable/dcos_generate_config.ee.sh
