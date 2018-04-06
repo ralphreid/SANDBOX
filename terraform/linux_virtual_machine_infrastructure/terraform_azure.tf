@@ -2,13 +2,9 @@ variable "resourcename" {
   default = "myResourceGroup"
 }
 
-variable "version" {
-  default = "~>1.3"
-}
-
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
-    version = "${version}"
+    version = "~> 1.3"
     subscription_id = "${ARM_SUBSCRIPTION_ID}"
     client_id       = "${ARM_CLIENT_ID}"
     client_secret   = "${ARM_CLIENT_SECRET}"
