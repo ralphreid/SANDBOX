@@ -8,7 +8,7 @@ variable "version" {
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
-    version = "version"
+    version = "${version}"
     subscription_id = "${ARM_SUBSCRIPTION_ID}"
     client_id       = "${ARM_CLIENT_ID}"
     client_secret   = "${ARM_CLIENT_SECRET}"

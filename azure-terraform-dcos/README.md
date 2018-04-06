@@ -3,6 +3,8 @@
 1. [Scale Sets](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview)
 1. [Scale Sets with Networking and Storage](https://docs.microsoft.com/en-us/azure/terraform/terraform-create-vm-scaleset-network-disks-hcl)
 1. [Terraform Providers](https://github.com/terraform-providers)
+1. [Terraform Variables](https://www.terraform.io/docs/configuration/variables.html)
+
 
 **Build Steps**:
 - [x] Get all connected to azure
