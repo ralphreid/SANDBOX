@@ -142,7 +142,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
 
     os_profile {
         computer_name  = "myvm"
-        admin_username = "azureuser"
+        admin_username = "jah"
     }
 
     os_profile_linux_config {

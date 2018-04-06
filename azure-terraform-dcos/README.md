@@ -20,3 +20,6 @@
 - [ ] Configure a Bootstrapper
 - [ ] Configure a DCOS Cluster
 - [ ] Configure a UCP Cluster
+
+## To Use:
+1. make sure to set environment variable for TERRAFORM_SSH_KEY_DATA
