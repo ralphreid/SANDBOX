@@ -2,6 +2,12 @@ variable "resourcename" {
   default = "myResourceGroup"
 }
 
+variable "ARM_SUBSCRIPTION_ID" { }
+variable "ARM_CLIENT_ID" { }
+variable "ARM_CLIENT_SECRET" { }
+variable "ARM_TENANT_ID" { }
+variable "TERRAFORM_SSH_KEY_DATA" { }
+
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
     version = "~> 1.3"
@@ -149,7 +155,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
         disable_password_authentication = true
         ssh_keys {
             path     = "/home/azureuser/.ssh/authorized_keys"
-            key_data = "${TERRAFORM_SSH_KEY_DATA}"
+            key_data = "${var.TERRAFORM_SSH_KEY_DATA}"
         }
     }
 
