@@ -2,19 +2,13 @@ variable "resourcename" {
   default = "myResourceGroup"
 }
 
-variable "ARM_SUBSCRIPTION_ID" { }
-variable "ARM_CLIENT_ID" { }
-variable "ARM_CLIENT_SECRET" { }
-variable "ARM_TENANT_ID" { }
-variable "TERRAFORM_SSH_KEY_DATA" { }
-
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
     version = "~> 1.3"
-    subscription_id = "${var.ARM_SUBSCRIPTION_ID}"
-    client_id       = "${var.ARM_CLIENT_ID}"
-    client_secret   = "${var.ARM_CLIENT_SECRET}"
-    tenant_id       = "${var.ARM_TENANT_ID}"
+    subscription_id = "${var.arm_subscription_id}"
+    client_id       = "${var.arm_client_id}"
+    client_secret   = "${var.arm_client_secret}"
+    tenant_id       = "${var.arm_tenant_id}"
 }
 
 # Create a resource group if it doesn’t exist
@@ -154,8 +148,8 @@ resource "azurerm_virtual_machine" "myterraformvm" {
     os_profile_linux_config {
         disable_password_authentication = true
         ssh_keys {
-            path     = "/home/azureuser/.ssh/authorized_keys"
-            key_data = "${var.TERRAFORM_SSH_KEY_DATA}"
+            path     = "/home/jah/.ssh/authorized_keys"
+            key_data = "${file(var.ssh_public_key_file)}"
         }
     }
 

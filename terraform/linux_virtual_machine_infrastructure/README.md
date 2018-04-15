@@ -1,4 +1,4 @@
-### Research & Background:
+ ### Research & Background:
 - https://docs.microsoft.com/en-us/azure/virtual-machines/linux/terraform-create-complete-vm
 - https://github.com/hashicorp/terraform/issues/9712
 - https://www.terraform.io/intro/getting-started/variables.html#from-a-file
@@ -16,16 +16,11 @@ make this secure. For now I will set a password for the user.
   -var-file="secret.tfvars" \
   -var-file="production.tfvars"`
 - `terraform apply -var-file=secret.tfvars`
+- Obtain the public address `az vm show --resource-group myResourceGroup --name myVM -d --query [publicIps] --o tsv`
+- ssh <computer_user>@<address>
 
 ## To Do:
-- Fix this issue:
-* azurerm_virtual_machine.myterraformvm: compute.VirtualMachinesClient#CreateOrUpdate: Failure sending request: StatusCode=400 -- Original Error: autorest/azure: Service returned an error. Status=400 Code="InvalidParameter" Message="Destination path for SSH public keys is currently limited to its default value /home/jah/.ssh/authorized_keys  due to a known issue in Linux provisioning agent."
-
-Terraform does not automatically rollback in the face of errors.
-Instead, your Terraform state file has been partially updated with
-any resources that successfully completed. Please address the error
-above and apply again to incrementally change your infrastructure.
-
+- Find out how to validate terraform style and syntax
 
 ## Doing:
-- moving env vars into a secrets file
+- moving user & password vars into a secrets file
