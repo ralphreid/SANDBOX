@@ -1,0 +1,10 @@
+{
+  "config_version": 1,
+  "mirrors": {
+    "terraform/dcos": {
+      "url": "git@github.com:dcos/terraform-dcos.git",
+      "branch": "master",
+      "revision": "0503361ef15d7cc3ff063c8e062a71d68b74e9a0"
+    }
+  }
+}
