@@ -1,0 +1,5 @@
+### I get an error every time I try to **edit a wiki page** - help!
+
+Unfortunately you can't currently edit the wiki in `https` mode. Change the URL of the page from `https` to `http` and try again.
+
+

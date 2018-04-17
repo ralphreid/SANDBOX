@@ -1,0 +1,13 @@
+*BL Comments: I think we need more detail here about what the actual functionality would be - what sort of tasks this would enable!!*
+
+## Raspberry Pi Mininet image (network in a box)
+The project will be extremely useful for educational institutions, as they would now be able to use extremely cheap test beds for networking and allied courses.
+
+*BL: I think one key aspect of an rPi Mininet image is creating a script which can generate that image automatically!! Here are some questions: Does Mininet run in the stock Ubuntu image for the Pi? If so, then we're already done. If not, what do we need to do to get it to run? We might need a way of automatically creating a cross-development environment to compile an ARM kernel for the Pi that has CONFIG_NET_NS enabled. Then we would need a way of creating a new image which has the new kernel and Mininet in it, and hopefully have some automatic way of testing the image to make sure that it actually works, for example booting it in qemu for ARM. The idea is to make a script which does everything in an automated fashion.*
+
+*BL: I'm also not entirely sure what "network-in-a-box" means to you (or should mean!) So, you have to figure out what would be useful here!! Do you want to make it easy for people to create an arbitrary topology of switches and routers? Do you want to make it easy to create an OpenFlow network with an internal or external controller? I think understanding the use case(s) and coming up with some really cool or fun ones would be a good place to start.*
+
+## Mininet Automatic Deployment to Amazon EC2  
+The project is an interesting and a very useful addition to Mininet that will enhance it's usability. It will be quite tricky to make the software simulation of Mininet to work across multiple nodes interacting with the physical resources.
+
+*BL: Don't worry about multiple nodes just yet. Try creating something which makes it as easy as possible to spin up an instance of Mininet on EC2. For example, try writing a simple script in Python that you can run on  your Linux/Windows/Mac PC that takes a Mininet script and runs it on an EC2 instance. Or think about a web interface which you can type a Mininet script into which allows it to run on an EC2 instance. Think about what you would find most convenient and easy as a beginning user of Mininet. What's the quickest and easiest way to get started with Mininet if all you have is a web browser?*

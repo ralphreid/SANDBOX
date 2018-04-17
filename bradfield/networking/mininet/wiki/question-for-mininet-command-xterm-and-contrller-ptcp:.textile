@@ -1,0 +1,22 @@
+Dear Team,
+
+I install ODL and Mininet in the same VM(ubuntu12.4)
+
+mn --topo single,3 --mac --switch ovsk --controller remote
+
+mininet>xterm h1
+Error:Cannot connect to display------------------------first error
+
+
+then i open another ssh session ,
+
+run command :
+
+root@xxx#controller ptcp:-------------------------------second error
+Feb 17 21:57:30|00001|vconn_tcp|ERR|ptcp:: bind: Address already in use
+Feb 17 21:57:30|00002|controller|ERR|ptcp:: connect: Address already in use
+controller: no active or passive switch connection
+
+could you please tell me how to solve it ???
+
+thanks a lot

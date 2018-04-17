@@ -1,6 +1,11 @@
 {
   "config_version": 1,
   "mirrors": {
+    "bradfield/networking/mininet/wiki": {
+      "url": "https://github.com/mininet/mininet.wiki.git",
+      "branch": "master",
+      "revision": "3335ef9615889f0bf48d070f7d987e40731f35a8"
+    },
     "terraform/dcos": {
       "url": "git@github.com:dcos/terraform-dcos.git",
       "branch": "master",
