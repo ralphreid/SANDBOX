@@ -24,7 +24,7 @@
         "mkdir ~/src",
         "cd ~/src",
         "git clone https://github.com/hashicorp/demo-terraform-101.git",
-        "cp -R ~/src/demo-terraform-beginner/assets /tmp",
+        "cp -R ~/src/demo-terraform-101/assets /tmp",
         "sudo sh /tmp/assets/setup-web.sh"
 ] }
 ] }
