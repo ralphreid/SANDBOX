@@ -1,7 +1,0 @@
----
-applications:
-- name: myapp
-  memory: 128MB
-  disk_quota: 256MB
-  random-route: true
-  command: python hello.py

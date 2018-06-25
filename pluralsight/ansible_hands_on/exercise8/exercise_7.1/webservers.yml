@@ -1,9 +1,0 @@
----
-## Web Servers
-- hosts: webservers
-  roles:
-    - server-common
-    - webserver
-  sudo: yes
-  gather_facts: no
-

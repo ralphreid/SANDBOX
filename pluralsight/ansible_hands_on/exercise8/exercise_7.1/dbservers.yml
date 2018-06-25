@@ -1,9 +1,0 @@
----
-## DB Servers
-- hosts: dbservers
-  roles:
-    - server-common
-    - dbserver
-  sudo: yes
-  gather_facts: no
-

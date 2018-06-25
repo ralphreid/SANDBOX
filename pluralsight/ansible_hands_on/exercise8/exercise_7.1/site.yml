@@ -1,4 +1,0 @@
----
-- include: common.yml tags=common
-- include: webservers.yml tags=webserver
-- include: dbservers.yml tags=dbserver
