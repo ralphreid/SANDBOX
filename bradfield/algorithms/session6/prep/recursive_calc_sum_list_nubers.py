@@ -8,6 +8,8 @@ def iterative_sum(numbers):
 
 iterative_sum([1, 3, 5, 7, 9])  # => 25
 
+# This is an example of using recursion
+
 def sum_of(numbers):
     if len(numbers) == 0:
         return 0
