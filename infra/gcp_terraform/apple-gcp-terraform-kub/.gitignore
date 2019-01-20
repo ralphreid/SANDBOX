@@ -3,3 +3,4 @@
 .terraform
 
 account.json
+secret.tfvars
