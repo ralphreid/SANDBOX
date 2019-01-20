@@ -1,6 +1,8 @@
 .DS_Store
 
 .terraform
+terraform.tfstate*
+.terraform.tfstate*
 
 account.json
 secret.auto.tfvars
