@@ -1,2 +1,3 @@
 def is_pangram(sentence):
-    pass
+    if not sentence:
+        return False
