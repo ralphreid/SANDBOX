@@ -83,8 +83,9 @@ Resources:
         "Fn::Base64":
           !Sub |
             #!/bin/bash
-            yum install httpd php mysql php-mysql -y
-            yum update -y
+            sudo yum -y install epel-release  
+            sudo yum-config-manager --enable remi-php72
+            yum update -y && yum -y install httpd php mysql php-mysql && yum update -y
             chkconfig httpd on
             service httpd start
             cd /var/www/html
