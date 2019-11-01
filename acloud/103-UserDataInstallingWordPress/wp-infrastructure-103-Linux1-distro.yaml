@@ -83,14 +83,14 @@ Resources:
         "Fn::Base64":
           !Sub |
             #!/bin/bash
-            sudo yum -y install epel-release  
+            sudo yum -y install epel-release
             sudo yum-config-manager --enable remi-php72
             yum update -y && yum -y install httpd php mysql php-mysql && yum update -y
             chkconfig httpd on
             service httpd start
             cd /var/www/html
-            wget https://wordpress.org/latest.tar.gz
-            tar -zxvf latest.tar.gz --strip 1
+            wget https://wordpress.org/wordpress-4.9.3.tar.gz
+            tar -zxvf wordpress-4.9.3.tar.gz --strip 1
             rm latest.tar.gz
             cp wp-config-sample.php wp-config.php
             sed -i 's/database_name_here/${DatabaseName}/g' wp-config.php
