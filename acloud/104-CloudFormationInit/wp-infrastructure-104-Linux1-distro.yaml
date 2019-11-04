@@ -88,7 +88,7 @@ Resources:
           !Sub |
             #!/bin/bash
             yum update -y aws-cfn-bootstrap # good practice - always do this.
-            amazon-linux-extras enable php7.2
+            amazon-linux-extras enable php7.2 lamp-mariadb10.2-php7.2
             /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2 --configsets wordpress --region ${AWS::Region}
             yum -y update
     Metadata:
@@ -134,7 +134,7 @@ Resources:
             yum:
               httpd: []
               php: []
-              mariadb: []
+              php-mysqlnd: []
           sources:
             /var/www/html: "http://wordpress.org/latest.tar.gz"
           services:
