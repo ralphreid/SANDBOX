@@ -35,7 +35,7 @@ Mappings:
     ca-central-1:
       AMALINUX: ami-07423fb63ea0a0930
     eu-west-1:
-      AMALINUX: ami-040ba9174949f6de4
+      AMALINUX: ami-040ba9174949f6de4 #Updated to Linux 2
     eu-west-2:
       AMALINUX: ami-01419b804382064e4
     eu-west-3:
@@ -88,21 +88,16 @@ Resources:
           !Sub |
             #!/bin/bash
             yum update -y aws-cfn-bootstrap # good practice - always do this.
+            amazon-linux-extras enable php7.2
             /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2 --configsets wordpress --region ${AWS::Region}
             yum -y update
     Metadata:
       AWS::CloudFormation::Init:
         configSets:
           wordpress:
-            - "enable_with_extra_packages"
             - "configure_cfn"
             - "install_wordpress"
             - "config_wordpress"
-        enable_with_extra_packages:
-          commands:
-            0_enable_php:
-              command: "amazon-linux-extras enable php7.2" # Required to install modern version of php
-              cwd: "~"
         configure_cfn:
           files:
             /etc/cfn/hooks.d/cfn-auto-reloader.conf:
@@ -139,8 +134,7 @@ Resources:
             yum:
               httpd: []
               php: []
-              mysql: []
-              php-mysql: []
+              mariadb: []
           sources:
             /var/www/html: "http://wordpress.org/latest.tar.gz"
           services:
