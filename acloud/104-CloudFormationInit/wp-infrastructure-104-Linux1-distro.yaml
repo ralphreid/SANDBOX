@@ -35,7 +35,7 @@ Mappings:
     ca-central-1:
       AMALINUX: ami-07423fb63ea0a0930
     eu-west-1:
-      AMALINUX: ami-08935252a36e25f85
+      AMALINUX: ami-040ba9174949f6de4
     eu-west-2:
       AMALINUX: ami-01419b804382064e4
     eu-west-3:
@@ -94,9 +94,15 @@ Resources:
       AWS::CloudFormation::Init:
         configSets:
           wordpress:
+            - "enable_with_extra_packages"
             - "configure_cfn"
             - "install_wordpress"
             - "config_wordpress"
+        enable_with_extra_packages:
+          commands:
+            0_enable_php:
+              command: "amazon-linux-extras enable php7.2" # Required to install modern version of php
+              cwd: "~"
         configure_cfn:
           files:
             /etc/cfn/hooks.d/cfn-auto-reloader.conf:
@@ -146,7 +152,7 @@ Resources:
           commands:
             01_clone_config:
               cwd: "/var/www/html/wordpress"
-              test: "test ! -e /var/www/html/wordpress/wp-config.php"
+              test: "test ! -e /var/www/html/wordpress/wp-config.php" # A pretest to make sure the file exists
               command: "cp wp-config-sample.php wp-config.php"
             02_inject_dbhost:
               cwd: "/var/www/html/wordpress"
