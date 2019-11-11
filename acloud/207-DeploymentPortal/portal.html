@@ -3,8 +3,8 @@
   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.21.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script type="text/javascript">
-    AWS.config.update({accessKeyId: 'SUPPORTAKID-CHANGEME', secretAccessKey: 'SUPPORTSECRET-CHANGEME'});
-    AWS.config.region = 'REGION-CHANGEME';
+    AWS.config.update({accessKeyId: 'AKIAXAGK6V7LABA7ANFB', secretAccessKey: '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'});
+    AWS.config.region = 'eu-west-1';
 
 //   DONT CHANGE THE COMMENTS BELOW - THESE ARE SO YOU CAN CHANGE THE VALUES BACK LATER
 //   AWS.config.update({accessKeyId: 'SUPPORTAKID-CHANGEME', secretAccessKey: 'SUPPORTSECRET-CHANGEME'});
@@ -27,7 +27,7 @@
       <script>
         function provisionStack(envtype, appversion) {
 
-          
+
           var cloudformation = new AWS.CloudFormation();
           var s1 = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
           var s2 = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -39,7 +39,7 @@
           var s8 = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
           var uuid = s1+s2+'-'+s3+'-'+s4+'-'+s5+'-'+s6+s7+s8
           var stackname = "CDLLC" + uuid
-          
+
           var param = {
             StackName: stackname,
             Parameters: [
@@ -47,9 +47,9 @@
               {ParameterKey: 'APPVERSION', ParameterValue: appversion, UsePreviousValue: false}
             ],
             OnFailure: 'DO_NOTHING',
-            TemplateURL: 'https://RESOURCEBUCKET-CHANGEME/wp.yaml'
+            TemplateURL: 'https://portalbucketanduser-portalbucket-ad8d3f9gmhz1.s3-eu-west-1.amazonaws.com/appenv5.yaml'
             // CONT CHANGE THE VALUE BELOW - THIS IS SO YOU CAN RETURN THE PLACEHOLDER LATER
-            //TemplateURL: 'https://RESOURCEBUCKET-CHANGEME/wp.yaml'   
+            //TemplateURL: 'https://RESOURCEBUCKET-CHANGEME/wp.yaml'
           };
           console.log(param)
           cloudformation.createStack(param, function(err,data){
@@ -84,7 +84,7 @@
                 if (obj.StackName.startsWith("CDLLC")) {
                   html+= ('<tr><td>'+index+'</td><td>'+obj.StackName+'</td><td>'+obj.CreationTime+'</td><td>'+obj.StackStatus+'</td><td><button onclick=\"deleteStack(\''+obj.StackName+'\')\">DELETE</button></td></tr>')
                 }
-              
+
               })
               html += "</table>"
               jQuery("#results").html(html)
@@ -145,7 +145,7 @@
                    html += "<button onclick=\"provisionStack('DEV','" + appversions[i] + "')\">DEV</button>"
                    html += "<button onclick=\"provisionStack('TEST','" + appversions[i] + "')\">TEST</button>"
                    html += "<button onclick=\"provisionStack('PROD','" + appversions[i] + "')\">PROD</button>"
-                   html += "<button onclick=\"provisionStack('PRESALES','" + appversions[i] + "')\">PRESALES</button>"                                     
+                   html += "<button onclick=\"provisionStack('PRESALES','" + appversions[i] + "')\">PRESALES</button>"
                    html += "</td>"
                    html += "</tr>"
                 }
@@ -166,7 +166,7 @@
     <button onclick="listStacks()">List Environments</button>
 
     </p>
-    <p id="results"> 
+    <p id="results">
     </p>
     <p id="provarea">
     </p>
