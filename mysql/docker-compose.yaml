@@ -1,0 +1,13 @@
+version: '3'
+services:
+  mysql_database:
+    image: mysql:8.0.18
+    ports:
+      - '3001:3306'
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_pa55w0rd
+      - MYSQL_DATABASE=my_database
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pa55w0rd
