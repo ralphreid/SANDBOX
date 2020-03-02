@@ -1,0 +1,1 @@
+ecs-cli up --keypair deepdive --instance-role ecsInstanceRole --size 1 --instance-type t2.micro --security-group sg-05db87290dbd96851 --vpc vpc-a4aab4c2 --subnets subnet-6e9dd608,subnet-8a2b71c2
