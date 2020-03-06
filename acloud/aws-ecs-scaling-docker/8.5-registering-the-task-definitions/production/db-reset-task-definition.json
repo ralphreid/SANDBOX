@@ -2,7 +2,7 @@
   "containerDefinitions": [
     {
       "name": "db-reset",
-      "image": "xxx.dkr.ecr.us-east-1.amazonaws.com/dockerzon/dockerzon:latest",
+      "image": "481461972950.dkr.ecr.us-east-1.amazonaws.com/dockerzon/dockerzon:latest",
       "command": ["./bin/rake", "db:reset"],
       "memory": 300,
       "environment": [
@@ -12,19 +12,19 @@
         },
         {
           "name": "DATABASE_URL",
-          "value": "postgresql://dockerzon:intergalacticzebramoldfactory@xxx:5432/dockerzon?encoding=utf8&pool=40&timeout=5000"
+          "value": "postgresql://dockerzon:intergalacticzebramoldfactory@dockerzone-production.cbol2meulsd4.eu-west-1.rds.amazonaws.com:5432/dockerzon?encoding=utf8&pool=40&timeout=5000"
         },
         {
           "name": "CACHE_URL",
-          "value": "redis://xxx:6379"
+          "value": "redis://dockerzon-production.dp2ecq.0001.euw1.cache.amazonaws.com:6379"
         },
         {
           "name": "JOB_WORKER_URL",
-          "value": "redis://xxx:6379"
+          "value": "redis://dockerzon-production.dp2ecq.0001.euw1.cache.amazonaws.com:6379"
         },
         {
           "name": "SECRET_TOKEN",
-          "value": "xxx"
+          "value": "c19e6cb93c2ead67ec990925da625c7500ae2d047861cce3986ff8c892c15028d21da16e8743f2e80c51ca6491fe991814bbac2994ef9a80b5a8f65ef868e820"
         }
       ]
     }
