@@ -13,7 +13,7 @@
         },
         {
           "name": "DATABASE_URL",
-          "value": "postgresql://dockerzon:intergalacticzebramoldfactory@ dockerzone-production.cbol2meulsd4.eu-west-1.rds.amazonaws.com:5432/dockerzon?encoding=utf8&pool=40&timeout=5000"
+          "value": "postgresql://dockerzon:intergalacticzebramoldfactory@dockerzone-production.cbol2meulsd4.eu-west-1.rds.amazonaws.com:5432/dockerzon?encoding=utf8&pool=40&timeout=5000"
         },
         {
           "name": "CACHE_URL",
@@ -25,7 +25,6 @@
         },
         {
           "name": "SECRET_TOKEN",
-          "value": "xxx"
         }
       ]
     }
