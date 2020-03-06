@@ -24,7 +24,7 @@
           "value": "redis://dockerzon-production.dp2ecq.0001.euw1.cache.amazonaws.com:6379"
         },
         {
-          "name": "SECRET_TOKEN",
+          "name": "c19e6cb93c2ead67ec990925da625c7500ae2d047861cce3986ff8c892c15028d21da16e8743f2e80c51ca6491fe991814bbac2994ef9a80b5a8f65ef868e820",
         }
       ]
     }
