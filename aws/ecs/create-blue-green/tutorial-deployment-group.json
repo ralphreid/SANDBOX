@@ -38,7 +38,7 @@
         }
       ]
    },
-   "serviceRoleArn": "arn:aws:iam::aws_account_id:role/ecsCodeDeployRole",
+   "serviceRoleArn": "arn:aws:iam::481461972950:role/ecsCodeDeployRole",
    "ecsServices": [
        {
            "serviceName": "service-bluegreen",
