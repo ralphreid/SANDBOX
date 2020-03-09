@@ -9,7 +9,6 @@
           "hostPort": 80
         }
       ],
-      "links": ["dockerzon:dockerzon"],
       "volumesFrom": [
         {
           "sourceContainer": "dockerzon"
@@ -59,6 +58,6 @@
   ],
   "executionRoleArn": "arn:aws:iam::481461972950:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
-  "cpu": "512",
-  "memory": "1024"
+  "cpu": "1024",
+  "memory": "2048"
 }
