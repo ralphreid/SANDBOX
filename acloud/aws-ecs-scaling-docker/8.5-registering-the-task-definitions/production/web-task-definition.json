@@ -53,5 +53,12 @@
       ]
     }
   ],
-  "family": "web"
+  "family": "web",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "executionRoleArn": "arn:aws:iam::481461972950:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "cpu": "512",
+  "memory": "1024"
 }

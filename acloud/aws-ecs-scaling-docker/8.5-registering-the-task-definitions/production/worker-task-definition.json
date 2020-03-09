@@ -4,8 +4,6 @@
       "name": "sidekiq",
       "image": "481461972950.dkr.ecr.us-east-1.amazonaws.com/dockerzon/dockerzon:latest",
       "command": ["./bin/sidekiq"],
-      "cpu": 1024,
-      "memory": 150,
       "environment": [
         {
           "name": "RAILS_ENV",
@@ -30,5 +28,12 @@
       ]
     }
   ],
-  "family": "worker"
+  "family": "worker",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "executionRoleArn": "arn:aws:iam::481461972950:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "cpu": "512",
+  "memory": "1024"
 }
