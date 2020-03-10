@@ -6,5 +6,19 @@
     "deploymentConfiguration": {
         "maximumPercent": 100,
         "minimumHealthyPercent": 0
+    },
+    "launchType": "FARGATE",
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+              "subnets": [
+                  "subnet-20cb5f7a",
+                  "subnet-8a2b71c2",
+                  "subnet-6e9dd608"
+              ],
+              "securityGroups": [
+                  "sg-05db87290dbd96851"
+                ],
+              "assignPublicIp": "ENABLED"
+        }
     }
 }
