@@ -2,6 +2,7 @@
     "cluster": "production",
     "serviceName": "web",
     "taskDefinition": "web",
+    "launchType": "FARGATE",
     "loadBalancers": [
         {
             "targetGroupArn": "arn:aws:elasticloadbalancing:eu-west-1:481461972950:targetgroup/targets-dockerzon/4caf4db04bb50aa0",
@@ -22,7 +23,6 @@
               "assignPublicIp": "ENABLED"
         }
     },
-    "role": "ecsServiceRole",
     "desiredCount": 2,
     "deploymentConfiguration": {
         "maximumPercent": 100,
