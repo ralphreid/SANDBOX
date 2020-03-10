@@ -9,6 +9,19 @@
             "containerPort": 80
         }
     ],
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+              "subnets": [
+                  "subnet-20cb5f7a",
+                  "subnet-8a2b71c2",
+                  "subnet-6e9dd608"
+              ],
+              "securityGroups": [
+                  "sg-05db87290dbd96851"
+                ],
+              "assignPublicIp": "ENABLED"
+        }
+    },
     "role": "ecsServiceRole",
     "desiredCount": 2,
     "deploymentConfiguration": {
