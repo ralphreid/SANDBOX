@@ -4,7 +4,7 @@
     "taskDefinition": "web",
     "loadBalancers": [
         {
-            "loadBalancerName": "dockerzon-web",
+            "targetGroupArn": "arn:aws:elasticloadbalancing:eu-west-1:481461972950:targetgroup/targets-dockerzon/4caf4db04bb50aa0",
             "containerName": "nginx",
             "containerPort": 80
         }
