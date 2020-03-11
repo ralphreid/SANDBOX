@@ -65,63 +65,63 @@ Resources:
 
   # The task definition. This is a simple metadata description of what
   # container to run, and what resource requirements it has.
-  TaskDefinition:
-    Type: AWS::ECS::TaskDefinition
-    Properties:
-      Family: !Ref 'ServiceName'
-      Cpu: !Ref 'ContainerCpu'
-      Memory: !Ref 'ContainerMemory'
-      NetworkMode: awsvpc
-      RequiresCompatibilities:
-        - FARGATE
-      ExecutionRoleArn:
-        Fn::ImportValue:
-          !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
-      TaskRoleArn:
-        Fn::If:
-          - 'HasCustomRole'
-          - !Ref 'Role'
-          - !Ref "AWS::NoValue"
-      ContainerDefinitions:
-        - Name: !Ref 'ServiceName'
-          Cpu: !Ref 'ContainerCpu'
-          Memory: !Ref 'ContainerMemory'
-          Image: !Ref 'ImageUrl'
-          PortMappings:
-            - ContainerPort: !Ref 'ContainerPort'
+  # TaskDefinitionOrginal:
+  #   Type: AWS::ECS::TaskDefinition
+  #   Properties:
+  #     Family: !Ref 'ServiceName'
+  #     Cpu: !Ref 'ContainerCpu'
+  #     Memory: !Ref 'ContainerMemory'
+  #     NetworkMode: awsvpc
+  #     RequiresCompatibilities:
+  #       - FARGATE
+  #     ExecutionRoleArn:
+  #       Fn::ImportValue:
+  #         !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
+  #     TaskRoleArn:
+  #       Fn::If:
+  #         - 'HasCustomRole'
+  #         - !Ref 'Role'
+  #         - !Ref "AWS::NoValue"
+  #     ContainerDefinitions:
+  #       - Name: !Ref 'ServiceName'
+  #         Cpu: !Ref 'ContainerCpu'
+  #         Memory: !Ref 'ContainerMemory'
+  #         Image: !Ref 'ImageUrl'
+  #         PortMappings:
+  #           - ContainerPort: !Ref 'ContainerPort'
 
   # The service. The service is a resource which allows you to run multiple
   # copies of a type of task, and gather up their logs and metrics, as well
   # as monitor the number of running tasks and replace any that have crashed
-  Service:
-    Type: AWS::ECS::Service
-    DependsOn: LoadBalancerRule
-    Properties:
-      ServiceName: !Ref 'ServiceName'
-      Cluster:
-        Fn::ImportValue:
-          !Join [':', [!Ref 'StackName', 'ClusterName']]
-      LaunchType: FARGATE
-      DeploymentConfiguration:
-        MaximumPercent: 200
-        MinimumHealthyPercent: 75
-      DesiredCount: !Ref 'DesiredCount'
-      NetworkConfiguration:
-        AwsvpcConfiguration:
-          AssignPublicIp: ENABLED
-          SecurityGroups:
-            - Fn::ImportValue:
-                !Join [':', [!Ref 'StackName', 'FargateContainerSecurityGroup']]
-          Subnets:
-            - Fn::ImportValue:
-                !Join [':', [!Ref 'StackName', 'PrivateSubnetOne']]
-            - Fn::ImportValue:
-                !Join [':', [!Ref 'StackName', 'PrivateSubnetTwo']]
-      TaskDefinition: !Ref 'TaskDefinition'
-      LoadBalancers:
-        - ContainerName: !Ref 'ServiceName'
-          ContainerPort: !Ref 'ContainerPort'
-          TargetGroupArn: !Ref 'TargetGroup'
+  # Service:
+  #   Type: AWS::ECS::Service
+  #   DependsOn: LoadBalancerRule
+  #   Properties:
+  #     ServiceName: !Ref 'ServiceName'
+  #     Cluster:
+  #       Fn::ImportValue:
+  #         !Join [':', [!Ref 'StackName', 'ClusterName']]
+  #     LaunchType: FARGATE
+  #     DeploymentConfiguration:
+  #       MaximumPercent: 200
+  #       MinimumHealthyPercent: 75
+  #     DesiredCount: !Ref 'DesiredCount'
+  #     NetworkConfiguration:
+  #       AwsvpcConfiguration:
+  #         AssignPublicIp: ENABLED
+  #         SecurityGroups:
+  #           - Fn::ImportValue:
+  #               !Join [':', [!Ref 'StackName', 'FargateContainerSecurityGroup']]
+  #         Subnets:
+  #           - Fn::ImportValue:
+  #               !Join [':', [!Ref 'StackName', 'PrivateSubnetOne']]
+  #           - Fn::ImportValue:
+  #               !Join [':', [!Ref 'StackName', 'PrivateSubnetTwo']]
+  #     TaskDefinition: !Ref 'TaskDefinitionOriginal'
+  #     LoadBalancers:
+  #       - ContainerName: !Ref 'ServiceName'
+  #         ContainerPort: !Ref 'ContainerPort'
+  #         TargetGroupArn: !Ref 'TargetGroup'
 
   # A target group. This is used for keeping track of all the tasks, and
   # what IP addresses / port numbers they have. You can query it yourself,
