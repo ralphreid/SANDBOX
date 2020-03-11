@@ -3,7 +3,7 @@ Description: Deploy a service on AWS Fargate, hosted in a private subnet, but ac
 Parameters:
   StackName:
     Type: String
-    Default: private-vpc
+    Default: core
     Description: The name of the parent Fargate networking stack that you created. Necessary
                  to locate and reference resources created by that stack.
   ServiceName:
@@ -35,7 +35,7 @@ Parameters:
                  traffic to this service.
   Priority:
     Type: Number
-    Default: 1
+    Default: 2
     Description: The priority for the routing rule added to the load balancer.
                  This only applies if your have multiple services which have been
                  assigned to different paths on the load balancer.
@@ -122,11 +122,12 @@ Resources:
   TargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      HealthCheckIntervalSeconds: 6
-      HealthCheckPath: /
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /health_check
       HealthCheckProtocol: HTTP
+      HealthCheckPort: 80
       HealthCheckTimeoutSeconds: 5
-      HealthyThresholdCount: 2
+      HealthyThresholdCount: 10
       TargetType: ip
       Name: !Ref 'ServiceName'
       Port: !Ref 'ContainerPort'
@@ -150,29 +151,3 @@ Resources:
         Fn::ImportValue:
           !Join [':', [!Ref 'StackName', 'PublicListener']]
       Priority: !Ref 'Priority'
-
-  DatabaseSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Access to the db
-      VpcId: vpc-a4aab4c2
-        # Fn::ImportValue:
-        #   !Join [':', [!Ref 'StackName', 'VPCId']]
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 5432
-          ToPort: 5432
-
-  Database:
-    Type: AWS::RDS::DBInstance
-    Properties:
-      MultiAZ: false
-      Engine: postgres
-      PubliclyAccessible: false
-      VPCSecurityGroups:
-        - !Ref 'DatabaseSecurityGroup'
-      DBInstanceClass: db.t2.micro
-      AllocatedStorage: 10
-      DBName: dockerzon_production
-      MasterUsername: dockerzon
-      MasterUserPassword: EFPUxCDFH2rniF
