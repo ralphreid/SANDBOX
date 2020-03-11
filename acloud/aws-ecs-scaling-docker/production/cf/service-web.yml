@@ -128,23 +128,23 @@ Resources:
   # to use the addresses yourself, but most often this target group is just
   # connected to an application load balancer, or network load balancer, so
   # it can automatically distribute traffic across all the targets.
-  TargetGroup:
-    Type: AWS::ElasticLoadBalancingV2::TargetGroup
-    Properties:
-      HealthCheckIntervalSeconds: 30
-      HealthCheckPath: /health_check
-      HealthCheckProtocol: HTTP
-      HealthCheckPort: 80
-      HealthCheckTimeoutSeconds: 5
-      HealthyThresholdCount: 10
-      TargetType: ip
-      Name: !Ref 'ServiceName'
-      Port: !Ref 'ContainerPort'
-      Protocol: HTTP
-      UnhealthyThresholdCount: 2
-      VpcId:
-        Fn::ImportValue:
-          !Join [':', [!Ref 'StackName', 'VPCId']]
+  # TargetGroup:
+  #   Type: AWS::ElasticLoadBalancingV2::TargetGroup
+  #   Properties:
+  #     HealthCheckIntervalSeconds: 30
+  #     HealthCheckPath: /health_check
+  #     HealthCheckProtocol: HTTP
+  #     HealthCheckPort: 80
+  #     HealthCheckTimeoutSeconds: 5
+  #     HealthyThresholdCount: 10
+  #     TargetType: ip
+  #     Name: !Ref 'ServiceName'
+  #     Port: !Ref 'ContainerPort'
+  #     Protocol: HTTP
+  #     UnhealthyThresholdCount: 2
+  #     VpcId:
+  #       Fn::ImportValue:
+  #         !Join [':', [!Ref 'StackName', 'VPCId']]
 
   # Create a rule on the load balancer for routing traffic to the target group
   # LoadBalancerRule:
