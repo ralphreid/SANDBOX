@@ -198,6 +198,8 @@ Resources:
   # ECS Resources
   ECSCluster:
     Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: production
 
   # A security group for the containers we will run in Fargate.
   # Three rules, allowing network traffic from a public facing load

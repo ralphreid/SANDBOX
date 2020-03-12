@@ -10,11 +10,6 @@ Parameters:
     Type: String
     Default: web
     Description: A name for the service
-  ImageUrl:
-    Type: String
-    Default: nginx
-    Description: The url of a docker image that contains the application process that
-                 will handle the traffic for this service
   ContainerPort:
     Type: Number
     Default: 80
@@ -63,6 +58,7 @@ Resources:
     Properties:
       RepositoryName: dockerzon/nginx
 
+
   # The task definition. This is a simple metadata description of what
   # container to run, and what resource requirements it has.
   # TaskDefinitionOrginal:
@@ -89,6 +85,33 @@ Resources:
   #         Image: !Ref 'ImageUrl'
   #         PortMappings:
   #           - ContainerPort: !Ref 'ContainerPort'
+
+  TaskDefinitionNginx:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Ref 'ServiceName'
+      # Cpu: !Ref 'ContainerCpu'
+      # Memory: !Ref 'ContainerMemory'
+      # NetworkMode: awsvpc
+      # RequiresCompatibilities:
+      #   - FARGATE
+      # ExecutionRoleArn:
+      #   Fn::ImportValue:
+      #     !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
+      # TaskRoleArn:
+      #   Fn::If:
+      #     - 'HasCustomRole'
+      #     - !Ref 'Role'
+      #     - !Ref "AWS::NoValue"
+      ContainerDefinitions:
+        - Name: !Ref 'ServiceName'
+          Cpu: !Ref 'ContainerCpu'
+          Memory: !Ref 'ContainerMemory'
+          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/nginx:latest'
+          PortMappings:
+            - ContainerPort: !Ref 'ContainerPort'
+
+
 
   # The service. The service is a resource which allows you to run multiple
   # copies of a type of task, and gather up their logs and metrics, as well
