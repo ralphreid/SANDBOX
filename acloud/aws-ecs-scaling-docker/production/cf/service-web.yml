@@ -86,30 +86,30 @@ Resources:
   #         PortMappings:
   #           - ContainerPort: !Ref 'ContainerPort'
 
-  TaskDefinitionNginx:
-    Type: AWS::ECS::TaskDefinition
-    Properties:
-      Family: !Ref 'ServiceName'
-      # Cpu: !Ref 'ContainerCpu'
-      # Memory: !Ref 'ContainerMemory'
-      # NetworkMode: awsvpc
-      # RequiresCompatibilities:
-      #   - FARGATE
-      # ExecutionRoleArn:
-      #   Fn::ImportValue:
-      #     !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
-      # TaskRoleArn:
-      #   Fn::If:
-      #     - 'HasCustomRole'
-      #     - !Ref 'Role'
-      #     - !Ref "AWS::NoValue"
-      ContainerDefinitions:
-        - Name: !Ref 'ServiceName'
-          Cpu: !Ref 'ContainerCpu'
-          Memory: !Ref 'ContainerMemory'
-          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/nginx:latest'
-          PortMappings:
-            - ContainerPort: !Ref 'ContainerPort'
+  # TaskDefinitionNginx:
+  #   Type: AWS::ECS::TaskDefinition
+  #   Properties:
+  #     Family: !Ref 'ServiceName'
+  #     # Cpu: !Ref 'ContainerCpu'
+  #     # Memory: !Ref 'ContainerMemory'
+  #     # NetworkMode: awsvpc
+  #     # RequiresCompatibilities:
+  #     #   - FARGATE
+  #     # ExecutionRoleArn:
+  #     #   Fn::ImportValue:
+  #     #     !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
+  #     # TaskRoleArn:
+  #     #   Fn::If:
+  #     #     - 'HasCustomRole'
+  #     #     - !Ref 'Role'
+  #     #     - !Ref "AWS::NoValue"
+  #     ContainerDefinitions:
+  #       - Name: !Ref 'ServiceName'
+  #         Cpu: !Ref 'ContainerCpu'
+  #         Memory: !Ref 'ContainerMemory'
+  #         Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/nginx:latest'
+  #         PortMappings:
+  #           - ContainerPort: !Ref 'ContainerPort'
 
 
 
