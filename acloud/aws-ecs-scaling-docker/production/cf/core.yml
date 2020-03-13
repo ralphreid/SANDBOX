@@ -414,15 +414,15 @@ Resources:
               Resource: '*'
 
 
-  # DatabaseSecurityGroupPostgres:
-  #   Type: AWS::EC2::SecurityGroup
-  #   Properties:
-  #     GroupDescription: Access to the db
-  #     VpcId: !Ref 'VPC'
-  #     SecurityGroupIngress:
-  #       - IpProtocol: tcp
-  #         FromPort: 5432
-  #         ToPort: 5432
+  DatabaseSecurityGroupPostgres:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Access to the db
+      VpcId: !Ref 'VPC'
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
 
   DatabaseSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
@@ -438,8 +438,8 @@ Resources:
       MultiAZ: false
       Engine: postgres
       PubliclyAccessible: false
-      # VPCSecurityGroups:
-      #   - !Ref 'DatabaseSecurityGroupPostgres'
+      VPCSecurityGroups:
+        - !Ref 'DatabaseSecurityGroupPostgres'
       DBInstanceClass: db.t2.micro
       DBSubnetGroupName: !Ref 'DatabaseSubnetGroup'
       AllocatedStorage: 10
