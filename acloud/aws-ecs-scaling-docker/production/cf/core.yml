@@ -398,6 +398,15 @@ Resources:
                 - 'ecr:BatchCheckLayerAvailability'
                 - 'ecr:GetDownloadUrlForLayer'
                 - 'ecr:BatchGetImage'
+                # Added additional to fix download issue from ECR
+                # -  'ecr:GetRepositoryPolicy'
+                # -  'ecr:DescribeRepositories'
+                # -  'ecr:ListImages'
+                # -  'ecr:DescribeImages'
+                # -  'ecr:GetLifecyclePolicy'
+                # -  'ecr:GetLifecyclePolicyPreview'
+                # -  'ecr:ListTagsForResource'
+                # -  'ecr:DescribeImageScanFindings'
 
                 # Allow the ECS tasks to upload logs to CloudWatch
                 - 'logs:CreateLogStream'
@@ -405,21 +414,22 @@ Resources:
               Resource: '*'
 
 
-  DatabaseSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Access to the db
-      VpcId: vpc-a4aab4c2
-        # Fn::ImportValue:
-        #   !Join [':', [!Ref 'StackName', 'VPCId']]
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 5432
-          ToPort: 5432
-        - IpProtocol: tcp
-          FromPort: 6379
-          ToPort: 6379
+  # DatabaseSecurityGroupPostgres:
+  #   Type: AWS::EC2::SecurityGroup
+  #   Properties:
+  #     GroupDescription: Access to the db
+  #     VpcId: !Ref 'VPC'
+  #     SecurityGroupIngress:
+  #       - IpProtocol: tcp
+  #         FromPort: 5432
+  #         ToPort: 5432
 
+  DatabaseSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      SubnetIds:
+        - PrivateSubnetOne
+        - PrivateSubnetTwo
 
   Database:
     Type: AWS::RDS::DBInstance
@@ -427,25 +437,26 @@ Resources:
       MultiAZ: false
       Engine: postgres
       PubliclyAccessible: false
-      VPCSecurityGroups:
-        - !Ref 'DatabaseSecurityGroup'
+      # VPCSecurityGroups:
+      #   - !Ref 'DatabaseSecurityGroupPostgres'
       DBInstanceClass: db.t2.micro
+      DBSubnetGroupName: !Ref 'DatabaseSubnetGroup'
       AllocatedStorage: 10
       DBName: dockerzon_production
       MasterUsername: dockerzon
       MasterUserPassword: EFPUxCDFH2rniF
 
 
-  ElasticCacheDockerzon:
-    Type: AWS::ElastiCache::CacheCluster
-    Properties:
-      Engine: redis
-      CacheNodeType: cache.t2.micro
-      NumCacheNodes: 1
-      VpcSecurityGroupIds:
-        - !GetAtt
-          - DatabaseSecurityGroup
-          - GroupId
+  # ElasticCacheDockerzon:
+  #   Type: AWS::ElastiCache::CacheCluster
+  #   Properties:
+  #     Engine: redis
+  #     CacheNodeType: cache.t2.micro
+  #     NumCacheNodes: 1
+  #     VpcSecurityGroupIds:
+  #       - !GetAtt
+  #         - DatabaseSecurityGroup
+  #         - GroupId
 
 # These are the values output by the CloudFormation template. Be careful
 # about changing any of them, because of them are exported with specific
