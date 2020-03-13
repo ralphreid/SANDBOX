@@ -14,14 +14,38 @@ Parameters:
     Type: Number
     Default: 80
     Description: What port number the application inside the docker container is binding to
-  ContainerCpu:
+  ContainerCpuNginx:
     Type: Number
     Default: 256
     Description: How much CPU to give the container. 1024 is 1 CPU
-  ContainerMemory:
+  ContainerMemoryNginx:
+    Type: Number
+    Default: 256
+    Description: How much memory in megabytes to give the container
+  ContainerPortNginx:
+    Type: Number
+    Default: 80
+    Description: What port number the application inside the docker container is binding to
+  ContainerCpuDockerzon:
+    Type: Number
+    Default: 512
+    Description: How much CPU to give the container. 1024 is 1 CPU
+  ContainerMemoryDockerzon:
     Type: Number
     Default: 512
     Description: How much memory in megabytes to give the container
+  ContainerPortDockerzon:
+    Type: Number
+    Default: 8000
+    Description: What port number the application inside the docker container is binding to
+  TaskCpu:
+    Type: Number
+    Default: 2048
+    Description: How much CPU to give the task. 1024 is 1 CPU
+  TaskMemory:
+    Type: Number
+    Default: 4096
+    Description: How much memory in megabytes to give the task
   Path:
     Type: String
     Default: "*"
@@ -46,6 +70,44 @@ Parameters:
 
 Conditions:
   HasCustomRole: !Not [ !Equals [!Ref 'Role', ''] ]
+
+
+# ┌────────────────────────────────────────────────────────────────────┐
+# │████████████████████████████████████████████████████████████████████│
+# │████████████████████████████████████████████████████████████████████│
+# └────────────────────────────────────────────────────────────────────┘
+#     ┌─────────────┐  ┌─────────────┐          ╔════════════════════╗
+#     │EcrDockerzon │  │EcrNginx     │  ┏━━━━━━━║ TaskExecutionRole  ║
+#     └─────────────┘  └─────────────┘  ┃       ╚════════════════════╝
+# ┌─────────────────────────────────────╋────◀━━━━━━┓
+# │ServiceWeb                           ┃    │      ┃      ╔════════════════╗
+# │┌────────────────────────────────────▼──┐ │      ┗━━━━━━▶ServiceRole     ║
+# ││TaskDefinitionWeb - Family: web-service│ │             ║                ║
+# ││                                       │ │             ║access to       ║
+# ││  ┌───────────────────────────────┐    │ │             ║register/unregis║
+# ││  │ContainerDefinitionNginx       │    │ │────────────┐║ter with the    ║
+# ││  └───────────────────────────────┘    │ │            │║Application Load║
+# ││  ┌───────────────────────────────┐    │ │            │║Balancer (ALB)  ║
+# ││  │ContainerDefinitionDockerzon   │    │ │            │║                ║
+# ││  └───────────────────────────────┘    │ │            │╚════════════════╝
+# │└───────────────────────────────────────┘ │            │              ▲
+# └──────────────────────────────────────────┘            │            ┏━┛
+#                                                         │            ┃
+# ┌───────────────────────────────────────────────────────▼────────────▼
+# │TargetGroup                                                         │
+# │                                                                    │
+# │connected to Core-LoadBalancer so it can automatically distribute   │
+# │traffic across all the targets.                                     │
+# └────┬────────────────────────────────────────────────────────┬──────┘
+#      │ListenerRule                                            │
+#      │                                                        │
+#      │on Core-LoadBalancer to route traffic to TargetGroupWeb │
+#      └────────────────────────────────────────────────────────┘
+#
+# ┌────────────────────────────────────────────────────────────────────┐
+# │████████████████████████████████████████████████████████████████████│
+# │████████████████████████████████████████████████████████████████████│
+# └────────────────────────────────────────────────────────────────────┘
 
 Resources:
   EcrDockerzon:
@@ -85,31 +147,31 @@ Resources:
   #         Image: !Ref 'ImageUrl'
   #         PortMappings:
   #           - ContainerPort: !Ref 'ContainerPort'
-
-  # TaskDefinitionNginx:
-  #   Type: AWS::ECS::TaskDefinition
-  #   Properties:
-  #     Family: !Ref 'ServiceName'
-  #     # Cpu: !Ref 'ContainerCpu'
-  #     # Memory: !Ref 'ContainerMemory'
-  #     # NetworkMode: awsvpc
-  #     # RequiresCompatibilities:
-  #     #   - FARGATE
-  #     # ExecutionRoleArn:
-  #     #   Fn::ImportValue:
-  #     #     !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
-  #     # TaskRoleArn:
-  #     #   Fn::If:
-  #     #     - 'HasCustomRole'
-  #     #     - !Ref 'Role'
-  #     #     - !Ref "AWS::NoValue"
-  #     ContainerDefinitions:
-  #       - Name: !Ref 'ServiceName'
-  #         Cpu: !Ref 'ContainerCpu'
-  #         Memory: !Ref 'ContainerMemory'
-  #         Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/nginx:latest'
-  #         PortMappings:
-  #           - ContainerPort: !Ref 'ContainerPort'
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Ref 'ServiceName'
+      Cpu: !Ref 'TaskCpu'
+      Memory: !Ref 'TaskMemory'
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      ExecutionRoleArn:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
+      TaskRoleArn:
+        Fn::If:
+          - 'HasCustomRole'
+          - !Ref 'Role'
+          - !Ref "AWS::NoValue"
+      ContainerDefinitions:
+        -
+          Name: nginx
+          Cpu: !Ref 'ContainerCpuNginx'
+          Memory: !Ref 'ContainerMemoryNginx'
+          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/nginx:latest'
+          PortMappings:
+            - ContainerPort: !Ref 'ContainerPortNginx'
 
 
 
