@@ -124,29 +124,36 @@ Resources:
   # The task definition. This is a simple metadata description of what
   # container to run, and what resource requirements it has.
   # TaskDefinitionOrginal:
-  #   Type: AWS::ECS::TaskDefinition
-  #   Properties:
-  #     Family: !Ref 'ServiceName'
-  #     Cpu: !Ref 'ContainerCpu'
-  #     Memory: !Ref 'ContainerMemory'
-  #     NetworkMode: awsvpc
-  #     RequiresCompatibilities:
-  #       - FARGATE
-  #     ExecutionRoleArn:
-  #       Fn::ImportValue:
-  #         !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
-  #     TaskRoleArn:
-  #       Fn::If:
-  #         - 'HasCustomRole'
-  #         - !Ref 'Role'
-  #         - !Ref "AWS::NoValue"
-  #     ContainerDefinitions:
-  #       - Name: !Ref 'ServiceName'
-  #         Cpu: !Ref 'ContainerCpu'
-  #         Memory: !Ref 'ContainerMemory'
-  #         Image: !Ref 'ImageUrl'
-  #         PortMappings:
-  #           - ContainerPort: !Ref 'ContainerPort'
+  TaskDefinitionDbReset:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: db-reset
+      Cpu: 512
+      Memory: 1024
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      ExecutionRoleArn:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
+      ContainerDefinitions:
+        - Name: db-reset
+          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
+          Command:
+            - ./bin/rake
+            - db:reset
+          Environment:
+            - Name: RAILS_ENV
+              Value: production
+            - Name: DATABASE_URL
+              Value: postgresql://dockerzon:EFPUxCDFH2rniF@cd1bwphxlzamwq9.cbol2meulsd4.eu-west-1.rds.amazonaws.com:5432/dockerzon?encoding=utf8&pool=40&timeout=5000
+            - Name: CACHE_URL
+              Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
+            - Name: JOB_WORKER_URL
+              Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
+            - Name: SECRET_TOKEN
+              Value: c19e6cb93c2ead67ec990925da625c7500ae2d047861cce3986ff8c892c15028d21da16e8743f2e80c51ca6491fe991814bbac2994ef9a80b5a8f65ef868e820
+
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
