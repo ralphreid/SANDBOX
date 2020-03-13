@@ -427,9 +427,10 @@ Resources:
   DatabaseSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
+      DBSubnetGroupDescription: Database subnets
       SubnetIds:
-        - PrivateSubnetOne
-        - PrivateSubnetTwo
+        - !Ref 'PrivateSubnetOne'
+        - !Ref 'PrivateSubnetTwo'
 
   Database:
     Type: AWS::RDS::DBInstance
