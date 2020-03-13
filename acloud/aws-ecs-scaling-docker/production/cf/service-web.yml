@@ -172,6 +172,13 @@ Resources:
           Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/nginx:latest'
           PortMappings:
             - ContainerPort: !Ref 'ContainerPortNginx'
+        -
+          Name: dockerzon
+          Cpu: !Ref 'ContainerCpuDockerzon'
+          Memory: !Ref 'ContainerMemoryDockerzon'
+          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
+          PortMappings:
+            - ContainerPort: !Ref 'ContainerPortDockerzon'
 
 
 
