@@ -124,6 +124,12 @@ Resources:
   # The task definition. This is a simple metadata description of what
   # container to run, and what resource requirements it has.
   # TaskDefinitionOrginal:
+  CloudWatchLogsGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Ref AWS::StackName
+      RetentionInDays: 1
+
   TaskDefinitionDbReset:
     Type: AWS::ECS::TaskDefinition
     Properties:
@@ -142,6 +148,12 @@ Resources:
           Command:
             - ./bin/rake
             - db:reset
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CloudWatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'db-reset'
           Environment:
             - Name: RAILS_ENV
               Value: production

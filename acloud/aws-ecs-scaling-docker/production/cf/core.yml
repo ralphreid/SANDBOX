@@ -423,6 +423,9 @@ Resources:
         - IpProtocol: tcp
           FromPort: 5432
           ToPort: 5432
+      SecurityGroupEgress:
+        - IpProtocol: '-1'
+          CidrIp: '0.0.0.0/0'
 
   DatabaseSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
@@ -488,6 +491,13 @@ Outputs:
     Value: !GetAtt 'ECSTaskExecutionRole.Arn'
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'ECSTaskExecutionRole' ] ]
+
+  DatabaseSecurityGroupPostgres:
+    Description: The database security group
+    Value: !Ref DatabaseSecurityGroupPostgres
+    Export:
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'DatabaseSecurityGroupPostgres' ] ]
+
   PublicListener:
     Description: The ARN of the public load balancer's Listener
     Value: !Ref PublicLoadBalancerListener
