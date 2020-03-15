@@ -496,6 +496,21 @@ Resources:
 # about changing any of them, because of them are exported with specific
 # names so that the other task related CF templates can use them.
 Outputs:
+  DatabaseConnectionUrl:
+    Value:
+      !Join
+        - ''
+        - - 'postgresql://dockerzon:EFPUxCDFH2rniF@'
+          - !GetAtt 'Database.Endpoint.Address'
+          - ':5432/dockerzon?encoding=utf8&pool=40&timeout=5000'
+    Export:
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'DatabaseConnectionUrl' ] ]
+
+
+  DatabaseEndpointAddress:
+    Value: !GetAtt 'Database.Endpoint.Address'
+    Export:
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'DatabaseEndpointAddress' ] ]
   ClusterName:
     Description: The name of the ECS cluster
     Value: !Ref 'ECSCluster'
