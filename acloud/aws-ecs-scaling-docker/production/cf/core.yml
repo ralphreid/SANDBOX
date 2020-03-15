@@ -413,20 +413,6 @@ Resources:
                 - 'logs:PutLogEvents'
               Resource: '*'
 
-
-  DatabaseSecurityGroupPostgres:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Access to the db
-      VpcId: !Ref 'VPC'
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 5432
-          ToPort: 5432
-      SecurityGroupEgress:
-        - IpProtocol: '-1'
-          CidrIp: '0.0.0.0/0'
-
   DatabaseSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
@@ -434,6 +420,28 @@ Resources:
       SubnetIds:
         - !Ref 'PrivateSubnetOne'
         - !Ref 'PrivateSubnetTwo'
+
+  # Security Group for resources that want to access the Database
+  AccessDBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Access to the db
+      VpcId: !Ref 'VPC'
+
+  DatabaseSecurityGroupPostgres:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Postgres security group
+      VpcId: !Ref 'VPC'
+
+  # allows traffic from the SG itself
+  DatabaseSecurityGroupPostgresIngressFromSelf:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      FromPort: 0
+      IpProtocol: -1
+      GroupName: Ref! 'DatabaseSecurityGroupPostgres'
+      ToPort: 0
 
   Database:
     Type: AWS::RDS::DBInstance
@@ -491,13 +499,11 @@ Outputs:
     Value: !GetAtt 'ECSTaskExecutionRole.Arn'
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'ECSTaskExecutionRole' ] ]
-
-  DatabaseSecurityGroupPostgres:
+  AccessDBSecurityGroup:
     Description: The database security group
-    Value: !Ref DatabaseSecurityGroupPostgres
+    Value: !Ref AccessDBSecurityGroup
     Export:
-      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'DatabaseSecurityGroupPostgres' ] ]
-
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'AccessDBSecurityGroup' ] ]
   PublicListener:
     Description: The ARN of the public load balancer's Listener
     Value: !Ref PublicLoadBalancerListener
