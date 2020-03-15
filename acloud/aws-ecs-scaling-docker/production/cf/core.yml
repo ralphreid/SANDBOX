@@ -434,23 +434,35 @@ Resources:
       GroupDescription: Postgres security group
       VpcId: !Ref 'VPC'
 
+  # outbound internet access
+  DatabaseSecurityGroupPostgresEgress:
+    Type: AWS::EC2::SecurityGroupEgress
+    Properties:
+      FromPort: 0
+      IpProtocol: -1
+      GroupId: !GetAtt 'DatabaseSecurityGroupPostgres.GroupId'
+      ToPort: 0
+      CidrIp: '0.0.0.0/0'
+
   # allows traffic from the SG itself
   DatabaseSecurityGroupPostgresIngressFromSelf:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
       FromPort: 0
       IpProtocol: -1
-      GroupId: !GetAtt 'DatabaseSecurityGroupPostgres.GroupId'
       ToPort: 0
+      GroupId: !GetAtt 'DatabaseSecurityGroupPostgres.GroupId'
+      SourceSecurityGroupId: !GetAtt 'DatabaseSecurityGroupPostgres.GroupId'
 
   # allow traffic for TCP 5432
   DatabaseSecurityGroupPostgresIngress:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
       FromPort: 5432
-      ToPort: 5423
+      ToPort: 5432
       IpProtocol: tcp
-      GroupId: !GetAtt 'AccessDBSecurityGroup.GroupId'
+      GroupId: !GetAtt 'DatabaseSecurityGroupPostgres.GroupId'
+      SourceSecurityGroupId: !GetAtt 'AccessDBSecurityGroup.GroupId'
 
 
   Database:
