@@ -187,6 +187,12 @@ Resources:
           Command:
             - ./bin/rake
             - db:migrate
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CloudWatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'db-migrate'
           Environment:
             - Name: RAILS_ENV
               Value: production
