@@ -166,9 +166,13 @@ Resources:
                 Fn::ImportValue:
                   !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
             - Name: CACHE_URL
-              Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
             - Name: JOB_WORKER_URL
-              Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
             - Name: SECRET_TOKEN
               Value: !Ref 'SecretToken'
 
@@ -204,9 +208,13 @@ Resources:
                 Fn::ImportValue:
                   !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
             - Name: CACHE_URL
-              Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
             - Name: JOB_WORKER_URL
-              Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
             - Name: SECRET_TOKEN
               Value: !Ref 'SecretToken'
 
