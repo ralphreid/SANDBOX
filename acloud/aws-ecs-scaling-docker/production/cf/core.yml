@@ -526,6 +526,15 @@ Outputs:
           - ':5432/dockerzon?encoding=utf8&pool=40&timeout=5000'
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'DatabaseConnectionUrl' ] ]
+  RedisConnectionUrl:
+    Value:
+      !Join
+        - ''
+        - - 'redis://'
+          - !GetAtt 'ElasticCacheDockerzon.RedisEndpoint.Address'
+          - ':6379'
+    Export:
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'RedisConnectionUrl' ] ]
   DatabaseEndpointAddress:
     Value: !GetAtt 'Database.Endpoint.Address'
     Export:
