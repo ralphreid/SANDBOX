@@ -6,6 +6,9 @@ Parameters:
     Default: core
     Description: The name of the parent Fargate networking stack that you created. Necessary
                  to locate and reference resources created by that stack.
+  DatabaseConnection:
+    Type: String
+    Default: postgresql://dockerzon:EFPUxCDFH2rniF@cd4tlq31hazjme.cbol2meulsd4.eu-west-1.rds.amazonaws.com:5432/dockerzon?encoding=utf8&pool=40&timeout=5000
   ServiceName:
     Type: String
     Default: web
@@ -158,7 +161,7 @@ Resources:
             - Name: RAILS_ENV
               Value: production
             - Name: DATABASE_URL
-              Value: postgresql://dockerzon:EFPUxCDFH2rniF@cd1bwphxlzamwq9.cbol2meulsd4.eu-west-1.rds.amazonaws.com:5432/dockerzon?encoding=utf8&pool=40&timeout=5000
+              Value: !Ref 'DatabaseConnection'
             - Name: CACHE_URL
               Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
             - Name: JOB_WORKER_URL
@@ -188,7 +191,7 @@ Resources:
             - Name: RAILS_ENV
               Value: production
             - Name: DATABASE_URL
-              Value: postgresql://dockerzon:EFPUxCDFH2rniF@cd1bwphxlzamwq9.cbol2meulsd4.eu-west-1.rds.amazonaws.com:5432/dockerzon?encoding=utf8&pool=40&timeout=5000
+              Value: !Ref 'DatabaseConnection'
             - Name: CACHE_URL
               Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
             - Name: JOB_WORKER_URL
@@ -232,7 +235,7 @@ Resources:
             - Name: RAILS_ENV
               Value: production
             - Name: DATABASE_URL
-              Value: postgresql://dockerzon:EFPUxCDFH2rniF@cd1bwphxlzamwq9.cbol2meulsd4.eu-west-1.rds.amazonaws.com:5432/dockerzon?encoding=utf8&pool=40&timeout=5000
+              Value: !Ref 'DatabaseConnection'
             - Name: CACHE_URL
               Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
             - Name: JOB_WORKER_URL
