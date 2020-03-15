@@ -6,6 +6,10 @@ Parameters:
     Default: core
     Description: The name of the parent Fargate networking stack that you created. Necessary
                  to locate and reference resources created by that stack.
+  SecretToken:
+    Type: String
+    Default: c19e6cb93c2ead67ec990925da625c7500ae2d047861cce3986ff8c892c15028d21da16e8743f2e80c51ca6491fe991814bbac2994ef9a80b5a8f65ef868e820
+    Description: A name for the service
   ServiceName:
     Type: String
     Default: web
@@ -166,7 +170,7 @@ Resources:
             - Name: JOB_WORKER_URL
               Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
             - Name: SECRET_TOKEN
-              Value: c19e6cb93c2ead67ec990925da625c7500ae2d047861cce3986ff8c892c15028d21da16e8743f2e80c51ca6491fe991814bbac2994ef9a80b5a8f65ef868e820
+              Value: !Ref 'SecretToken'
 
   TaskDefinitionDbMigrate:
     Type: AWS::ECS::TaskDefinition
@@ -204,7 +208,7 @@ Resources:
             - Name: JOB_WORKER_URL
               Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
             - Name: SECRET_TOKEN
-              Value: c19e6cb93c2ead67ec990925da625c7500ae2d047861cce3986ff8c892c15028d21da16e8743f2e80c51ca6491fe991814bbac2994ef9a80b5a8f65ef868e820
+              Value: !Ref 'SecretToken'
 
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
@@ -241,14 +245,16 @@ Resources:
           Environment:
             - Name: RAILS_ENV
               Value: production
-            # - Name: DATABASE_URL
-            #   Value: !Ref 'DatabaseConnection'
+            - Name: DATABASE_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
             - Name: CACHE_URL
               Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
             - Name: JOB_WORKER_URL
               Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
             - Name: SECRET_TOKEN
-              Value: c19e6cb93c2ead67ec990925da625c7500ae2d047861cce3986ff8c892c15028d21da16e8743f2e80c51ca6491fe991814bbac2994ef9a80b5a8f65ef868e820
+              Value: !Ref 'SecretToken'
 
 
   # The service. The service is a resource which allows you to run multiple

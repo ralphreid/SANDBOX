@@ -422,47 +422,57 @@ Resources:
         - !Ref 'PrivateSubnetTwo'
 
   # Security Group for resources that want to access the Database
-  AccessDBSecurityGroup:
+  AccessSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Access to the db
       VpcId: !Ref 'VPC'
 
-  DatabaseSecurityGroupPostgres:
+  SG:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Postgres security group
       VpcId: !Ref 'VPC'
 
   # outbound internet access
-  DatabaseSecurityGroupPostgresEgress:
+  SGEgress:
     Type: AWS::EC2::SecurityGroupEgress
     Properties:
       FromPort: 0
       IpProtocol: -1
-      GroupId: !GetAtt 'DatabaseSecurityGroupPostgres.GroupId'
+      GroupId: !GetAtt 'SG.GroupId'
       ToPort: 0
       CidrIp: '0.0.0.0/0'
 
   # allows traffic from the SG itself
-  DatabaseSecurityGroupPostgresIngressFromSelf:
+  SGIngressFromSelf:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
       FromPort: 0
       IpProtocol: -1
       ToPort: 0
-      GroupId: !GetAtt 'DatabaseSecurityGroupPostgres.GroupId'
-      SourceSecurityGroupId: !GetAtt 'DatabaseSecurityGroupPostgres.GroupId'
+      GroupId: !GetAtt 'SG.GroupId'
+      SourceSecurityGroupId: !GetAtt 'SG.GroupId'
 
   # allow traffic for TCP 5432
-  DatabaseSecurityGroupPostgresIngress:
+  SGIngressRDS:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
       FromPort: 5432
       ToPort: 5432
       IpProtocol: tcp
-      GroupId: !GetAtt 'DatabaseSecurityGroupPostgres.GroupId'
-      SourceSecurityGroupId: !GetAtt 'AccessDBSecurityGroup.GroupId'
+      GroupId: !GetAtt 'SG.GroupId'
+      SourceSecurityGroupId: !GetAtt 'AccessSecurityGroup.GroupId'
+
+  # allow traffic for TCP 6379
+  SGIngressEC:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      FromPort: 6379
+      ToPort: 6379
+      IpProtocol: tcp
+      GroupId: !GetAtt 'SG.GroupId'
+      SourceSecurityGroupId: !GetAtt 'AccessSecurityGroup.GroupId'
 
 
   Database:
@@ -472,7 +482,7 @@ Resources:
       Engine: postgres
       PubliclyAccessible: false
       VPCSecurityGroups:
-        - !Ref 'DatabaseSecurityGroupPostgres'
+        - !Ref 'SG'
       DBInstanceClass: db.t2.micro
       DBSubnetGroupName: !Ref 'DatabaseSubnetGroup'
       AllocatedStorage: 10
@@ -481,16 +491,16 @@ Resources:
       MasterUserPassword: EFPUxCDFH2rniF
 
 
-  # ElasticCacheDockerzon:
-  #   Type: AWS::ElastiCache::CacheCluster
-  #   Properties:
-  #     Engine: redis
-  #     CacheNodeType: cache.t2.micro
-  #     NumCacheNodes: 1
-  #     VpcSecurityGroupIds:
-  #       - !GetAtt
-  #         - DatabaseSecurityGroup
-  #         - GroupId
+  ElasticCacheDockerzon:
+    Type: AWS::ElastiCache::CacheCluster
+    Properties:
+      Engine: redis
+      CacheNodeType: cache.t2.micro
+      NumCacheNodes: 1
+      VpcSecurityGroupIds:
+        - !GetAtt
+          - AccessSecurityGroup
+          - GroupId
 
 # These are the values output by the CloudFormation template. Be careful
 # about changing any of them, because of them are exported with specific
@@ -505,8 +515,6 @@ Outputs:
           - ':5432/dockerzon?encoding=utf8&pool=40&timeout=5000'
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'DatabaseConnectionUrl' ] ]
-
-
   DatabaseEndpointAddress:
     Value: !GetAtt 'Database.Endpoint.Address'
     Export:
@@ -536,11 +544,11 @@ Outputs:
     Value: !GetAtt 'ECSTaskExecutionRole.Arn'
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'ECSTaskExecutionRole' ] ]
-  AccessDBSecurityGroup:
+  AccessSecurityGroup:
     Description: The database security group
-    Value: !Ref AccessDBSecurityGroup
+    Value: !Ref AccessSecurityGroup
     Export:
-      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'AccessDBSecurityGroup' ] ]
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'AccessSecurityGroup' ] ]
   PublicListener:
     Description: The ARN of the public load balancer's Listener
     Value: !Ref PublicLoadBalancerListener
