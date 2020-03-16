@@ -513,7 +513,7 @@ Resources:
         - !Ref PrivateSubnetOne
         - !Ref PrivateSubnetTwo
 
-  SecurityGroupNginx:
+  SecurityGroupWeb:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: !Ref 'VPC'
@@ -522,6 +522,10 @@ Resources:
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 8000
+          ToPort: 8000
           CidrIp: 0.0.0.0/0
 
 # These are the values output by the CloudFormation template. Be careful
