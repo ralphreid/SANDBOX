@@ -569,6 +569,11 @@ Outputs:
     Value: !Ref AccessSecurityGroupRDS
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'AccessSecurityGroupRDS' ] ]
+  SGECSecurityGroup:
+    Description: The database security group
+    Value: !Ref SGEC
+    Export:
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'SGECSecurityGroup' ] ]
   PublicListener:
     Description: The ARN of the public load balancer's Listener
     Value: !Ref PublicLoadBalancerListener
