@@ -589,11 +589,11 @@ Outputs:
     Value: !Ref SGEC
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'SGECSecurityGroup' ] ]
-  SecurityGroupNginx:
+  SecurityGroupWeb:
     Description: The nginx security group
-    Value: !Ref SecurityGroupNginx
+    Value: !Ref SecurityGroupWeb
     Export:
-      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'SecurityGroupNginx' ] ]
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'SecurityGroupWeb' ] ]
   PublicListener:
     Description: The ARN of the public load balancer's Listener
     Value: !Ref PublicLoadBalancerListener
