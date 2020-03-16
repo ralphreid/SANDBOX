@@ -366,7 +366,7 @@ Resources:
       LoadBalancers:
         - ContainerName: sidekiq
           ContainerPort: 6379
-          TargetGroupArn: !Ref 'TargetGroup'
+          TargetGroupArn: !Ref 'TargetGroupWorker'
 
 
   # A target group. This is used for keeping track of all the tasks, and
