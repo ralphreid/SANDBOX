@@ -287,12 +287,24 @@ Resources:
             - ContainerPort: !Ref 'ContainerPortNginx'
           VolumesFrom:
             - SourceContainer: dockerzon
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CloudWatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'nginx'
         - Name: dockerzon
           # Cpu: !Ref 'ContainerCpuDockerzon'
           # Memory: !Ref 'ContainerMemoryDockerzon'
           Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
           PortMappings:
             - ContainerPort: !Ref 'ContainerPortDockerzon'
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CloudWatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'dockerzon'
           Environment:
             - Name: RAILS_ENV
               Value: production
