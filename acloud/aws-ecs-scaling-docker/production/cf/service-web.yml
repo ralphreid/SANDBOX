@@ -293,7 +293,7 @@ Resources:
             Options:
               awslogs-group: !Ref CloudWatchLogsGroup
               awslogs-region: !Ref AWS::Region
-              awslogs-stream-prefix: 'nginx'
+              awslogs-stream-prefix: 'web'
         - Name: dockerzon
           # Cpu: !Ref 'ContainerCpuDockerzon'
           # Memory: !Ref 'ContainerMemoryDockerzon'
@@ -306,7 +306,7 @@ Resources:
             Options:
               awslogs-group: !Ref CloudWatchLogsGroup
               awslogs-region: !Ref AWS::Region
-              awslogs-stream-prefix: 'dockerzon'
+              awslogs-stream-prefix: 'web'
           Environment:
             - Name: RAILS_ENV
               Value: production
