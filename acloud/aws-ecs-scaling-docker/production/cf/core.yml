@@ -516,7 +516,6 @@ Resources:
   SecurityGroupNginx:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: ContainerSecurityGroup
       GroupDescription: Security group for NGINX container
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -585,6 +584,11 @@ Outputs:
     Value: !Ref SGEC
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'SGECSecurityGroup' ] ]
+  SecurityGroupNginx:
+    Description: The database security group
+    Value: !Ref SecurityGroupNginx
+    Export:
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'SecurityGroupNginx' ] ]
   PublicListener:
     Description: The ARN of the public load balancer's Listener
     Value: !Ref PublicLoadBalancerListener
