@@ -323,7 +323,8 @@ Resources:
       DeploymentConfiguration:
         MaximumPercent: 200
         MinimumHealthyPercent: 75
-      DesiredCount: !Ref 'DesiredCount'
+      # DesiredCount: !Ref 'DesiredCount'
+      DesiredCount: 0
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: ENABLED
