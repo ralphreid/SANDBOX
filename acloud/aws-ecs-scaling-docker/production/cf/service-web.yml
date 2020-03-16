@@ -348,6 +348,8 @@ Resources:
                 !Join [':', [!Ref 'StackName', 'FargateContainerSecurityGroup']]
             - Fn::ImportValue:
                 !Join [':', [!Ref 'StackName', 'AccessSecurityGroupRDS']]
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'SecurityGroupNginx']]
           Subnets:
             - Fn::ImportValue:
                 !Join [':', [!Ref 'StackName', 'PrivateSubnetOne']]
