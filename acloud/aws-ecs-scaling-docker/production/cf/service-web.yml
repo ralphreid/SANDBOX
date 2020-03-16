@@ -330,16 +330,18 @@ Resources:
           SecurityGroups:
             - Fn::ImportValue:
                 !Join [':', [!Ref 'StackName', 'FargateContainerSecurityGroup']]
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'AccessSecurityGroupRDS']]
           Subnets:
             - Fn::ImportValue:
                 !Join [':', [!Ref 'StackName', 'PrivateSubnetOne']]
             - Fn::ImportValue:
                 !Join [':', [!Ref 'StackName', 'PrivateSubnetTwo']]
-      TaskDefinition: !Ref 'TaskDefinitionOriginal'
+      TaskDefinition: !Ref 'TaskDefinition'
       LoadBalancers:
-        - ContainerName: !Ref 'ServiceName'
-          ContainerPort: !Ref 'ContainerPort'
-          TargetGroupArn: !Ref 'TargetGroup'
+        - ContainerName: nginx
+          ContainerPort: !Ref 'ContainerPortNginx'
+          TargetGroupArn: !Ref 'TargetGroupWeb'
 
   ServiceWorker:
     Type: AWS::ECS::Service
@@ -356,10 +358,12 @@ Resources:
       DesiredCount: 0
       NetworkConfiguration:
         AwsvpcConfiguration:
-          AssignPublicIp: ENABLED
+          AssignPublicIp: DISABLED
           SecurityGroups:
             - Fn::ImportValue:
                 !Join [':', [!Ref 'StackName', 'FargateContainerSecurityGroup']]
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'SGECSecurityGroup']]
           Subnets:
             - Fn::ImportValue:
                 !Join [':', [!Ref 'StackName', 'PrivateSubnetOne']]
@@ -377,23 +381,23 @@ Resources:
   # to use the addresses yourself, but most often this target group is just
   # connected to an application load balancer, or network load balancer, so
   # it can automatically distribute traffic across all the targets.
-  # TargetGroup:
-  #   Type: AWS::ElasticLoadBalancingV2::TargetGroup
-  #   Properties:
-  #     HealthCheckIntervalSeconds: 30
-  #     HealthCheckPath: /health_check
-  #     HealthCheckProtocol: HTTP
-  #     HealthCheckPort: 80
-  #     HealthCheckTimeoutSeconds: 5
-  #     HealthyThresholdCount: 10
-  #     TargetType: ip
-  #     Name: !Ref 'ServiceName'
-  #     Port: !Ref 'ContainerPort'
-  #     Protocol: HTTP
-  #     UnhealthyThresholdCount: 2
-  #     VpcId:
-  #       Fn::ImportValue:
-  #         !Join [':', [!Ref 'StackName', 'VPCId']]
+  TargetGroupWeb:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /health_check
+      HealthCheckProtocol: HTTP
+      HealthCheckPort: 80
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 10
+      TargetType: ip
+      Name: !Ref 'ServiceName'
+      Port: !Ref 'ContainerPortNginx'
+      Protocol: HTTP
+      UnhealthyThresholdCount: 2
+      VpcId:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'VPCId']]
 
   TargetGroupWorker:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
@@ -408,18 +412,18 @@ Resources:
 
 
   # Create a rule on the load balancer for routing traffic to the target group
-  # LoadBalancerRule:
-  #   Type: AWS::ElasticLoadBalancingV2::ListenerRule
-  #   Properties:
-  #     Actions:
-  #       - TargetGroupArn: !Ref 'TargetGroup'
-  #         Type: 'forward'
-  #     Conditions:
-  #       - Field: path-pattern
-  #         Values: [!Ref 'Path']
-  #     ListenerArn:
-  #       Fn::ImportValue:
-  #         !Join [':', [!Ref 'StackName', 'PublicListener']]
+  LoadBalancerRuleWeb:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+        - TargetGroupArn: !Ref 'TargetGroupWorker'
+          Type: 'forward'
+      Conditions:
+        - Field: path-pattern
+          Values: [!Ref 'Path']
+      ListenerArn:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'PublicListener']]
 
   ListnerRuleWorker:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
