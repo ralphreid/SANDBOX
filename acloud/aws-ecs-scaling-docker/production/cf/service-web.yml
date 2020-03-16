@@ -280,16 +280,16 @@ Resources:
           - !Ref "AWS::NoValue"
       ContainerDefinitions:
         - Name: nginx
-          Cpu: !Ref 'ContainerCpuNginx'
-          Memory: !Ref 'ContainerMemoryNginx'
+          # Cpu: !Ref 'ContainerCpuNginx'
+          # Memory: !Ref 'ContainerMemoryNginx'
           Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/nginx:latest'
           PortMappings:
             - ContainerPort: !Ref 'ContainerPortNginx'
           VolumesFrom:
             - SourceContainer: dockerzon
         - Name: dockerzon
-          Cpu: !Ref 'ContainerCpuDockerzon'
-          Memory: !Ref 'ContainerMemoryDockerzon'
+          # Cpu: !Ref 'ContainerCpuDockerzon'
+          # Memory: !Ref 'ContainerMemoryDockerzon'
           Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
           PortMappings:
             - ContainerPort: !Ref 'ContainerPortDockerzon'
@@ -323,8 +323,8 @@ Resources:
       DeploymentConfiguration:
         MaximumPercent: 200
         MinimumHealthyPercent: 75
-      # DesiredCount: !Ref 'DesiredCount'
-      DesiredCount: 0
+      DesiredCount: !Ref 'DesiredCount'
+      # DesiredCount: 0
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: ENABLED
