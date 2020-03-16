@@ -338,6 +338,36 @@ Resources:
   #       - ContainerName: !Ref 'ServiceName'
   #         ContainerPort: !Ref 'ContainerPort'
   #         TargetGroupArn: !Ref 'TargetGroup'
+  ServiceWorker:
+    Type: AWS::ECS::Service
+    DependsOn: LoadBalancerRule
+    Properties:
+      ServiceName: worker
+      Cluster:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'ClusterName']]
+      LaunchType: FARGATE
+      DeploymentConfiguration:
+        MaximumPercent: 100
+        MinimumHealthyPercent: 0
+      DesiredCount: 1
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          SecurityGroups:
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'FargateContainerSecurityGroup']]
+          Subnets:
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'PrivateSubnetOne']]
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'PrivateSubnetTwo']]
+      TaskDefinition: !Ref 'TaskDefinitionWorker'
+      LoadBalancers:
+        - ContainerName: sidekiq
+          ContainerPort: 6379
+          TargetGroupArn: !Ref 'TargetGroup'
+
 
   # A target group. This is used for keeping track of all the tasks, and
   # what IP addresses / port numbers they have. You can query it yourself,
@@ -362,6 +392,18 @@ Resources:
   #       Fn::ImportValue:
   #         !Join [':', [!Ref 'StackName', 'VPCId']]
 
+  TargetGroupWorker:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      TargetType: ip
+      Name: worker
+      Port: 6379
+      Protocol: HTTP
+      VpcId:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'VPCId']]
+
+
   # Create a rule on the load balancer for routing traffic to the target group
   # LoadBalancerRule:
   #   Type: AWS::ElasticLoadBalancingV2::ListenerRule
@@ -375,4 +417,17 @@ Resources:
   #     ListenerArn:
   #       Fn::ImportValue:
   #         !Join [':', [!Ref 'StackName', 'PublicListener']]
-  #     Priority: !Ref 'Priority'
+
+ListnerRuleWorker:
+  Type: AWS::ElasticLoadBalancingV2::ListenerRule
+  Properties:
+    Actions:
+      - TargetGroupArn: !Ref 'TargetGroupWorker'
+        Type: 'forward'
+    Conditions:
+      - Field: path-pattern
+        Value: '*'
+    ListenerArn:
+      Fn::ImportValue:
+        !Join [':', [!Ref 'StackName', 'PublicListener']]
+    Priority: 2
