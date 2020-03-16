@@ -516,6 +516,7 @@ Resources:
   SecurityGroupNginx:
     Type: AWS::EC2::SecurityGroup
     Properties:
+      VpcId: !Ref 'VPC'
       GroupDescription: Security group for NGINX container
       SecurityGroupIngress:
         - IpProtocol: tcp
