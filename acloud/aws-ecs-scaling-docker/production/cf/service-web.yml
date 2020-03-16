@@ -418,16 +418,16 @@ Resources:
   #       Fn::ImportValue:
   #         !Join [':', [!Ref 'StackName', 'PublicListener']]
 
-ListnerRuleWorker:
-  Type: AWS::ElasticLoadBalancingV2::ListenerRule
-  Properties:
-    Actions:
-      - TargetGroupArn: !Ref 'TargetGroupWorker'
-        Type: 'forward'
-    Conditions:
-      - Field: path-pattern
-        Value: '*'
-    ListenerArn:
-      Fn::ImportValue:
-        !Join [':', [!Ref 'StackName', 'PublicListener']]
-    Priority: 2
+  ListnerRuleWorker:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+        - TargetGroupArn: !Ref 'TargetGroupWorker'
+          Type: 'forward'
+      Conditions:
+        - Field: path-pattern
+          Value: '*'
+      ListenerArn:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'PublicListener']]
+      Priority: 2
