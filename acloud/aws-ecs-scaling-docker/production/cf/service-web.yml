@@ -426,7 +426,8 @@ Resources:
           Type: 'forward'
       Conditions:
         - Field: path-pattern
-          Values: '*'
+          Values:
+            - '*'
       ListenerArn:
         Fn::ImportValue:
           !Join [':', [!Ref 'StackName', 'PrivateListener']]
