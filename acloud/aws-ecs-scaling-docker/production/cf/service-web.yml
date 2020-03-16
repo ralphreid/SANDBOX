@@ -340,7 +340,7 @@ Resources:
   #         TargetGroupArn: !Ref 'TargetGroup'
   ServiceWorker:
     Type: AWS::ECS::Service
-    DependsOn: LoadBalancerRule
+    DependsOn: ListnerRuleWorker
     Properties:
       ServiceName: worker
       Cluster:
