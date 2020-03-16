@@ -424,6 +424,7 @@ Resources:
       ListenerArn:
         Fn::ImportValue:
           !Join [':', [!Ref 'StackName', 'PublicListener']]
+      Priority: 1
 
   ListnerRuleWorker:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
