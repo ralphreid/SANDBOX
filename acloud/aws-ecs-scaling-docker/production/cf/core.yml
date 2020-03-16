@@ -585,7 +585,7 @@ Outputs:
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'SGECSecurityGroup' ] ]
   SecurityGroupNginx:
-    Description: The database security group
+    Description: The nginx security group
     Value: !Ref SecurityGroupNginx
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'SecurityGroupNginx' ] ]
