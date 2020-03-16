@@ -429,5 +429,5 @@ Resources:
           Value: '*'
       ListenerArn:
         Fn::ImportValue:
-          !Join [':', [!Ref 'StackName', 'PublicListener']]
+          !Join [':', [!Ref 'StackName', 'PrivateListener']]
       Priority: 2
