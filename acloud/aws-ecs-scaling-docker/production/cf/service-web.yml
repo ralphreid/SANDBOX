@@ -339,7 +339,7 @@ Resources:
         MinimumHealthyPercent: 75
       # DesiredCount: !Ref 'DesiredCount'
       # DesiredCount: 0
-      DesiredCount: 1
+      DesiredCount: 0
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: ENABLED
@@ -348,8 +348,8 @@ Resources:
                 !Join [':', [!Ref 'StackName', 'FargateContainerSecurityGroup']]
             - Fn::ImportValue:
                 !Join [':', [!Ref 'StackName', 'AccessSecurityGroupRDS']]
-            - Fn::ImportValue:
-                !Join [':', [!Ref 'StackName', 'SecurityGroupNginx']]
+            # - Fn::ImportValue:
+            #     !Join [':', [!Ref 'StackName', 'SecurityGroupWeb']]
           Subnets:
             - Fn::ImportValue:
                 !Join [':', [!Ref 'StackName', 'PrivateSubnetOne']]

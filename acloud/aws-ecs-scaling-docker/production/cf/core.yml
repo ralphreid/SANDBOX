@@ -517,7 +517,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: !Ref 'VPC'
-      GroupDescription: Security group for NGINX container
+      GroupDescription: Security group for the web service
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
