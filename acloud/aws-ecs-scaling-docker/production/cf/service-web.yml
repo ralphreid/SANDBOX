@@ -416,7 +416,7 @@ Resources:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
     Properties:
       Actions:
-        - TargetGroupArn: !Ref 'TargetGroupWorker'
+        - TargetGroupArn: !Ref 'TargetGroupWeb'
           Type: 'forward'
       Conditions:
         - Field: path-pattern
