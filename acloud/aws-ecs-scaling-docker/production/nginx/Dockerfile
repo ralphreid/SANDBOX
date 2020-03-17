@@ -24,4 +24,4 @@ RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Start nginx in the foreground to play nicely with Docker.
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx-debug", "-g", "daemon off;"]

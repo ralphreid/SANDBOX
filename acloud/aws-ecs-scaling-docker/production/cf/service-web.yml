@@ -278,7 +278,7 @@ Resources:
           Cpu: 256
           Memory: 512
           Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/nginx:latest'
-          Essential: true
+          Essential: false
           PortMappings:
             - ContainerPort: !Ref 'ContainerPortNginx'
           VolumesFrom:
