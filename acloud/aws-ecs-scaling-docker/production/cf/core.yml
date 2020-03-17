@@ -268,7 +268,6 @@ Resources:
       HealthCheckProtocol: HTTP
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 10
-      Name: web
       TargetType: ip
       Port: 80
       Protocol: HTTP
