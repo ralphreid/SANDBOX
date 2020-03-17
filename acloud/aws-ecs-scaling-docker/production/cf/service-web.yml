@@ -219,47 +219,47 @@ Resources:
               Value: !Ref 'SecretToken'
 
   TaskDefinitionWorker:
-  #   Type: AWS::ECS::TaskDefinition
-  #   Properties:
-  #     Family: worker
-  #     Cpu: 512
-  #     Memory: 1024
-  #     NetworkMode: awsvpc
-  #     RequiresCompatibilities:
-  #       - FARGATE
-  #     ExecutionRoleArn:
-  #       Fn::ImportValue:
-  #         !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
-  #     ContainerDefinitions:
-  #       - Name: sidekiq
-  #         Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
-  #         PortMappings:
-  #           - ContainerPort: 6379
-  #         Command:
-  #           - ./bin/sidekiq
-  #         LogConfiguration:
-  #           LogDriver: awslogs
-  #           Options:
-  #             awslogs-group: !Ref CloudWatchLogsGroup
-  #             awslogs-region: !Ref AWS::Region
-  #             awslogs-stream-prefix: 'worker'
-  #         Environment:
-  #           - Name: RAILS_ENV
-  #             Value: production
-  #           - Name: DATABASE_URL
-  #             Value:
-  #               Fn::ImportValue:
-  #                 !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
-  #           - Name: CACHE_URL
-  #             Value:
-  #               Fn::ImportValue:
-  #                 !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
-  #           - Name: JOB_WORKER_URL
-  #             Value:
-  #               Fn::ImportValue:
-  #                 !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
-  #           - Name: SECRET_TOKEN
-  #             Value: !Ref 'SecretToken'
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: worker
+      Cpu: 512
+      Memory: 1024
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      ExecutionRoleArn:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
+      ContainerDefinitions:
+        - Name: sidekiq
+          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
+          PortMappings:
+            - ContainerPort: 6379
+          Command:
+            - ./bin/sidekiq
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CloudWatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'worker'
+          Environment:
+            - Name: RAILS_ENV
+              Value: production
+            - Name: DATABASE_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
+            - Name: CACHE_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
+            - Name: JOB_WORKER_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
+            - Name: SECRET_TOKEN
+              Value: !Ref 'SecretToken'
 
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
