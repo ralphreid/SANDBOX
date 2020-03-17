@@ -324,7 +324,6 @@ Resources:
   # as monitor the number of running tasks and replace any that have crashed
   ServiceWeb:
     Type: AWS::ECS::Service
-    # DependsOn: LoadBalancerRuleWeb
     Properties:
       ServiceName: !Ref 'ServiceName'
       Cluster:

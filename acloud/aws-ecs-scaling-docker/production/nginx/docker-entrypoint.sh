@@ -5,7 +5,7 @@ set -e
 
 # What is the backend's name and port? The backend should be the name of the
 # Docker image that is linked to nginx.
-PLACEHOLDER_BACKEND_NAME="dockerzon"
+PLACEHOLDER_BACKEND_NAME="127.0.0.1"
 PLACEHOLDER_BACKEND_PORT="8000"
 
 # What should the virtualhost's name be? This is the server_name value and would
@@ -17,8 +17,10 @@ PLACEHOLDER_BACKEND_PORT="8000"
 # metadata. This allows us to dynamically configure nginx at runtime.
 #
 # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+# PLACEHOLDER_VHOST="$(curl http://169.254.169.254/latest/meta-data/public-hostname)"
 # PLACEHOLDER_VHOST="$(curl http://169.254.169.254/latest/meta-data/public-ipv4)"
-PLACEHOLDER_VHOST="$(curl http://169.254.169.254/latest/meta-data/public-hostname)"
+# PLACEHOLDER_VHOST="$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .ContainerInstanceArn' | awk -F: '{print $4}')"
+PLACEHOLDER_VHOST="foo.com"
 
 # Where is our default config located?
 DEFAULT_CONFIG_PATH="/etc/nginx/conf.d/default.conf"
