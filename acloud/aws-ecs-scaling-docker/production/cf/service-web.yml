@@ -281,40 +281,40 @@ Resources:
           Essential: true
           PortMappings:
             - ContainerPort: !Ref 'ContainerPortNginx'
-          # VolumesFrom:
-          #   - SourceContainer: dockerzon
+          VolumesFrom:
+            - SourceContainer: dockerzon
           LogConfiguration:
             LogDriver: awslogs
             Options:
               awslogs-group: !Ref CloudWatchLogsGroup
               awslogs-region: !Ref AWS::Region
               awslogs-stream-prefix: 'web'
-        # - Name: dockerzon
-        #   # Cpu: !Ref 'ContainerCpuDockerzon'
-        #   # Memory: !Ref 'ContainerMemoryDockerzon'
-        #   Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
-        #   Essential: false
-        #   PortMappings:
-        #     - ContainerPort: !Ref 'ContainerPortDockerzon'
-        #   LogConfiguration:
-        #     LogDriver: awslogs
-        #     Options:
-        #       awslogs-group: !Ref CloudWatchLogsGroup
-        #       awslogs-region: !Ref AWS::Region
-        #       awslogs-stream-prefix: 'web'
-        #   Environment:
-        #     - Name: RAILS_ENV
-        #       Value: production
-        #     - Name: DATABASE_URL
-        #       Value:
-        #         Fn::ImportValue:
-        #           !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
-        #     - Name: CACHE_URL
-        #       Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
-        #     - Name: JOB_WORKER_URL
-        #       Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
-        #     - Name: SECRET_TOKEN
-        #       Value: !Ref 'SecretToken'
+        - Name: dockerzon
+          # Cpu: !Ref 'ContainerCpuDockerzon'
+          # Memory: !Ref 'ContainerMemoryDockerzon'
+          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
+          Essential: false
+          PortMappings:
+            - ContainerPort: !Ref 'ContainerPortDockerzon'
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CloudWatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'web'
+          Environment:
+            - Name: RAILS_ENV
+              Value: production
+            - Name: DATABASE_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
+            - Name: CACHE_URL
+              Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
+            - Name: JOB_WORKER_URL
+              Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
+            - Name: SECRET_TOKEN
+              Value: !Ref 'SecretToken'
 
 
   # The service. The service is a resource which allows you to run multiple
