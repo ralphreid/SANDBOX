@@ -281,6 +281,7 @@ Resources:
           Essential: false
           PortMappings:
             - ContainerPort: !Ref 'ContainerPortNginx'
+              Protocol: tcp
           VolumesFrom:
             - SourceContainer: dockerzon
           LogConfiguration:
@@ -296,6 +297,7 @@ Resources:
           Essential: true
           PortMappings:
             - ContainerPort: !Ref 'ContainerPortDockerzon'
+              Protocol: tcp
           LogConfiguration:
             LogDriver: awslogs
             Options:
@@ -333,7 +335,7 @@ Resources:
         MaximumPercent: 200
         MinimumHealthyPercent: 75
       DesiredCount: !Ref 'DesiredCount'
-      DesiredCount: 1
+      DesiredCount: 0
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: ENABLED
@@ -402,7 +404,7 @@ Resources:
       HealthCheckPort: 80
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 10
-      TargetType: ip
+      # TargetType: ip
       Name: !Ref 'ServiceName'
       Port: !Ref 'ContainerPortNginx'
       Protocol: HTTP
