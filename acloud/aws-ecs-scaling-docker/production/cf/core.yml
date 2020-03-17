@@ -594,16 +594,16 @@ Outputs:
     Value: !Ref SecurityGroupWeb
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'SecurityGroupWeb' ] ]
-  PublicListener:
-    Description: The ARN of the public load balancer's Listener
-    Value: !Ref PublicLoadBalancerListener
-    Export:
-      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'PublicListener' ] ]
-  PrivateListener:
-    Description: The ARN of the private load balancer's Listener
-    Value: !Ref PrivateLoadBalancerListener
-    Export:
-      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'PrivateListener' ] ]
+  # PublicListener:
+  #   Description: The ARN of the public load balancer's Listener
+  #   Value: !Ref PublicLoadBalancerListener
+  #   Export:
+  #     Name: !Join [ ':', [ !Ref 'AWS::StackName', 'PublicListener' ] ]
+  # PrivateListener:
+  #   Description: The ARN of the private load balancer's Listener
+  #   Value: !Ref PrivateLoadBalancerListener
+  #   Export:
+  #     Name: !Join [ ':', [ !Ref 'AWS::StackName', 'PrivateListener' ] ]
   VPCId:
     Description: The ID of the VPC that this stack is deployed in
     Value: !Ref 'VPC'
