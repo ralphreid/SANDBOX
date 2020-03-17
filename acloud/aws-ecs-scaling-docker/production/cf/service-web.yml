@@ -134,91 +134,91 @@ Resources:
       LogGroupName: !Ref AWS::StackName
       RetentionInDays: 1
 
-  # TaskDefinitionDbReset:
-  #   Type: AWS::ECS::TaskDefinition
-  #   Properties:
-  #     Family: db-reset
-  #     Cpu: 512
-  #     Memory: 1024
-  #     NetworkMode: awsvpc
-  #     RequiresCompatibilities:
-  #       - FARGATE
-  #     ExecutionRoleArn:
-  #       Fn::ImportValue:
-  #         !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
-  #     ContainerDefinitions:
-  #       - Name: db-reset
-  #         Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
-  #         Command:
-  #           - ./bin/rake
-  #           - db:reset
-  #         LogConfiguration:
-  #           LogDriver: awslogs
-  #           Options:
-  #             awslogs-group: !Ref CloudWatchLogsGroup
-  #             awslogs-region: !Ref AWS::Region
-  #             awslogs-stream-prefix: 'db-reset'
-  #         Environment:
-  #           - Name: RAILS_ENV
-  #             Value: production
-  #           - Name: DATABASE_URL
-  #             Value:
-  #               Fn::ImportValue:
-  #                 !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
-  #           - Name: CACHE_URL
-  #             Value:
-  #               Fn::ImportValue:
-  #                 !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
-  #           - Name: JOB_WORKER_URL
-  #             Value:
-  #               Fn::ImportValue:
-  #                 !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
-  #           - Name: SECRET_TOKEN
-  #             Value: !Ref 'SecretToken'
+  TaskDefinitionDbReset:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: db-reset
+      Cpu: 512
+      Memory: 1024
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      ExecutionRoleArn:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
+      ContainerDefinitions:
+        - Name: db-reset
+          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
+          Command:
+            - ./bin/rake
+            - db:reset
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CloudWatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'db-reset'
+          Environment:
+            - Name: RAILS_ENV
+              Value: production
+            - Name: DATABASE_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
+            - Name: CACHE_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
+            - Name: JOB_WORKER_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
+            - Name: SECRET_TOKEN
+              Value: !Ref 'SecretToken'
 
-  # TaskDefinitionDbMigrate:
-  #   Type: AWS::ECS::TaskDefinition
-  #   Properties:
-  #     Family: db-migrate
-  #     Cpu: 512
-  #     Memory: 1024
-  #     NetworkMode: awsvpc
-  #     RequiresCompatibilities:
-  #       - FARGATE
-  #     ExecutionRoleArn:
-  #       Fn::ImportValue:
-  #         !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
-  #     ContainerDefinitions:
-  #       - Name: db-reset
-  #         Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
-  #         Command:
-  #           - ./bin/rake
-  #           - db:migrate
-  #         LogConfiguration:
-  #           LogDriver: awslogs
-  #           Options:
-  #             awslogs-group: !Ref CloudWatchLogsGroup
-  #             awslogs-region: !Ref AWS::Region
-  #             awslogs-stream-prefix: 'db-migrate'
-  #         Environment:
-  #           - Name: RAILS_ENV
-  #             Value: production
-  #           - Name: DATABASE_URL
-  #             Value:
-  #               Fn::ImportValue:
-  #                 !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
-  #           - Name: CACHE_URL
-  #             Value:
-  #               Fn::ImportValue:
-  #                 !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
-  #           - Name: JOB_WORKER_URL
-  #             Value:
-  #               Fn::ImportValue:
-  #                 !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
-  #           - Name: SECRET_TOKEN
-  #             Value: !Ref 'SecretToken'
+  TaskDefinitionDbMigrate:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: db-migrate
+      Cpu: 512
+      Memory: 1024
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      ExecutionRoleArn:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
+      ContainerDefinitions:
+        - Name: db-reset
+          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
+          Command:
+            - ./bin/rake
+            - db:migrate
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CloudWatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'db-migrate'
+          Environment:
+            - Name: RAILS_ENV
+              Value: production
+            - Name: DATABASE_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
+            - Name: CACHE_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
+            - Name: JOB_WORKER_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'RedisConnectionUrl']]
+            - Name: SECRET_TOKEN
+              Value: !Ref 'SecretToken'
 
-  # TaskDefinitionWorker:
+  TaskDefinitionWorker:
   #   Type: AWS::ECS::TaskDefinition
   #   Properties:
   #     Family: worker
@@ -261,62 +261,62 @@ Resources:
   #           - Name: SECRET_TOKEN
   #             Value: !Ref 'SecretToken'
 
-  # TaskDefinition:
-  #   Type: AWS::ECS::TaskDefinition
-  #   Properties:
-  #     Family: !Ref 'ServiceName'
-  #     Cpu: !Ref 'TaskCpu'
-  #     Memory: !Ref 'TaskMemory'
-  #     NetworkMode: awsvpc
-  #     RequiresCompatibilities:
-  #       - FARGATE
-  #     ExecutionRoleArn:
-  #       Fn::ImportValue:
-  #         !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
-  #     ContainerDefinitions:
-  #       - Name: nginx
-  #         Cpu: 256
-  #         Memory: 512
-  #         Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/nginx:latest'
-  #         Essential: false
-  #         PortMappings:
-  #           - ContainerPort: !Ref 'ContainerPortNginx'
-  #             Protocol: tcp
-  #         VolumesFrom:
-  #           - SourceContainer: dockerzon
-  #         LogConfiguration:
-  #           LogDriver: awslogs
-  #           Options:
-  #             awslogs-group: !Ref CloudWatchLogsGroup
-  #             awslogs-region: !Ref AWS::Region
-  #             awslogs-stream-prefix: 'web'
-  #       - Name: dockerzon
-  #         Cpu: !Ref 'ContainerCpuDockerzon'
-  #         Memory: !Ref 'ContainerMemoryDockerzon'
-  #         Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
-  #         Essential: true
-  #         PortMappings:
-  #           - ContainerPort: !Ref 'ContainerPortDockerzon'
-  #             Protocol: tcp
-  #         LogConfiguration:
-  #           LogDriver: awslogs
-  #           Options:
-  #             awslogs-group: !Ref CloudWatchLogsGroup
-  #             awslogs-region: !Ref AWS::Region
-  #             awslogs-stream-prefix: 'web'
-  #         Environment:
-  #           - Name: RAILS_ENV
-  #             Value: production
-  #           - Name: DATABASE_URL
-  #             Value:
-  #               Fn::ImportValue:
-  #                 !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
-  #           - Name: CACHE_URL
-  #             Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
-  #           - Name: JOB_WORKER_URL
-  #             Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
-  #           - Name: SECRET_TOKEN
-  #             Value: !Ref 'SecretToken'
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Ref 'ServiceName'
+      Cpu: !Ref 'TaskCpu'
+      Memory: !Ref 'TaskMemory'
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      ExecutionRoleArn:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'ECSTaskExecutionRole']]
+      ContainerDefinitions:
+        - Name: nginx
+          Cpu: 256
+          Memory: 512
+          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/nginx:latest'
+          Essential: false
+          PortMappings:
+            - ContainerPort: !Ref 'ContainerPortNginx'
+              Protocol: tcp
+          VolumesFrom:
+            - SourceContainer: dockerzon
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CloudWatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'web'
+        - Name: dockerzon
+          Cpu: !Ref 'ContainerCpuDockerzon'
+          Memory: !Ref 'ContainerMemoryDockerzon'
+          Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
+          Essential: true
+          PortMappings:
+            - ContainerPort: !Ref 'ContainerPortDockerzon'
+              Protocol: tcp
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CloudWatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'web'
+          Environment:
+            - Name: RAILS_ENV
+              Value: production
+            - Name: DATABASE_URL
+              Value:
+                Fn::ImportValue:
+                  !Join [':', [!Ref 'StackName', 'DatabaseConnectionUrl']]
+            - Name: CACHE_URL
+              Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
+            - Name: JOB_WORKER_URL
+              Value: redis://cor-el-b35el00yb2u0.dp2ecq.0001.euw1.cache.amazonaws.com:6379
+            - Name: SECRET_TOKEN
+              Value: !Ref 'SecretToken'
 
 
   # The service. The service is a resource which allows you to run multiple
@@ -390,29 +390,6 @@ Resources:
   #         TargetGroupArn: !Ref 'TargetGroupWorker'
 
 
-  # A target group. This is used for keeping track of all the tasks, and
-  # what IP addresses / port numbers they have. You can query it yourself,
-  # to use the addresses yourself, but most often this target group is just
-  # connected to an application load balancer, or network load balancer, so
-  # it can automatically distribute traffic across all the targets.
-  # TargetGroupWeb:
-  #   Type: AWS::ElasticLoadBalancingV2::TargetGroup
-  #   Properties:
-  #     HealthCheckIntervalSeconds: 30
-  #     HealthCheckPath: /health_check
-  #     HealthCheckProtocol: HTTP
-  #     HealthCheckPort: 80
-  #     HealthCheckTimeoutSeconds: 5
-  #     HealthyThresholdCount: 10
-  #     # TargetType: ip
-  #     Name: !Ref 'ServiceName'
-  #     Port: !Ref 'ContainerPortNginx'
-  #     Protocol: HTTP
-  #     UnhealthyThresholdCount: 2
-  #     VpcId:
-  #       Fn::ImportValue:
-  #         !Join [':', [!Ref 'StackName', 'VPCId']]
-
   # TargetGroupWorker:
   #   Type: AWS::ElasticLoadBalancingV2::TargetGroup
   #   Properties:
@@ -424,21 +401,6 @@ Resources:
   #       Fn::ImportValue:
   #         !Join [':', [!Ref 'StackName', 'VPCId']]
 
-
-  # Create a rule on the load balancer for routing traffic to the target group
-  # LoadBalancerRuleWeb:
-  #   Type: AWS::ElasticLoadBalancingV2::ListenerRule
-  #   Properties:
-  #     Actions:
-  #       - TargetGroupArn: !Ref 'TargetGroupWeb'
-  #         Type: 'forward'
-  #     Conditions:
-  #       - Field: path-pattern
-  #         Values: [!Ref 'Path']
-  #     ListenerArn:
-  #       Fn::ImportValue:
-  #         !Join [':', [!Ref 'StackName', 'PublicListener']]
-  #     Priority: 1
 
   # ListnerRuleWorker:
   #   Type: AWS::ElasticLoadBalancingV2::ListenerRule
