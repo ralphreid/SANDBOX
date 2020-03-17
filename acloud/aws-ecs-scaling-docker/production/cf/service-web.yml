@@ -322,40 +322,42 @@ Resources:
   # The service. The service is a resource which allows you to run multiple
   # copies of a type of task, and gather up their logs and metrics, as well
   # as monitor the number of running tasks and replace any that have crashed
-  # ServiceWeb:
-  #   Type: AWS::ECS::Service
-  #   # DependsOn: LoadBalancerRuleWeb
-  #   Properties:
-  #     ServiceName: !Ref 'ServiceName'
-  #     Cluster:
-  #       Fn::ImportValue:
-  #         !Join [':', [!Ref 'StackName', 'ClusterName']]
-  #     LaunchType: FARGATE
-  #     DeploymentConfiguration:
-  #       MaximumPercent: 200
-  #       MinimumHealthyPercent: 75
-  #     DesiredCount: !Ref 'DesiredCount'
-  #     DesiredCount: 0
-  #     NetworkConfiguration:
-  #       AwsvpcConfiguration:
-  #         AssignPublicIp: ENABLED
-  #         SecurityGroups:
-  #           - Fn::ImportValue:
-  #               !Join [':', [!Ref 'StackName', 'FargateContainerSecurityGroup']]
-  #           - Fn::ImportValue:
-  #               !Join [':', [!Ref 'StackName', 'AccessSecurityGroupRDS']]
-  #           - Fn::ImportValue:
-  #               !Join [':', [!Ref 'StackName', 'SecurityGroupWeb']]
-  #         Subnets:
-  #           - Fn::ImportValue:
-  #               !Join [':', [!Ref 'StackName', 'PrivateSubnetOne']]
-  #           - Fn::ImportValue:
-  #               !Join [':', [!Ref 'StackName', 'PrivateSubnetTwo']]
-  #     TaskDefinition: !Ref 'TaskDefinition'
-  #     LoadBalancers:
-  #       - ContainerName: nginx
-  #         ContainerPort: !Ref 'ContainerPortNginx'
-  #         TargetGroupArn: !Ref 'TargetGroupWeb'
+  ServiceWeb:
+    Type: AWS::ECS::Service
+    # DependsOn: LoadBalancerRuleWeb
+    Properties:
+      ServiceName: !Ref 'ServiceName'
+      Cluster:
+        Fn::ImportValue:
+          !Join [':', [!Ref 'StackName', 'ClusterName']]
+      LaunchType: FARGATE
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 75
+      DesiredCount: !Ref 'DesiredCount'
+      DesiredCount: 0
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          SecurityGroups:
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'FargateContainerSecurityGroup']]
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'AccessSecurityGroupRDS']]
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'SecurityGroupWeb']]
+          Subnets:
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'PrivateSubnetOne']]
+            - Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'PrivateSubnetTwo']]
+      TaskDefinition: !Ref 'TaskDefinition'
+      LoadBalancers:
+        - ContainerName: nginx
+          ContainerPort: !Ref 'ContainerPortNginx'
+          TargetGroupArn:
+            Fn::ImportValue:
+                !Join [':', [!Ref 'StackName', 'TargetGroupWeb']]
 
   # ServiceWorker:
   #   Type: AWS::ECS::Service
