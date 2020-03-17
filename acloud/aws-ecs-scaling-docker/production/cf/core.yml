@@ -257,30 +257,30 @@ Resources:
       SecurityGroups: [!Ref 'PublicLoadBalancerSG']
   # A dummy target group is used to setup the ALB to just drop traffic
   # initially, before any real service target groups have been added.
-  DummyTargetGroupPublic:
-    Type: AWS::ElasticLoadBalancingV2::TargetGroup
-    Properties:
-      HealthCheckIntervalSeconds: 6
-      HealthCheckPath: /
-      HealthCheckProtocol: HTTP
-      HealthCheckTimeoutSeconds: 5
-      HealthyThresholdCount: 2
-      Name: !Join ['-', [!Ref 'AWS::StackName', 'drop-1']]
-      Port: 80
-      Protocol: HTTP
-      UnhealthyThresholdCount: 2
-      VpcId: !Ref 'VPC'
-  PublicLoadBalancerListener:
-    Type: AWS::ElasticLoadBalancingV2::Listener
-    DependsOn:
-      - PublicLoadBalancer
-    Properties:
-      DefaultActions:
-        - TargetGroupArn: !Ref 'DummyTargetGroupPublic'
-          Type: 'forward'
-      LoadBalancerArn: !Ref 'PublicLoadBalancer'
-      Port: 80
-      Protocol: HTTP
+  # DummyTargetGroupPublic:
+  #   Type: AWS::ElasticLoadBalancingV2::TargetGroup
+  #   Properties:
+  #     HealthCheckIntervalSeconds: 6
+  #     HealthCheckPath: /
+  #     HealthCheckProtocol: HTTP
+  #     HealthCheckTimeoutSeconds: 5
+  #     HealthyThresholdCount: 2
+  #     Name: !Join ['-', [!Ref 'AWS::StackName', 'drop-1']]
+  #     Port: 80
+  #     Protocol: HTTP
+  #     UnhealthyThresholdCount: 2
+  #     VpcId: !Ref 'VPC'
+  # PublicLoadBalancerListener:
+  #   Type: AWS::ElasticLoadBalancingV2::Listener
+  #   DependsOn:
+  #     - PublicLoadBalancer
+  #   Properties:
+  #     DefaultActions:
+  #       - TargetGroupArn: !Ref 'DummyTargetGroupPublic'
+  #         Type: 'forward'
+  #     LoadBalancerArn: !Ref 'PublicLoadBalancer'
+  #     Port: 80
+  #     Protocol: HTTP
 
   # An internal load balancer, this would be used for a service that is not
   # directly accessible to the public, but instead should only receive traffic
@@ -312,30 +312,30 @@ Resources:
       SecurityGroups: [!Ref 'PrivateLoadBalancerSG']
   # This dummy target group is used to setup the ALB to just drop traffic
   # initially, before any real service target groups have been added.
-  DummyTargetGroupPrivate:
-    Type: AWS::ElasticLoadBalancingV2::TargetGroup
-    Properties:
-      HealthCheckIntervalSeconds: 6
-      HealthCheckPath: /
-      HealthCheckProtocol: HTTP
-      HealthCheckTimeoutSeconds: 5
-      HealthyThresholdCount: 2
-      Name: !Join ['-', [!Ref 'AWS::StackName', 'drop-2']]
-      Port: 80
-      Protocol: HTTP
-      UnhealthyThresholdCount: 2
-      VpcId: !Ref 'VPC'
-  PrivateLoadBalancerListener:
-    Type: AWS::ElasticLoadBalancingV2::Listener
-    DependsOn:
-      - PrivateLoadBalancer
-    Properties:
-      DefaultActions:
-        - TargetGroupArn: !Ref 'DummyTargetGroupPrivate'
-          Type: 'forward'
-      LoadBalancerArn: !Ref 'PrivateLoadBalancer'
-      Port: 80
-      Protocol: HTTP
+  # DummyTargetGroupPrivate:
+  #   Type: AWS::ElasticLoadBalancingV2::TargetGroup
+  #   Properties:
+  #     HealthCheckIntervalSeconds: 6
+  #     HealthCheckPath: /
+  #     HealthCheckProtocol: HTTP
+  #     HealthCheckTimeoutSeconds: 5
+  #     HealthyThresholdCount: 2
+  #     Name: !Join ['-', [!Ref 'AWS::StackName', 'drop-2']]
+  #     Port: 80
+  #     Protocol: HTTP
+  #     UnhealthyThresholdCount: 2
+  #     VpcId: !Ref 'VPC'
+  # PrivateLoadBalancerListener:
+  #   Type: AWS::ElasticLoadBalancingV2::Listener
+  #   DependsOn:
+  #     - PrivateLoadBalancer
+  #   Properties:
+  #     DefaultActions:
+  #       - TargetGroupArn: !Ref 'DummyTargetGroupPrivate'
+  #         Type: 'forward'
+  #     LoadBalancerArn: !Ref 'PrivateLoadBalancer'
+  #     Port: 80
+  #     Protocol: HTTP
 
   # This is an IAM role which authorizes ECS to manage resources on your
   # account on your behalf, such as updating your load balancer with the
