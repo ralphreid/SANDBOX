@@ -290,10 +290,10 @@ Resources:
               awslogs-region: !Ref AWS::Region
               awslogs-stream-prefix: 'web'
         - Name: dockerzon
-          # Cpu: !Ref 'ContainerCpuDockerzon'
-          # Memory: !Ref 'ContainerMemoryDockerzon'
+          Cpu: !Ref 'ContainerCpuDockerzon'
+          Memory: !Ref 'ContainerMemoryDockerzon'
           Image: '481461972950.dkr.ecr.eu-west-1.amazonaws.com/dockerzon/dockerzon:latest'
-          Essential: false
+          Essential: true
           PortMappings:
             - ContainerPort: !Ref 'ContainerPortDockerzon'
           LogConfiguration:
@@ -332,8 +332,7 @@ Resources:
       DeploymentConfiguration:
         MaximumPercent: 200
         MinimumHealthyPercent: 75
-      # DesiredCount: !Ref 'DesiredCount'
-      # DesiredCount: 0
+      DesiredCount: !Ref 'DesiredCount'
       DesiredCount: 0
       NetworkConfiguration:
         AwsvpcConfiguration:
