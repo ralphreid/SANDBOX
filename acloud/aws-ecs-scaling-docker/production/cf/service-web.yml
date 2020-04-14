@@ -354,9 +354,7 @@ Resources:
       LoadBalancers:
         - ContainerName: nginx
           ContainerPort: !Ref 'ContainerPortNginx'
-          TargetGroupArn:
-            Fn::ImportValue:
-                !Join [':', [!Ref 'StackName', 'TargetGroupWeb']]
+          TargetGroupArn: !ImportValue 'SP::PublicLoadBalancer'
 
   # ServiceWorker:
   #   Type: AWS::ECS::Service
