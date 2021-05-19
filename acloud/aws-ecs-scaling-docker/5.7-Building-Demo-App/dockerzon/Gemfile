@@ -48,5 +48,5 @@ end
 gem 'pg', '~> 0.18.4'
 gem 'redis-rails', '~> 4.0.0'
 gem 'sidekiq', '~> 4.0.2'
-gem 'puma', '~> 2.15.3'
+gem 'puma', '~> 4.3.8'
 gem 'rack-timeout', '~> 0.3.2'
