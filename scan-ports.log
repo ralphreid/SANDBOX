@@ -1,0 +1,151 @@
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-07-19 10:14 EDT
+Nmap scan report for 192.168.0.2
+Host is up (0.00080s latency).
+All 64512 scanned ports on 192.168.0.2 are closed
+
+Nmap scan report for 192.168.0.12
+Host is up (0.00052s latency).
+All 64512 scanned ports on 192.168.0.12 are closed
+
+Nmap scan report for 192.168.0.13
+Host is up (0.00038s latency).
+Not shown: 64511 closed ports
+PORT     STATE SERVICE
+3306/tcp open  mysql
+
+Nmap scan report for 192.168.0.14
+Host is up (0.00091s latency).
+Not shown: 64510 closed ports
+PORT     STATE SERVICE
+1433/tcp open  ms-sql-s
+1434/tcp open  ms-sql-m
+
+Nmap scan report for 192.168.0.16
+Host is up (0.00054s latency).
+All 64512 scanned ports on 192.168.0.16 are closed
+
+Nmap scan report for 192.168.0.17
+Host is up (0.00051s latency).
+All 64512 scanned ports on 192.168.0.17 are closed
+
+Nmap scan report for 192.168.0.100
+Host is up (0.00054s latency).
+Not shown: 64511 closed ports
+PORT     STATE SERVICE
+3389/tcp open  ms-wbt-server
+
+Nmap scan report for 192.168.0.102
+Host is up (0.00081s latency).
+All 64512 scanned ports on 192.168.0.102 are closed
+
+Nmap scan report for 192.168.0.103
+Host is up (0.00052s latency).
+All 64512 scanned ports on 192.168.0.103 are closed
+
+Nmap scan report for 192.168.0.104
+Host is up (0.00054s latency).
+Not shown: 64511 closed ports
+PORT     STATE SERVICE
+3389/tcp open  ms-wbt-server
+
+Nmap scan report for 192.168.0.113
+Host is up (0.00055s latency).
+Not shown: 64510 closed ports
+PORT     STATE SERVICE
+9001/tcp open  tor-orport
+9030/tcp open  unknown
+
+Nmap scan report for 192.168.0.114
+Host is up (0.00050s latency).
+Not shown: 64510 closed ports
+PORT     STATE SERVICE
+5900/tcp open  vnc
+5901/tcp open  vnc-1
+
+Nmap scan report for 192.168.0.116
+Host is up (0.00045s latency).
+Not shown: 64509 closed ports
+PORT     STATE SERVICE
+5001/tcp open  commplex-link
+9100/tcp open  jetdirect
+9600/tcp open  micromuse-ncpw
+
+Nmap scan report for 192.168.0.117
+Host is up (0.00050s latency).
+Not shown: 64511 closed ports
+PORT     STATE SERVICE
+4000/tcp open  remoteanything
+
+Nmap scan report for 192.168.0.125
+Host is up (0.00051s latency).
+Not shown: 64507 closed ports
+PORT     STATE SERVICE
+3910/tcp open  prnrequest
+3911/tcp open  prnstatus
+8080/tcp open  http-proxy
+9100/tcp open  jetdirect
+9220/tcp open  unknown
+
+Nmap scan report for 192.168.0.126
+Host is up (0.00049s latency).
+All 64512 scanned ports on 192.168.0.126 are closed
+
+Nmap scan report for 192.168.0.129
+Host is up (0.00056s latency).
+Not shown: 64511 closed ports
+PORT     STATE SERVICE
+3389/tcp open  ms-wbt-server
+
+Nmap scan report for 192.168.0.132
+Host is up (0.00070s latency).
+Not shown: 64511 closed ports
+PORT     STATE SERVICE
+3389/tcp open  ms-wbt-server
+
+Nmap scan report for 192.168.0.133
+Host is up (0.00068s latency).
+All 64512 scanned ports on 192.168.0.133 are closed
+
+Nmap scan report for 192.168.0.134
+Host is up (0.00052s latency).
+All 64512 scanned ports on 192.168.0.134 are closed
+
+Nmap scan report for 192.168.0.136
+Host is up (0.00055s latency).
+Not shown: 64507 closed ports
+PORT     STATE SERVICE
+3910/tcp open  prnrequest
+3911/tcp open  prnstatus
+8080/tcp open  http-proxy
+9100/tcp open  jetdirect
+9220/tcp open  unknown
+
+Nmap scan report for 192.168.0.138
+Host is up (0.00054s latency).
+Not shown: 64511 closed ports
+PORT     STATE SERVICE
+3389/tcp open  ms-wbt-server
+
+Nmap scan report for 192.168.0.145
+Host is up (0.00047s latency).
+Not shown: 64510 closed ports
+PORT      STATE SERVICE
+3389/tcp  open  ms-wbt-server
+25565/tcp open  minecraft
+
+Nmap scan report for 192.168.0.149
+Host is up (0.00040s latency).
+Not shown: 64510 closed ports
+PORT     STATE SERVICE
+2501/tcp open  rtsclient
+5001/tcp open  commplex-link
+
+Nmap scan report for 192.168.0.150
+Host is up (0.00056s latency).
+Not shown: 64509 closed ports
+PORT      STATE SERVICE
+8080/tcp  open  http-proxy
+9091/tcp  open  xmltec-xmlmail
+51413/tcp open  unknown
+
+Nmap done: 149 IP addresses (25 hosts up) scanned in 60.25 seconds

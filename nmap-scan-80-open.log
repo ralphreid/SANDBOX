@@ -1,0 +1,14 @@
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-07-19 10:10 EDT
+Nmap scan report for 192.168.0.125
+Host is up (0.00058s latency).
+
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap scan report for 192.168.0.136
+Host is up (0.00052s latency).
+
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap done: 149 IP addresses (25 hosts up) scanned in 40.84 seconds
