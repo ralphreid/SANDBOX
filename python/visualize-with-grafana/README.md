@@ -10,11 +10,15 @@
 1. Run Grafana
 
 ```bash
+docker stop  grafana; docker rm grafana;
 docker run -d \
 -p 3000:3000 \
 --name=grafana \
 -e "GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource" \
 -e "GF_AUTH_ANONYMOUS_ENABLED=true" \
+-e "GF_SECURITY_ADMIN_PASSWORD=admin" \
+--add-host=host.docker.internal:host-gateway \
+-v /Users/jah/dev/me/SANDBOX/python/visualize-with-grafana/grafana/datasources:/etc/grafana/provisioning/datasources \
 grafana/grafana
 ```
 
