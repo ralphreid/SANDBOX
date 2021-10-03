@@ -1,4 +1,5 @@
-from bottle import Bottle, json_dumps, HTTPResponse, run, request, response
+from  data import *
+from bottle import Bottle, json_dumps as dumps, HTTPResponse, run, request, response
 
 app = Bottle()
 
@@ -15,7 +16,7 @@ def enable_cors():
 @app.post("/search")
 def search():
     return HTTPResponse(
-        body=json_dumps(["series A", "series B"]),
+        body=dumps(["series A", "series B"]),
         headers={"Content-Type": "application/json"}
     )
 
@@ -50,11 +51,23 @@ def query():
         }]}
 
         series = request.json['targets'][0]['target']
-        body = json_dumps(bodies[series])
+        body = dumps(bodies[series])
         return HTTPResponse(
             body=body,
             headers={"Content-Type": "application/json"}
         )
+
+    else:
+        body = []
+        start, end = request.json['range']['from'], request.json['range']['to']
+        for target in request.json['targets']:
+            name = target['target']
+            datapoints = create_data_points(FUNCTIONS[name], start, end)
+            body.append({'target': name, 'datapoints': datapoints})
+
+        body = dumps(body)
+    return HTTPResponse(body=body, headers={'Content-Type': 'application/json'})
+
 
 if __name__ == "__main__":
     run(app, host="localhost", port=8081)

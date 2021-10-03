@@ -4,10 +4,10 @@
 2. <http://oz123.github.io/writings/2019-06-16-Visualize-almost-anything-with-Grafana-and-Python/index.html>
 3. <https://bottlepy.org/docs/dev/>
 
-
 # Key Commands
 
-1. Run Grafana
+1. Start data server `python3 data-source.py`
+2. Run Grafana
 
 ```bash
 docker stop  grafana; docker rm grafana;
@@ -21,7 +21,3 @@ docker run -d \
 -v /Users/jah/dev/me/SANDBOX/python/visualize-with-grafana/grafana/datasources:/etc/grafana/provisioning/datasources \
 grafana/grafana
 ```
-
-2. Grafana credentials are `admin` and `admin`
-
-3. adf
