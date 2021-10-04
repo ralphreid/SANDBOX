@@ -44,7 +44,7 @@ def annotations():
         {
             "annotation": 'This is the annotation',
             "time": (convert_to_time_ms(req['range']['from']) +
-                     convert_to_time_ms(req['range']['to'])) / 2,
+                    convert_to_time_ms(req['range']['to'])) / 2,
             "title": 'Deployment notes',
             "tags": ['tag1', 'tag2'],
             "text": 'Hm, something went wrong...'
