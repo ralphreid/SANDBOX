@@ -9,6 +9,13 @@ services:
     environment:
       - SERVICES=s3
       - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - EDGE_PORT=4566
+      - LOCALSTACK_HOSTNAME=localhost.localstack.cloud
     volumes:
       - './.localstack:/var/lib/localstack'
       - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      default:
+        aliases:
+          - localhost.localstack.cloud
