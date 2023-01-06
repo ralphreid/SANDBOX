@@ -2,19 +2,16 @@ version: '3.2'
 services:
   localstack:
     image: localstack/localstack:latest
-    container_name: localstack_demo
+    container_name: localstack
+    network_mode: bridge
     ports:
-      - '4563-4599:4563-4599'
-      - '8055:8080'
+      - '127.0.0.1:4563-4599:4563-4599'
+      - '127.0.0.1:9000:9000'
     environment:
-      - SERVICES=s3:4572,ssm:4583
-      - DEBUG=1
+      - SERVICES=s3,cloudformation
+      # - DEBUG=1
       - DOCKER_HOST=unix:///var/run/docker.sock
       - EDGE_PORT=4566
     volumes:
       - './.localstack:/var/lib/localstack'
       - '/var/run/docker.sock:/var/run/docker.sock'
-    networks:
-      default:
-        aliases:
-          - localhost.localstack.cloud
