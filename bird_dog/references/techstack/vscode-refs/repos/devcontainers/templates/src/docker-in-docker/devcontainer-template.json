@@ -1,0 +1,44 @@
+{
+    "id": "docker-in-docker",
+    "version": "1.2.0",
+    "name": "Docker in Docker",
+    "description": "Create child containers _inside_ a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-in-docker",
+    "publisher": "Dev Container Spec Maintainers",
+    "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+    "options": {
+        "installZsh": {
+            "type": "boolean",
+            "description": "Install ZSH!?",
+            "default": "true"
+        },
+        "upgradePackages": {
+            "type": "boolean",
+            "description": "Upgrade OS packages?",
+            "default": "false"
+        },
+        "dockerVersion": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "none",
+                "20.10"
+            ],
+            "default": "latest",
+            "description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+        },
+        "moby": {
+            "type": "boolean",
+            "default": "true",
+            "description": "Install OSS Moby build instead of Docker CE"
+        },
+        "enableNonRootDocker": {
+            "type": "boolean",
+            "description": "Enable non-root user to access Docker in container?",
+            "default": "true"
+        }
+    },
+    "platforms": [
+        "Any"
+    ]
+}

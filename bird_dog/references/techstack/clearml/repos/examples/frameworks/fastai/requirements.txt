@@ -1,0 +1,4 @@
+fastai >= 2.6.0
+tensorboard
+tensorboardX
+clearml

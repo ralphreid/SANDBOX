@@ -1,0 +1,23 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local", "**/apps/examples.env", "**/examples/.env"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "env": ["OPENAI_API_KEY", "NODE_ENV"],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "test": {
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "start": {
+      "cache": false
+    }
+  } 
+}

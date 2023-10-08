@@ -1,0 +1,24 @@
+# Automatically generated folders
+__pycache__/
+dist/
+build/
+
+# Automatically generated files
+.DS_Store
+.mypy_cache
+.pytest_cache
+
+# Env
+env/
+.env
+.venv
+
+# Poetry
+poetry-installer-error-*.yml
+**/poetry.lock
+
+# VSCode
+.vscode/
+
+# NodeJS
+node_modules/

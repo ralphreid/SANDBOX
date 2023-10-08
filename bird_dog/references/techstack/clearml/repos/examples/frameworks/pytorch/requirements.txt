@@ -1,0 +1,10 @@
+clearml
+jsonschema==3.2.0 ; python_version <= '3.5'
+matplotlib
+pytorch-ignite
+tensorboard>=1.14.0
+tensorboardX
+torch>=1.1.0
+torchvision>=0.3.0
+tqdm
+protobuf>=4.21.1

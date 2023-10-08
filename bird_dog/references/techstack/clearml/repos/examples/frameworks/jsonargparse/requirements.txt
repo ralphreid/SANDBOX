@@ -1,0 +1,8 @@
+jsonargparse
+pytorch_lightning
+torch
+torchmetrics
+torchvision
+docstring_parser
+pytorch-lightning[extra]
+lightning; python_version >= '3.8'

@@ -1,0 +1,75 @@
+---
+title: Introduction
+---
+
+Retake is a real-time database for AI data. By integratating your Postgres data with embedding models,
+Retake enables real-time search over your database.
+
+Documents in Retake are stored in **real-time indexes**. These indexes stay in sync with Postgres and
+can be queried with keyword search, vector search, or hybrid search — a combination of the two.
+
+## Why Retake
+
+Retake is a good fit for developers that
+
+1. Have large volumes of documents stored in Postgres that are expensive and time-consuming to reindex or re-embed
+   with batch jobs.
+2. Have investigated vector databases for similarity search, but also want the capabilities of traditional search
+   (e.g. keyword-based search, faceting, efficient filtering, etc.).
+3. Are looking for a search library "just works" without the overhead of managing a vector store,
+   search engine, embedding models, and data ingestion pipelines.
+
+## Use Cases
+
+**LLM Applications**
+
+Retake is the perfect solution for surfacing up-to-date, relevant database documents that can be
+fed into the prompt windows of large language models (LLMs).
+
+**Text Reconciliation**
+
+Retake can be embedded into backends that map incoming text to the most similar match in a database. For instance, an
+HR software company may want to map receipts uploaded by employees to recent transactions.
+
+**Personalized Recommendations**
+
+Recommendation engines that previously relied on rule-based approaches can now harness deeper semantic insights,
+increasing the precision and relevance of their suggestions.
+
+**Universal Search**
+
+Retake's low-code SDKs radically simplify the integration of universal search in an application.
+
+## Key Features
+
+**Always in Sync**
+
+Retake leverages logical-replication-based Change-Data-Capture (CDC) to integrate directly with Postgres. As data changes or new data arrives,
+Retake ensures that the indexed data is kept in sync.
+
+**Intelligent Vector Cache**
+
+Whenever data is changed in Postgres, Retake updates the embedding/vector representation of that data behind the scenes.
+Vectors are automatically cached for lightning-fast query results with semantic understanding.
+
+**Low-Code SDK**
+
+Retake provides intuitive search SDKs that drop into any Python or Typescript application (other languages coming soon).
+The core API is just a few functions.
+
+**Open/ElasticSearch DSL Compatible**
+
+Retake enables developers to query with the full expressiveness of the OpenSearch DSL (domain-specific language).
+
+**Deployable Anywhere**
+
+Retake is deployable anywhere, from a laptop to a distributed cloud system.
+
+<CardGroup cols={2}>
+  <Card title="Quick Start" icon="circle-play" href="/quickstart">
+    Add search to your Python or Typescript application in under five minutes
+  </Card>
+  <Card title="Architecture" icon="circle-play" href="/architecture">
+    How Retake works under the hood
+  </Card>
+</CardGroup>

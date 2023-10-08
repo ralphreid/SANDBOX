@@ -1,0 +1,32 @@
+{
+    "id": "ruby-rails-postgres",
+    "version": "2.0.0",
+    "name": "Ruby on Rails & Postgres",
+    "description": "Develop Ruby on Rails applications with Postgres. Includes a Rails application container and PostgreSQL server.",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres",
+    "publisher": "Dev Container Spec Maintainers",
+    "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+    "options": {
+        "imageVariant": {
+            "type": "string",
+            "description": "Ruby version (use -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+            "proposals": [
+                "3-bookworm",
+				"3.2-bookworm",
+                "3.1-bookworm",
+                "3-bullseye",
+				"3.2-bullseye",
+                "3.1-bullseye",
+                "3.0-bullseye",
+                "3-buster",
+				"3.2-buster",
+                "3.1-buster",
+                "3.0-buster"
+            ],
+            "default": "3.2-bullseye"
+        }
+    },
+    "platforms": [
+        "Ruby"
+    ]
+}

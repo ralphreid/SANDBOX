@@ -1,0 +1,103 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Retake",
+  "logo": {
+    "dark": "/logo/primary.svg",
+    "light": "/logo/primary.svg"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#34d399",
+    "light": "#34d399",
+    "dark": "#34d399"
+  },
+  "modeToggle": {
+    "default": "dark",
+    "isHidden": true
+  },
+  "topbarCtaButton": {
+    "type": "github",
+    "url": "https://github.com/getretake/retake"
+  },
+  "anchors": [
+    {
+      "name": "How to Search",
+      "icon": "magnifying-glass",
+      "url": "search"
+    },
+    {
+      "name": "Python Client",
+      "icon": "python",
+      "url": "python"
+    },
+    {
+      "name": "Typescript Client",
+      "icon": "js",
+      "url": "typescript"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Welcome",
+      "pages": [
+        "introduction",
+        "setup",
+        "quickstart",
+        "architecture",
+        "concepts"
+      ]
+    },
+    {
+      "group": "How to Search",
+      "pages": [
+        "search/overview",
+        "search/keyword",
+        "search/neural",
+        "search/vector",
+        "search/sorting",
+        "search/filtering",
+        "search/aggregation",
+        "search/pagination",
+        "search/highlighting",
+        "search/boosting",
+        "search/object",
+        "search/custom"
+      ]
+    },
+    {
+      "group": "Deployment",
+      "pages": ["deployment/local", "deployment/cloud", "deployment/managed"]
+    },
+    {
+      "group": "Product",
+      "pages": ["product/roadmap", "product/changelog"]
+    },
+    {
+      "group": "Python",
+      "pages": [
+        "python/client",
+        "python/index",
+        "python/search",
+        "python/database",
+        "python/table"
+      ]
+    },
+    {
+      "group": "Typescript",
+      "pages": [
+        "typescript/client",
+        "typescript/index",
+        "typescript/search",
+        "typescript/database",
+        "typescript/table"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/getretake/retake"
+  },
+  "backgroundImage": "/background.png",
+  "integrations": {
+    "intercom": "d3sdz6rs"
+  }
+}

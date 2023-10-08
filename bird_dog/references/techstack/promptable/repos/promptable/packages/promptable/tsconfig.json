@@ -1,0 +1,61 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "module": "esnext",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "moduleResolution": "node",
+        "preserveWatchOutput": true,
+        "skipLibCheck": true,
+        "noEmit": true,
+        "strict": true,
+        "baseUrl": ".",
+        "declaration": true,
+        "declarationMap": true,
+        "resolveJsonModule": true,
+        "paths": {
+            "@vector-stores/*": [
+                "src/vector-stores/*"
+            ],
+            "@types/*": [
+                "src/types/*"
+            ],
+            "@utils/*": [
+                "src/utils/*"
+            ],
+            "@prompts/*": [
+                "src/prompts/*"
+            ],
+            "@providers/*": [
+                "src/providers/*"
+            ],
+            "@loaders/*": [
+                "src/loaders/*"
+            ],
+            "@parsers/*": [
+                "src/parsers/*"
+            ],
+            "@embeddings/*": [
+                "src/embeddings/*"
+            ],
+            "@documents/*": [
+                "src/documents/*"
+            ],
+            "@indicies/*": [
+                "src/indicies/*"
+            ],
+            "@splitters/*": [
+                "src/splitters/*"
+            ],
+        }
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
