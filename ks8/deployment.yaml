@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: localstack-config
+data:
+  LOCALSTACK_HOST: "localstack"
+  LOCALSTACK_PORT: "4566"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app-container
+          image: my-app-image
+          envFrom:
+            - configMapRef:
+                name: localstack-config
+          ports:
+            - containerPort: 8080
