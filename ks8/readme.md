@@ -7,7 +7,7 @@
 First, install Kind using Homebrew:
 
 ```bash
-brew install kind helm localstack kubectl
+brew install kind helm localstack kubectl terraform
 ```
 
 ### 2. Create a Kind Cluster
@@ -51,4 +51,24 @@ Use kubectl to apply your Kubernetes deployment:
 
 ```bash
 kubectl apply -f deployment.yaml
+```
+
+### 8. Deploy with Terraform
+
+Initialize Terraform: Navigate to the directory containing main.tf and initialize Terraform:
+
+```bash
+terraform init
+```
+
+Plan the Infrastructure: Create an execution plan to preview the changes that Terraform will make to your infrastructure:
+
+```bash
+terraform plan
+```
+
+Apply the Configuration: Apply the changes required to reach the desired state of the configuration:
+
+```bash
+terraform apply
 ```
