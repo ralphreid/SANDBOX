@@ -29,8 +29,10 @@ brew install localstack
 Start LocalStack with the --network flag:
 
 ```bash
+export LOCALSTACK_AUTH_TOKEN=$(pbpaste)
+
 docker network create localstack-network
-localstack start --network localstack-network
+localstack start --network localstack-network -d
 ```
 
 ### 4. Configure Networking
@@ -38,7 +40,7 @@ localstack start --network localstack-network
 Ensure LocalStack and Kind can communicate by connecting them to the same Docker network:
 
 ```bash
-docker network connect localstack-network kind-control-plane
+docker network connect localstack-network localstack-cluster-control-plane
 ```
 
 ### 6. Create a Kubernetes Deployment YAML
@@ -51,7 +53,12 @@ Use kubectl to apply your Kubernetes deployment:
 
 ```bash
 kubectl apply -f deployment.yaml
+
+kubectl apply -f nginx-deployment.yaml
+kubectl port-forward deployment/nginx-deployment 8080:80
 ```
+
+Now, open your web browser and navigate to http://localhost:8080 to see the Nginx welcome page.
 
 ### 8. Deploy with Terraform
 
