@@ -1,0 +1,2 @@
+kubectl get pods -l app=thanos
+kubectl get pods -l app=nginx-test-server

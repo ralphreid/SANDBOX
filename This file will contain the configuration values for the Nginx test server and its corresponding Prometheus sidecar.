@@ -1,0 +1,20 @@
+# nginx-test-server-values.yml
+
+# Nginx Test Server Configuration
+nginx:
+  image: nginx:latest
+  port: 80
+
+# Prometheus Sidecar Configuration
+prometheus:
+  enabled: true
+  scrapeInterval: 10s
+  evaluationInterval: 10s
+
+# Thanos Sidecar Configuration (for test server metrics)
+thanos:
+  enabled: true
+  store:
+    type: s3
+    bucket: my-bucket
+    endpoint: s3.amazonaws.com

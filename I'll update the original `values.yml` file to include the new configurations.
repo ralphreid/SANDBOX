@@ -1,0 +1,57 @@
+# values.yml
+
+# RBAC Configuration
+rbac:
+  create: false
+
+serviceAccounts:
+  server:
+    create: false
+    name: prometheus-server-sa
+  thanos:
+    create: false
+    name: thanos-sidecar-sa
+
+# ConfigMap Files
+serverFiles:
+  alerts:
+    - alert: anAlert
+      # ...
+  config:
+    prometheus.yml: |
+      global:
+        scrape_interval: 10s
+        evaluation_interval: 10s
+      # ...
+
+thanosFiles:
+  config:
+    thanos.yml: |
+      store:
+        type: s3
+        bucket: my-bucket
+        endpoint: s3.amazonaws.com
+      # ...
+
+# Ingress TLS
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - prometheus.domain.com
+    tls:
+      - secretName: prometheus-server-tls
+        hosts:
+          - prometheus.domain.com
+
+# NetworkPolicy
+networkPolicy:
+  enabled: true
+
+prometheus.io/scrape: "true"
+prometheus.io/port: "9090"
+
+# Nginx Test Server Configuration
+nginxTestServer:
+  enabled: true
+  valuesFile: nginx-test-server-values.yml

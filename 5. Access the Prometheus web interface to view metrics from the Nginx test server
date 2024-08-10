@@ -1,0 +1,2 @@
+kubectl port-forward svc/prometheus 9090:9090 &
+open http://localhost:9090

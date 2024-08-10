@@ -1,0 +1,2 @@
+helm repo add thanos https://thanos.io/thanos-chart/
+helm install thanos thanos/thanos --values values.yml
