@@ -32,6 +32,20 @@ resource "aws_subnet" "private" {
 
 resource "aws_security_group" "eks_sg" {
   vpc_id = aws_vpc.main.id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_iam_role" "eks_role" {
@@ -52,6 +66,11 @@ resource "aws_iam_role_policy_attachment" "eks_policy_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
+resource "aws_iam_role_policy_attachment" "eks_service_policy_attachment" {
+  role       = aws_iam_role.eks_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+}
+
 resource "aws_eks_cluster" "main" {
   name     = "main-cluster"
   role_arn = aws_iam_role.eks_role.arn
@@ -59,4 +78,19 @@ resource "aws_eks_cluster" "main" {
   vpc_config {
     subnet_ids = concat(aws_subnet.public[*].id, aws_subnet.private[*].id)
   }
+}
+
+resource "aws_eks_node_group" "main" {
+  cluster_name    = aws_eks_cluster.main.name
+  node_group_name = "main-node-group"
+  node_role_arn   = aws_iam_role.eks_role.arn
+  subnet_ids      = aws_subnet.public[*].id
+
+  scaling_config {
+    desired_size = 2
+    max_size     = 3
+    min_size     = 1
+  }
+
+  instance_types = ["t3.medium"]
 }

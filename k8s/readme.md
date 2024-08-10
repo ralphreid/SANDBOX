@@ -60,6 +60,13 @@ kubectl port-forward deployment/nginx-deployment 8080:80
 
 Now, open your web browser and navigate to http://localhost:8080 to see the Nginx welcome page.
 
+Check Pod Status: Ensure that the Nginx pod is running correctly.
+`kubectl get pods`
+
+Look for the status of the Nginx pod. It should be in the Running state.
+Check Logs: Inspect the logs of the Nginx pod to see if there are any errors.
+`kubectl logs <nginx-pod-name>`
+
 ### 8. Deploy with Terraform
 
 Initialize Terraform: Navigate to the directory containing main.tf and initialize Terraform:
@@ -76,6 +83,24 @@ terraform plan
 
 Apply the Configuration: Apply the changes required to reach the desired state of the configuration:
 
+````bash
+
+### 8. Deploy with Terraform
+
+Initialize Terraform: Navigate to the directory containing main.tf and initialize Terraform:
+
 ```bash
-terraform apply
+terraform init
+````
+
+Plan the Infrastructure: Create an execution plan to preview the changes that Terraform will make to your infrastructure:
+
+```bash
+terraform plan
+```
+
+Apply the Configuration: Apply the changes required to reach the desired state of the configuration:
+
+```bash
+terraform apply -auto-approve
 ```
