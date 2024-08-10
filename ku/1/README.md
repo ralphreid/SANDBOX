@@ -25,6 +25,7 @@
 
 1. Install Kind: `curl -Lo ./kind https://kind.sigs.k8s.io/dl/linux/amd64 && chmod +x ./kind`
 2. Create a cluster: `./kind create cluster --name thanos-cluster`
+3. Check config: `kubectl config current-context`
 
 ### Install Helm and Deploy Thanos
 
