@@ -30,7 +30,7 @@
 ### Install Helm and Deploy Thanos
 
 1. Install Helm: `curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash`
-2. Add the Thanos Helm repository: `helm repo add thanos https://thanos.io/thanos-helm/`
+2. Add the Thanos Helm repository: `helm repo add thanos https://charts.thanos.io/thanos`
 3. Update the Helm repositories: `helm repo update`
 4. Deploy Thanos: `helm install thanos thanos/thanos`
 
@@ -42,3 +42,7 @@
 ### Verify Thanos Deployment
 
 1. Check the Thanos pods: `kubectl get pods -l app=thanos`
+
+## References
+- https://charts.thanos.io/thanos
+- https://github.com/bitnami/charts/tree/main/bitnami/thanos
