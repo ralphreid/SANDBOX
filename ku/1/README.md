@@ -32,7 +32,7 @@
 1. Install Helm: `curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash`
 2. Add the Thanos Helm repository: `helm repo add thanos https://charts.thanos.io/thanos`
 3. Update the Helm repositories: `helm repo update`
-4. Deploy Thanos: `helm install thanos thanos/thanos`
+4. Deploy Thanos using OCI registry: `helm install my-release oci://registry-1.docker.io/bitnamicharts/thanos`
 
 ### Access Thanos UIs
 
