@@ -77,12 +77,32 @@ WARNING: There are "resources" sections in the chart not set. Using "resourcesPr
 ### Access Thanos UIs
 
 1. Visit the Thanos Query UI: `http://localhost:9090`
-2. Visit the Thanos Compact UI: `http://localhost:9091`
 
 ### Verify Thanos Deployment
 
-1. Check the Thanos pods: `kubectl get pods -l app=thanos`
+To teardown the resources created by the Thanos deployment, follow these steps:
+
+1. Delete the Thanos release: `helm uninstall my-release`
+2. Delete the Kind cluster: `kind delete cluster --name thanos-cluster`
+
+Remember to verify that all resources have been successfully deleted by running `kubectl get all` after executing these commands.
+
+1. `kubectl get pods --all-namespaces -l app=thanos`
+2. `kubectl get pods -n <namespace> -l app=thanos`
+3. Check the Thanos pods: `kubectl get pods -l app=thanos`
+
+Use Helmfile for managing multiple Helm charts and environments: Helmfile allows you to define and manage multiple Helm charts and their configurations in a single file.
+
+:
+Deploy with Helmfile:
+
+file apply
 
 ## References
+
 - https://charts.thanos.io/thanos
 - https://github.com/bitnami/charts/tree/main/bitnami/thanos
+- https://github.com/bitnami/charts/blob/main/bitnami/thanos/README.md
+- https://github.com/bitnami/charts/tree/main/bitnami/kube-prometheus
+- https://k8slens.dev
+- https://kind.sigs.k8s.io/docs/user/quick-start/
