@@ -34,6 +34,46 @@
 3. Update the Helm repositories: `helm repo update`
 4. Deploy Thanos using OCI registry: `helm install my-release oci://registry-1.docker.io/bitnamicharts/thanos`
 
+```
+ helm install my-release oci://registry-1.docker.io/bitnamicharts/thanos
+Pulled: registry-1.docker.io/bitnamicharts/thanos:15.7.19
+Digest: sha256:2818cec2d4162903b9ee2d3a6c69e0bb8da3f036b74dc9579ff00097f4eaaf33
+NAME: my-release
+LAST DEPLOYED: Sat Aug 10 21:30:44 2024
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: thanos
+CHART VERSION: 15.7.19
+APP VERSION: 0.36.0
+
+** Please be patient while the chart is being deployed **
+
+Thanos chart was deployed enabling the following components:
+- Thanos Query
+
+Thanos Query can be accessed through following DNS name from within your cluster:
+
+    my-release-thanos-query.default.svc.cluster.local (port 9090)
+
+To access Thanos Query from outside the cluster execute the following commands:
+
+1. Get the Thanos Query URL by running these commands:
+
+    export SERVICE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].port}" services my-release-thanos-query)
+    kubectl port-forward --namespace default svc/my-release-thanos-query ${SERVICE_PORT}:${SERVICE_PORT} &
+    echo "http://127.0.0.1:${SERVICE_PORT}"
+
+2. Open a browser and access Thanos Query using the obtained URL.
+
+WARNING: There are "resources" sections in the chart not set. Using "resourcesPreset" is not recommended for production. For production installations, please set the following values according to your workload needs:
+  - query.resources
+  - queryFrontend.resources
++info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+```
+
 ### Access Thanos UIs
 
 1. Visit the Thanos Query UI: `http://localhost:9090`
