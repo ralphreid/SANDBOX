@@ -6,7 +6,7 @@ namespace: clearml-prod
 
 # Use the base Helm chart
 resources:
-  - ../../charts/clearml/values-prod.yaml
+  - ../charts/clearml/values-prod.yaml
 
 # Configure the common resources (e.g., shared ConfigMaps or Secrets)
 commonLabels:
@@ -14,8 +14,8 @@ commonLabels:
   app: clearml
 
 # Configure Helm chart overrides
-patchesStrategicMerge:
-  - patch-clearml-prod.yaml
+# patches:
+#   - patch-clearml-prod.yaml
 
 # Additional prod-specific configurations
 configMapGenerator:
@@ -28,5 +28,5 @@ helmCharts:
   - name: clearml
     releaseName: clearml
     version: 1.0.0
-    repo: file://../../charts/clearml
+    repo: file://../charts/clearml
     valuesFile: values-prod.yaml
