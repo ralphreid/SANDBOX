@@ -216,8 +216,8 @@ This guide provides a comprehensive workflow for developing, testing, and deploy
 To set up the required clusters, follow these steps:
 
 ```bash
-kind create cluster --name clearml-demo
-kind get kubeconfig --name clearml-demo > ~/.kube/config
+kind create cluster --name wicked-demo
+kind get kubeconfig --name wicked-demo > ~/.kube/config
 ```
 
 ### Customizable Resources with Kustomize (kuctl)
@@ -349,7 +349,7 @@ To clean up, follow these steps:
 #### Delete Kind Cluster
 
 ```bash
-kind delete cluster --name clearml-demo
+kind delete cluster --name wicked-demo
 ```
 
 #### Destroy Terraform-managed AWS Resources
