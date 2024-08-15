@@ -1,0 +1,13 @@
+apiVersion: v2
+name: clearml
+description: A Helm chart for deploying ClearML components
+version: 0.1.0
+appVersion: "1.0"
+type: application
+
+# Optional: Dependencies
+dependencies:
+  - name: postgresql
+    version: "11.1.4"
+    repository: "https://charts.bitnami.com/bitnami"
+    condition: postgresql.enabled

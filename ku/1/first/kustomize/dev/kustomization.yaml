@@ -1,22 +1,32 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
-  - ../../charts/clearml
-  - ../../charts/grafana
-  - ../../charts/my-app
-  - ../../charts/opentelemetry
+# Set the namespace for the resources
+namespace: clearml-dev
 
+# Use the base Helm chart
+resources:
+  - ../../charts/clearml/values-dev.yaml
+
+# Configure the common resources (e.g., shared ConfigMaps or Secrets)
+commonLabels:
+  environment: dev
+  app: clearml
+
+# Configure Helm chart overrides
+patchesStrategicMerge:
+  - patch-clearml-dev.yaml
+
+# Additional dev-specific configurations
+configMapGenerator:
+  - name: clearml-dev-config
+    literals:
+      - DEBUG=true
+
+# HelmChartInflationGenerator allows Kustomize to use Helm charts
 helmCharts:
   - name: clearml
-    chart: ../../charts/clearml
-    valuesFile: ../../charts/clearml/values-dev.yaml
-  - name: grafana
-    chart: ../../charts/grafana
-    valuesFile: ../../charts/grafana/values.yaml
-  - name: my-app
-    chart: ../../charts/my-app
-    valuesFile: ../../charts/my-app/values-dev.yaml
-  - name: opentelemetry
-    chart: ../../charts/opentelemetry
-    valuesFile: ../../charts/opentelemetry/values.yaml
+    releaseName: clearml
+    version: 1.0.0
+    repo: file://../../charts/clearml
+    valuesFile: values-dev.yaml

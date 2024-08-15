@@ -1,0 +1,11 @@
+prometheus:
+  enabled: false
+
+loki:
+  enabled: false
+
+opentelemetryCollector:
+  enabled: false
+
+postgresql:
+  enabled: false

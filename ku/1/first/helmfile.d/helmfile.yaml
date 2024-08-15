@@ -11,15 +11,18 @@ repositories:
     url: https://charts.helm.sh/stable
 
 releases:
-  - name: clearml
-    chart: ../charts/clearml
-    values:
-      - ../values/common.yaml
+  # - name: clearml
+  #   chart: ../charts/clearml
+  #   values:
+  #     - ../values/common.yaml
+  #     - ../charts/clearml/values.yaml
   - name: grafana
     chart: ../charts/grafana
     values:
       - ../values/common.yaml
-  - name: opentelemetry
-    chart: ../charts/opentelemetry
-    values:
-      - ../values/common.yaml
+      - ../charts/grafana/values.yaml
+  # - name: opentelemetry
+  #   chart: ../charts/opentelemetry
+  #   values:
+  #     - ../values/common.yaml
+  #     - ../charts/opentelemetry/values.yaml

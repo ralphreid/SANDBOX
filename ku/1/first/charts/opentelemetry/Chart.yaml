@@ -1,0 +1,17 @@
+apiVersion: v2
+name: opentelemetry
+description: A Helm chart for deploying OpenTelemetry components
+version: 0.1.0
+appVersion: "1.0"
+type: application
+
+# Optional: Dependencies
+dependencies:
+  - name: opentelemetry-collector
+    version: "0.12.0"
+    repository: "https://open-telemetry.github.io/opentelemetry-helm-charts"
+    condition: opentelemetryCollector.enabled
+  - name: prometheus
+    version: "15.0.0"
+    repository: "https://prometheus-community.github.io/helm-charts"
+    condition: prometheus.enabled
