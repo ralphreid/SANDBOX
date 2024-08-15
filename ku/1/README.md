@@ -113,10 +113,11 @@ file apply
 
 Create command:
 
-```shell
-mkdir -p charts/{clearml/templates,grafana/templates,opentelemetry/templates,my-app/templates} helmfile.d terraform/{dev,prod} values && \
-touch charts/clearml/{Chart.yaml,values.yaml,values-dev.yaml,values-prod.yaml} charts/grafana/{Chart.yaml,values.yaml} charts/opentelemetry/{Chart.yaml,values.yaml} charts/my-app/{Chart.yaml,values.yaml,values-dev.yaml,values-prod.yaml} helmfile.d/{helmfile.yaml,dev.yaml,prod.yaml} terraform/dev/{main.tf,terraform.tfvars} terraform/prod/{main.tf,terraform.tfvars} values/{common.yaml,dev.yaml,prod.yaml}
-```
+````shell
+```sh
+mkdir -p kustomize/{dev,prod} charts/{clearml/templates,grafana/templates,opentelemetry/templates,my-app/templates} helmfile.d terraform/{dev,prod} values && \
+touch kustomize/dev/kustomization.yaml kustomize/prod/kustomization.yaml charts/clearml/{Chart.yaml,values.yaml,values-dev.yaml,values-prod.yaml} charts/grafana/{Chart.yaml,values.yaml} charts/opentelemetry/{Chart.yaml,values.yaml} charts/my-app/{Chart.yaml,values.yaml,values-dev.yaml,values-prod.yaml} helmfile.d/{helmfile.yaml,dev.yaml,prod.yaml} terraform/dev/{main.tf,terraform.tfvars} terraform/prod/{main.tf,terraform.tfvars} values/{common.yaml,dev.yaml,prod.yaml}
+````
 
 ```shell
 ├── charts/                                # Custom Helm charts
@@ -240,17 +241,111 @@ To customize resources with Kustomize, follow these steps:
 sudo apt-get install -y kustomize
 ```
 
-#### Build Kustomize Configuration
+#### Objectives
 
-```bash
-kustomize build <directory>
+1. Use Kustomize to manage Kubernetes configurations.
+2. Integrate Helm charts with Kustomize for better configuration management.
+3. Ensure the setup is consistent across different environments (dev and prod).
+
+#### Kustomize Build and Use of the Tool
+
+To integrate Helm charts with Kustomize, follow these steps:
+
+1. Create a `kustomization.yaml` file for each environment.
+2. Use Helm with Kustomize to render the charts.
+3. Apply the Kustomize configurations to the Kubernetes cluster.
+
+#### Example `kustomization.yaml` for Dev Environment
+
+Create a `kustomization.yaml` file in a new directory `kustomize/dev`:
+
+```yaml
+# kustomize/dev/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../charts/clearml
+  - ../../charts/grafana
+  - ../../charts/my-app
+  - ../../charts/opentelemetry
+
+helmCharts:
+  - name: clearml
+  path: ../../charts/clearml
+  valuesFile: ../../charts/clearml/values-dev.yaml
+  - name: grafana
+  path: ../../charts/grafana
+  valuesFile: ../../charts/grafana/values.yaml
+  - name: my-app
+  path: ../../charts/my-app
+  valuesFile: ../../charts/my-app/values-dev.yaml
+  - name: opentelemetry
+  path: ../../charts/opentelemetry
+  valuesFile: ../../charts/opentelemetry/values.yaml
 ```
 
-**Tip:** Apply the kustomization directly to the cluster.
+#### Example `kustomization.yaml` for Prod Environment
 
-```bash
-kustomize build <directory> | kubectl apply -f -
+Create a `kustomization.yaml` file in a new directory `kustomize/prod`:
+
+```yaml
+# kustomize/prod/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../charts/clearml
+  - ../../charts/grafana
+  - ../../charts/my-app
+  - ../../charts/opentelemetry
+
+helmCharts:
+  - name: clearml
+  path: ../../charts/clearml
+  valuesFile: ../../charts/clearml/values-prod.yaml
+  - name: grafana
+  path: ../../charts/grafana
+  valuesFile: ../../charts/grafana/values.yaml
+  - name: my-app
+  path: ../../charts/my-app
+  valuesFile: ../../charts/my-app/values-prod.yaml
+  - name: opentelemetry
+  path: ../../charts/opentelemetry
+  valuesFile: ../../charts/opentelemetry/values.yaml
 ```
+
+#### Commands to Build and Apply Kustomize Configurations
+
+1. Navigate to the `kustomize` directory:
+
+   ```sh
+   cd kustomize
+   ```
+
+2. Build the Kustomize configuration for the dev environment:
+
+   ```sh
+   kustomize build dev | kubectl apply -f -
+   ```
+
+3. Build the Kustomize configuration for the prod environment:
+
+   ```sh
+   kustomize build prod | kubectl apply -f -
+   ```
+
+#### Explanation
+
+- `kustomize build dev`: This command builds the Kubernetes manifests for the dev environment by combining the base resources and the Helm charts specified in the `kustomization.yaml` file.
+- `kubectl apply -f -`: This command applies the generated manifests to the Kubernetes cluster.
+
+#### Key Questions
+
+1. Do you have any specific customizations or overrides that need to be applied to the Helm charts beyond what is specified in the `values-dev.yaml` and `values-prod.yaml` files?
+2. Are there any additional resources or configurations that need to be included in the `kustomization.yaml` files?
+
+These questions will help ensure that the Kustomize setup meets all your requirements and objectives.
 
 ### Monitoring and Observability Setup
 
