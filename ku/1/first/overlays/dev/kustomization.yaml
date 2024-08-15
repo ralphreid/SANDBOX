@@ -5,8 +5,8 @@ kind: Kustomization
 namespace: clearml-dev
 
 # Use the base Helm chart
-resources:
-  - ../charts/clearml/values-dev.yaml
+# resources:
+#   - ../../charts/clearml/values-dev.yaml
 
 # Configure the common resources (e.g., shared ConfigMaps or Secrets)
 commonLabels:
@@ -28,5 +28,5 @@ helmCharts:
   - name: clearml
     releaseName: clearml
     version: 1.0.0
-    repo: file://../charts/clearml
+    repo: file://../../charts/clearml
     valuesFile: values-dev.yaml
