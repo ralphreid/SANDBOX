@@ -107,11 +107,16 @@ file apply
 - https://k8slens.dev
 - https://kind.sigs.k8s.io/docs/user/quick-start/
 
-## Setting Up a Local K8s Cluster with Thanos and LLM Demo
+## Setup
 
 ### Directory Structure
 
-Create command: `mkdir -p charts/{clearml/{templates,Chart.yaml,values.yaml,values-dev.yaml,values-prod.yaml},grafana/{templates,Chart.yaml,values.yaml},opentelemetry/{templates,Chart.yaml,values.yaml},my-app/{templates,Chart.yaml,values.yaml,values-dev.yaml,values-prod.yaml}} helmfile.d/{helmfile.yaml,dev.yaml,prod.yaml} terraform/{dev/{main.tf,terraform.tfvars},prod/{main.tf,terraform.tfvars}} values/{common.yaml,dev.yaml,prod.yaml}`
+Create command:
+
+```shell
+mkdir -p charts/{clearml/templates,grafana/templates,opentelemetry/templates,my-app/templates} helmfile.d terraform/{dev,prod} values && \
+touch charts/clearml/{Chart.yaml,values.yaml,values-dev.yaml,values-prod.yaml} charts/grafana/{Chart.yaml,values.yaml} charts/opentelemetry/{Chart.yaml,values.yaml} charts/my-app/{Chart.yaml,values.yaml,values-dev.yaml,values-prod.yaml} helmfile.d/{helmfile.yaml,dev.yaml,prod.yaml} terraform/dev/{main.tf,terraform.tfvars} terraform/prod/{main.tf,terraform.tfvars} values/{common.yaml,dev.yaml,prod.yaml}
+```
 
 ```shell
 ├── charts/                                # Custom Helm charts
