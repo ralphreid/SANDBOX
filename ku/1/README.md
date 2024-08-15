@@ -198,6 +198,162 @@ annotations:
   service.beta.kubernetes.io/aws-cloud-map-namespace: "my-namespace"
 ```
 
-This pattern helps streamline the deployment process across environments, ensuring that you can manage complexity while maintaining flexibility and control.
+## Key Commands and Tips
 
-### Key Commands and Tips
+This guide provides a comprehensive workflow for developing, testing, and deploying ClearML on AWS EKS using Kind, Helmfile, Kustomize, and Terraform.
+
+**Summary of Tips and Probes**
+
+- **Kind:** `kubectl get nodes` to check the cluster status.
+- **Helm:** `helm get values <release-name>` to inspect configurations.
+- **Kustomize:** `kustomize build <directory> | less` to review the generated manifests.
+- **Grafana:** Use `kubectl port-forward` to access UIs like Grafana.
+- **ClearML:** `kubectl logs -l app=clearml-webserver` to troubleshoot issues.
+- **EKS:** `aws eks describe-cluster` and `kubectl get nodes` to verify EKS cluster health.
+
+### Initial Setup with Kind
+
+To set up the required clusters, follow these steps:
+
+```bash
+kind create cluster --name clearml-demo
+kind get kubeconfig --name clearml-demo > ~/.kube/config
+```
+
+### Customizable Resources with Kustomize (kuctl)
+
+To customize resources with Kustomize, follow these steps:
+
+#### Install Kustomize
+
+```bash
+sudo apt-get install -y kustomize
+```
+
+#### Build Kustomize Configuration
+
+```bash
+kustomize build <directory>
+```
+
+**Tip:** Apply the kustomization directly to the cluster.
+
+```bash
+kustomize build <directory> | kubectl apply -f -
+```
+
+### Monitoring and Observability Setup
+
+To set up monitoring and observability, follow these steps:
+
+#### Deploy Grafana and OpenTelemetry
+
+```bash
+helmfile -f helmfile.d/prod.yaml apply
+```
+
+#### Access Grafana UI
+
+```bash
+kubectl port-forward service/grafana 3000:80
+```
+
+**Tip:** Login with default credentials (`admin`/`admin`) and set up data sources.
+
+### Validate ClearML Deployment
+
+To validate the ClearML deployment, follow these steps:
+
+#### Port-forward ClearML Server
+
+```bash
+kubectl port-forward service/clearml-webserver 8080:80
+```
+
+#### Access ClearML UI
+
+Navigate to `http://localhost:8080` in a browser.
+
+**Prober:**
+
+#### Check ClearML Server Logs
+
+```bash
+kubectl logs -l app=clearml-webserver
+```
+
+**Tip:** Inspect environment-specific configurations.
+
+```bash
+helm get values clearml --namespace default
+```
+
+### Terraform for AWS Infrastructure (Production Only)
+
+To set up Terraform for AWS infrastructure, follow these steps:
+
+#### Apply Terraform Configuration
+
+```bash
+terraform -chdir=terraform/prod apply
+```
+
+#### Verify EKS Cluster Creation
+
+```bash
+aws eks describe-cluster --name <cluster-name>
+```
+
+**Prober:**
+
+#### Check if EKS Cluster Nodes are Ready
+
+```bash
+kubectl get nodes
+```
+
+### Deploy to AWS EKS with Helmfile
+
+To deploy to AWS EKS with Helmfile, follow these steps:
+
+#### Switch Context to EKS Cluster
+
+```bash
+aws eks update-kubeconfig --name <cluster-name> --region <region>
+```
+
+#### Apply Helmfile for Production
+
+```bash
+helmfile -f helmfile.d/prod.yaml apply
+```
+
+**Prober:**
+
+#### View All Kubernetes Resources
+
+```bash
+kubectl get all -n <namespace>
+```
+
+**Tip:** Check the status of all pods.
+
+```bash
+kubectl get pods -A
+```
+
+### Clean Up
+
+To clean up, follow these steps:
+
+#### Delete Kind Cluster
+
+```bash
+kind delete cluster --name clearml-demo
+```
+
+#### Destroy Terraform-managed AWS Resources
+
+```bash
+terraform -chdir=terraform/prod destroy
+```
