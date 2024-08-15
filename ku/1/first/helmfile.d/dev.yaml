@@ -1,0 +1,9 @@
+environments:
+  dev:
+    values:
+      - ../values/dev.yaml
+      - ../charts/clearml/values-dev.yaml
+      - ../charts/my-app/values-dev.yaml
+
+helmDefaults:
+  tillerless: true

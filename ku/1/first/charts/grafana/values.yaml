@@ -1,0 +1,12 @@
+grafana:
+  adminUser: admin
+  adminPassword: admin
+  service:
+    type: LoadBalancer
+  datasources:
+    data:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server
+        access: proxy
+        isDefault: true

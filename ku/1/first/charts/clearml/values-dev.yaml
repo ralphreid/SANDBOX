@@ -1,0 +1,6 @@
+clearml:
+  filesServer:
+    storage:
+      provider: hostPath
+      hostPath:
+        path: /mnt/data/clearml_files_dev

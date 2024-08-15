@@ -255,65 +255,13 @@ To integrate Helm charts with Kustomize, follow these steps:
 2. Use Helm with Kustomize to render the charts.
 3. Apply the Kustomize configurations to the Kubernetes cluster.
 
-#### Example `kustomization.yaml` for Dev Environment
+Additional Steps:
 
-Create a `kustomization.yaml` file in a new directory `kustomize/dev`:
+1. Install the Kustomize Helm Plugin: Ensure you have the Kustomize Helm plugin installed. You can install it using the following command:
+   `kustomize edit add plugin helm`
 
-```yaml
-# kustomize/dev/kustomization.yaml
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-resources:
-  - ../../charts/clearml
-  - ../../charts/grafana
-  - ../../charts/my-app
-  - ../../charts/opentelemetry
-
-helmCharts:
-  - name: clearml
-  path: ../../charts/clearml
-  valuesFile: ../../charts/clearml/values-dev.yaml
-  - name: grafana
-  path: ../../charts/grafana
-  valuesFile: ../../charts/grafana/values.yaml
-  - name: my-app
-  path: ../../charts/my-app
-  valuesFile: ../../charts/my-app/values-dev.yaml
-  - name: opentelemetry
-  path: ../../charts/opentelemetry
-  valuesFile: ../../charts/opentelemetry/values.yaml
-```
-
-#### Example `kustomization.yaml` for Prod Environment
-
-Create a `kustomization.yaml` file in a new directory `kustomize/prod`:
-
-```yaml
-# kustomize/prod/kustomization.yaml
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-resources:
-  - ../../charts/clearml
-  - ../../charts/grafana
-  - ../../charts/my-app
-  - ../../charts/opentelemetry
-
-helmCharts:
-  - name: clearml
-  path: ../../charts/clearml
-  valuesFile: ../../charts/clearml/values-prod.yaml
-  - name: grafana
-  path: ../../charts/grafana
-  valuesFile: ../../charts/grafana/values.yaml
-  - name: my-app
-  path: ../../charts/my-app
-  valuesFile: ../../charts/my-app/values-prod.yaml
-  - name: opentelemetry
-  path: ../../charts/opentelemetry
-  valuesFile: ../../charts/opentelemetry/values.yaml
-```
+2. Update the Kustomize Build Command: Use the following command to build and apply the Kustomize configuration:
+   `kustomize build ku/1/first/kustomize/dev | kubectl apply -f -`
 
 #### Commands to Build and Apply Kustomize Configurations
 

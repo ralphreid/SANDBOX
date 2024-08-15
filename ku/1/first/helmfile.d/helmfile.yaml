@@ -1,0 +1,25 @@
+# releases:
+#   - name: grafana
+#     namespace: monitoring
+#     chart: grafana/grafana
+#     version: 6.17.4
+#     values:
+#       - ../charts/grafana/values.yaml
+
+repositories:
+  - name: stable
+    url: https://charts.helm.sh/stable
+
+releases:
+  - name: clearml
+    chart: ../charts/clearml
+    values:
+      - ../values/common.yaml
+  - name: grafana
+    chart: ../charts/grafana
+    values:
+      - ../values/common.yaml
+  - name: opentelemetry
+    chart: ../charts/opentelemetry
+    values:
+      - ../values/common.yaml

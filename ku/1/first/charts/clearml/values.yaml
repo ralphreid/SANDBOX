@@ -1,0 +1,33 @@
+clearml:
+  server:
+    webServer:
+      image:
+        repository: allegroai/clearml
+        tag: latest
+      service:
+        type: ClusterIP
+        port: 8080
+    apiServer:
+      image:
+        repository: allegroai/clearml
+        tag: latest
+      service:
+        type: ClusterIP
+        port: 8008
+    filesServer:
+      storage:
+        provider: hostPath # Default is hostPath for local
+        hostPath:
+          path: /mnt/clearml_files
+
+  serving:
+    enabled: true
+    modelServing:
+      replicas: 2
+      resources:
+        limits:
+          cpu: 500m
+          memory: 512Mi
+        requests:
+          cpu: 250m
+          memory: 256Mi

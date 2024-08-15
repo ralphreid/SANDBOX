@@ -1,0 +1,11 @@
+clearml:
+  filesServer:
+    storage:
+      provider: s3
+      s3:
+        bucket: "clearml-files-bucket"
+        region: "us-west-2"
+    apiServer:
+      replicas: 3
+    webServer:
+      replicas: 2
