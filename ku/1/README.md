@@ -106,3 +106,91 @@ file apply
 - https://github.com/bitnami/charts/tree/main/bitnami/kube-prometheus
 - https://k8slens.dev
 - https://kind.sigs.k8s.io/docs/user/quick-start/
+
+## Setting Up a Local K8s Cluster with Thanos and LLM Demo
+
+### Directory Structure
+
+Create command: `mkdir -p charts/{clearml/{templates,Chart.yaml,values.yaml,values-dev.yaml,values-prod.yaml},grafana/{templates,Chart.yaml,values.yaml},opentelemetry/{templates,Chart.yaml,values.yaml},my-app/{templates,Chart.yaml,values.yaml,values-dev.yaml,values-prod.yaml}} helmfile.d/{helmfile.yaml,dev.yaml,prod.yaml} terraform/{dev/{main.tf,terraform.tfvars},prod/{main.tf,terraform.tfvars}} values/{common.yaml,dev.yaml,prod.yaml}`
+
+```shell
+├── charts/                                # Custom Helm charts
+│   ├── clearml/                           # ClearML Helm chart
+│   │   ├── templates/
+│   │   ├── Chart.yaml
+│   │   ├── values.yaml                    # Default values
+│   │   ├── values-dev.yaml                # Dev environment-specific values
+│   │   └── values-prod.yaml               # Prod environment-specific values
+│   ├── grafana/                           # Grafana Helm chart
+│   │   ├── templates/
+│   │   ├── Chart.yaml
+│   │   └── values.yaml
+│   ├── opentelemetry/                     # OpenTelemetry Helm chart
+│   │   ├── templates/
+│   │   ├── Chart.yaml
+│   │   └── values.yaml
+│   └── my-app/                            # Example application Helm chart
+│       ├── templates/
+│       ├── Chart.yaml
+│       ├── values.yaml
+│       ├── values-dev.yaml
+│       └── values-prod.yaml
+├── helmfile.d/                            # Helmfile configurations
+│   ├── helmfile.yaml                      # Base Helmfile (all charts)
+│   ├── dev.yaml                           # Helmfile config for development
+│   └── prod.yaml                          # Helmfile config for production
+├── terraform/                             # Terraform for AWS infrastructure
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   ├── dev/                               # Dev-specific Terraform configuration
+│   │   ├── main.tf
+│   │   └── terraform.tfvars
+│   └── prod/                              # Prod-specific Terraform configuration
+│       ├── main.tf
+│       └── terraform.tfvars
+└── values/                                # Common values
+    ├── common.yaml                        # Common values for all environments
+    ├── dev.yaml                           # Dev environment values
+    └── prod.yaml                          # Prod environment values
+```
+
+### Helm Chart Configuration
+
+1. Create a new chart: `helm create my-chart`
+2. Install the chart: `helm install my-chart ./my-chart`
+3. Upgrade the chart: `helm upgrade my-chart ./my-chart`
+4. Uninstall the chart: `helm uninstall my-chart`
+
+### Helmfile Configuration
+
+Helmfile helps manage deployments across multiple environments by layering environment-specific configurations on top of the base configurations.
+
+### Terraform Configuration
+
+Terraform should be used to provision the necessary AWS infrastructure, such as the EKS cluster, networking, IAM roles, etc. Separate configurations for development and production environments ensure isolation and appropriate resource allocation.
+
+### Deploying with Helmfile
+
+With this structure, you can deploy your application to different environments using Helmfile.
+
+### Benefits of This Pattern
+
+- Reusability: Common values are defined once and shared across environments, reducing duplication.
+- Environment Isolation: Separate values files and Terraform configurations ensure environments are isolated and configured appropriately.
+- Flexibility: Helmfile allows easy management of different environments with minimal duplication.
+- Infrastructure as Code: Terraform handles infrastructure provisioning, ensuring consistency and repeatability.
+
+### Leveraging Fargate and Cloud Map
+
+- Fargate Support: If you’re deploying to Fargate, ensure your Helm chart is configured to use Fargate profiles in your EKS cluster by setting appropriate annotations in your deployment templates.
+- Cloud Map for Service Discovery: Integrate AWS Cloud Map in your Helm templates by adding annotations to your services, ensuring they register with Cloud Map for service discovery:
+
+```yaml
+annotations:
+  service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+  service.beta.kubernetes.io/aws-cloud-map-discovery: "enabled"
+  service.beta.kubernetes.io/aws-cloud-map-namespace: "my-namespace"
+```
+
+This pattern helps streamline the deployment process across environments, ensuring that you can manage complexity while maintaining flexibility and control.
