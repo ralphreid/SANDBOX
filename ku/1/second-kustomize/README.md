@@ -1,6 +1,8 @@
-## How
+# Kubernetes Kustomize Setup
 
-### Install
+This project demonstrates the use of Kustomize to manage Kubernetes configurations.
+
+## Install
 
 To set up the cluster, run: `kind create cluster --name my-fun-work`
 
@@ -12,9 +14,6 @@ To set up the cluster, run: `kind create cluster --name my-fun-work`
 ## Ref
 
 - https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/
-# Kubernetes Kustomize Setup
-
-This project demonstrates the use of Kustomize to manage Kubernetes configurations.
 
 ## Directory Structure
 
@@ -25,6 +24,7 @@ This project demonstrates the use of Kustomize to manage Kubernetes configuratio
 ## Base Configurations
 
 The base directory includes the following resources:
+
 - `configmap.yaml`: Defines a ConfigMap with example properties.
 - `deployment.yaml`: Defines a Deployment with 3 replicas of an Nginx container.
 - `service.yaml`: Defines a Service to expose the Deployment.
