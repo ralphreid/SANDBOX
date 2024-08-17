@@ -15,4 +15,5 @@ and setup and explore a nice workbench for follow on fun.
 
 ## How
 
-## What
+### Install
+To set up the cluster, run:
