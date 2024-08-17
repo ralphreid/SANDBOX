@@ -1,0 +1,14 @@
+mkdir kustomize
+mkdir kustomize/base
+mkdir kustomize/overlays
+mkdir kustomize/overlays/dev
+mkdir kustomize/overlays/prod
+
+touch kustomize/base/kustomization.yaml
+touch kustomize/base/deployment.yaml
+touch kustomize/base/service.yaml
+touch kustomize/base/configmap.yaml
+touch kustomize/overlays/dev/kustomization.yaml
+touch kustomize/overlays/dev/patch.yaml
+touch kustomize/overlays/prod/kustomization.yaml
+touch kustomize/overlays/prod/patch.yaml

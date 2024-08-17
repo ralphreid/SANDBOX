@@ -1,0 +1,10 @@
+# Kustomize-based Prometheus Deployment
+
+## Step 1: Apply Base Configuration
+`kubectl apply -k kustomize/base`
+
+## Step 2: Apply Development Overlay
+`kubectl apply -k kustomize/overlays/dev`
+
+## Step 3: Apply Production Overlay
+`kubectl apply -k kustomize/overlays/prod`
