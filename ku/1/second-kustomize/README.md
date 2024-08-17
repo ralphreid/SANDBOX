@@ -16,4 +16,4 @@ and setup and explore a nice workbench for follow on fun.
 ## How
 
 ### Install
-To set up the cluster, run:
+To set up the cluster, run: `kind create cluster --name my-fun-work`
