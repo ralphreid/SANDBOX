@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-config
+data:
+  example.property.1: "value1"
+  example.property.2: "value2"
