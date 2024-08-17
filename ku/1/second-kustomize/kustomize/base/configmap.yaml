@@ -3,5 +3,10 @@ kind: ConfigMap
 metadata:
   name: example-config
 data:
-  example.property.1: "value1"
-  example.property.2: "value2"
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
