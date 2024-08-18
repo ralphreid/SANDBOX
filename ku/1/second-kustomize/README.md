@@ -4,7 +4,7 @@ This project demonstrates the use of Kustomize to manage Kubernetes configuratio
 
 ## Install
 
-To set up the cluster, run: `kind create cluster --name my-fun-work`
+To set up the cluster, run: `kind create cluster --name wicked-demo`
 
 - Initialize Kustomize
   Run: `kustomize build`
@@ -24,6 +24,7 @@ This guide will walk you through setting up a minimal Prometheus service on Kube
 Before we begin, ensure that you have `kubectl` installed and configured to communicate with your Kubernetes cluster. Kustomize is now integrated into `kubectl`, so you don't need to install it separately.
 
 - **Verify `kubectl` version**:
+
   ```sh
   kubectl version --client
   ```
@@ -164,6 +165,7 @@ patchesStrategicMerge:
 ```
 
 **Patch for Development (`kustomize/overlays/dev/patch.yaml`):**
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -191,6 +193,7 @@ patchesStrategicMerge:
 ```
 
 **Patch for Production (`kustomize/overlays/prod/patch.yaml`):**
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
