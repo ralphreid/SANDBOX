@@ -6,4 +6,4 @@ resources:
 configMapGenerator:
   - name: prometheus-config
     files:
-      - prometheus.yml=prometheus.yml
+      - prometheus.yml
