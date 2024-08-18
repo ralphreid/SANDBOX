@@ -63,6 +63,41 @@ Implement logging, monitoring, and alerting to observe the state of your applica
 ### 4. Automation
 Automate repetitive tasks using CI/CD pipelines and Kubernetes operators.
 
+## Automated Health Checks and Self-Healing
+
+### 1. Implementing Health Checks
+Ensure that all your applications have readiness and liveness probes configured. These probes help Kubernetes determine if your application is running correctly and is ready to serve traffic.
+
+- Example of a liveness probe:
+  ```yaml
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 8080
+    initialDelaySeconds: 3
+    periodSeconds: 3
+  ```
+
+- Example of a readiness probe:
+  ```yaml
+  readinessProbe:
+    httpGet:
+      path: /ready
+      port: 8080
+    initialDelaySeconds: 3
+    periodSeconds: 3
+  ```
+
+### 2. Self-Healing with Kubernetes
+Kubernetes can automatically restart containers that fail, replace and reschedule containers when nodes die, and kill containers that don't respond to your defined health checks.
+
+- Ensure your deployments are configured with appropriate health checks and resource limits to enable Kubernetes to manage them effectively.
+
+### 3. Using Operators for Self-Healing
+Operators can be used to automate the recovery process for more complex scenarios. They can monitor the state of your applications and perform custom recovery actions when issues are detected.
+
+- Example: Using the Prometheus Operator to monitor and heal Prometheus instances.
+
 ## Exploring the Cluster and CLI Tools
 
 ### 1. kubectl
