@@ -3,6 +3,8 @@ resources:
   - configmap.yaml
   - service-prometheus.yaml
   - configmap-alertmanager.yaml
+  - service-alertmanager.yaml
+  - deployment-alertmanager.yaml
 
 configMapGenerator:
   - name: prometheus-config
