@@ -121,6 +121,22 @@ This file will reference the resources defined above.
 
 ```yaml
 resources:
+  - ../../base
+
+patchesStrategicMerge:
+  - patch.yaml
+  - ../../base
+
+patchesStrategicMerge:
+  - patch.yaml
+  - deployment.yaml
+  - service.yaml
+  - configmap.yaml
+
+configMapGenerator:
+  - name: prometheus-config
+    files:
+      - prometheus.yml=prometheus.yml
   - deployment.yaml
   - service.yaml
   - configmap.yaml

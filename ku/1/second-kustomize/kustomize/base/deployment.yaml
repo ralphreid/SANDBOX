@@ -3,17 +3,17 @@ kind: Deployment
 metadata:
   name: prometheus
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: example
+      app: prometheus
   template:
     metadata:
       labels:
-        app: example
+        app: prometheus
     spec:
       containers:
-      - name: example-container
-        image: nginx:1.14.2
-        ports:
-        - containerPort: 80
+        - name: prometheus
+          image: prom/prometheus:v2.37.0
+          ports:
+            - containerPort: 9090
