@@ -1,10 +1,7 @@
 resources:
-  - configmap/configmap-alertmanager.yaml
-  - configmap/configmap-prometheus.yaml
   - configmap/prometheus-configmap.yaml
   - configmap/alertmanager-configmap.yaml
   - service/service-alertmanager.yaml
   - service/service-prometheus.yaml
   - deployment/deployment-alertmanager.yaml
   - deployment/deployment-prometheus.yaml
-
