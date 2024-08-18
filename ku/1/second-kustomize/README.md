@@ -78,7 +78,3 @@ To apply the production configuration:
 ```sh
 kubectl apply -k kustomize/overlays/prod
 ```
-
-> > > > > > > REPLACE
-
-</source>
